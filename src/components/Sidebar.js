@@ -1,7 +1,7 @@
 import '../styles/Sidebar.css';
 import React from 'react';
 import HomeIcon from '../images/home.svg';
-import TaskIcon from '../images/tasks.svg';
+import TaskIcon from '../images/tasks1.svg';
 import CalendarIcon from '../images/calendar.svg';
 
 const Sidebar = () => {
