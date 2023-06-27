@@ -1,6 +1,8 @@
 import '../styles/Sidebar.css';
 import React from 'react';
-import HomeIcon from '../images/home.svg';
+import HomeIcon from '../images/home.png';
+import TaskIcon from '../images/clipboard.png';
+import CalendarIcon from '../images/calendar.png';
 
 const Sidebar = () => {
     return (
@@ -18,7 +20,7 @@ const Sidebar = () => {
                 <li className="sidebar-item">
                     <a href="#" className="sidebar-link">
                         <div className="icon-wrapper">
-                            <img src={HomeIcon} alt="Home" className="sidebar-icon" />
+                            <img src={TaskIcon} alt="Home" className="sidebar-icon" />
                         </div>
                         <span className="sidebar-text">Tasks</span>
                     </a>
@@ -26,7 +28,7 @@ const Sidebar = () => {
                 <li className="sidebar-item">
                     <a href="#" className="sidebar-link">
                         <div className="icon-wrapper">
-                            <img src={HomeIcon} alt="Home" className="sidebar-icon" />
+                            <img src={CalendarIcon} alt="Home" className="sidebar-icon" />
                         </div>
                         <span className="sidebar-text">Calendar</span>
                     </a>
