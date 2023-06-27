@@ -1,4 +1,4 @@
-import 'C:/Users/User/Desktop/TaskTracker/tasktracker-ui/src/Sidebar.css';
+import 'E:/JavaProjects/TaskTracker/tasktracker-ui/src/Sidebar.css';
 
 import React from 'react';
 import HomeIcon from './home.svg';
