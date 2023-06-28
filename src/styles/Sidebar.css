@@ -1,5 +1,5 @@
 .sidebar {
-  width: 23vw;
+  width: 18em;
   border-right: 2px solid rgba(82, 80, 80, 0.075);
   position: fixed;
   height: 100vh;
@@ -11,19 +11,19 @@
 }
 
 .open {
-  width: 23vw;
+  width: 18em;
 }
 
 .closed {
-  width: 7vw;
+  width: 4em;
 }
 
 .open-text {
-  width: 23.2vw;
+  width: 18.1em;
 }
 
 .closed-text {
-  width: 7.2vw;
+  width: 4.1em;
 }
 
 .sidebar-heading {
@@ -36,7 +36,7 @@
   height: 55px;
   margin-bottom: 20px;
   padding-top: 15px;
-  padding-left: 15px;
+  padding-left: 12px;
   display: flex;
   align-items: center;
   gap: 10px;
@@ -59,7 +59,7 @@
 
 .sidebar-link {
   height: 22px;
-  padding: 8px 8px 8px 15px;
+  padding: 8px 8px 8px 12px;
   display: flex;
   align-items: center;
   text-decoration: none;
