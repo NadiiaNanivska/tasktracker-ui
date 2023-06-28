@@ -7,6 +7,7 @@
   display: flex;
   flex-direction: column;
   align-items: flex-start;
+  justify-content: space-between;
 }
 
 .sidebar-heading {
@@ -17,14 +18,28 @@
   color: #333;
 }
 
+.sidebar-footer {
+  margin-bottom: 10vh;
+}
+
 .sidebar-nav {
-  width: 101%;
+  width: 168%;
   list-style-type: none;
   padding: 0;
   margin: 0;
 }
 
+.sidebar-nav-footer {
+  padding: 20px 20px 8px 0;
+  width: 38vh;
+  list-style-type: none;
+}
+
 .sidebar-item {
+  margin-bottom: 10px;
+}
+
+.sidebar-item-footer {
   margin-bottom: 10px;
 }
 
@@ -59,5 +74,5 @@
 }
 
 .sidebar-text {
-  margin-left: 5px; /* Adjust the margin as needed */
+  margin-left: 5px;
 }
