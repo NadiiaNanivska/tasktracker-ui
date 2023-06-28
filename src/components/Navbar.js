@@ -12,7 +12,7 @@ const Navbar = () => {
             <div className="initials">
                 <img className="navbar-notification-img" src={FaqItem} />
                 <img className="navbar-notification-img" src={NotificationsItem} />
-                <h3>Vitalik Yatskiv</h3>
+                <h4>Vitalik Yatskiv</h4>
                 <img className="navbar-person-img" src={DogItem} />
             </div>
         </div>
