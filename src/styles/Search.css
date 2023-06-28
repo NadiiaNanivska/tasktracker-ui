@@ -1,0 +1,23 @@
+.search {
+    padding-left: 4em;
+}
+
+.search-input {
+    width: 45em;
+    height: 3em;
+    padding-left: 35px;
+    border: none;
+    border-radius: 20px;
+    background-color: #fefefe;
+    outline: none;
+    transition: box-shadow 0.3s ease;
+    background-image: url('../images/search.svg');
+    background-repeat: no-repeat;
+    background-position: 10px center;
+    background-size: 20px 20px;
+}
+
+.search-input::placeholder {
+    font-size: 17px;
+    color: #969696;
+}

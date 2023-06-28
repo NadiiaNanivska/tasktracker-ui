@@ -1,14 +1,17 @@
 import './App.css';
-import Sidebar from './components/Sidebar';
 import {BrowserRouter, Route, Routes} from 'react-router-dom';
+import Home from "./components/Home";
 
 function App() {
   return (
-      <BrowserRouter>
-        <Routes>
-          <Route path="/" element={<Sidebar/>}></Route>
-        </Routes>
-      </BrowserRouter>
+      <>
+        <Home />
+      {/*// <BrowserRouter>*/}
+      {/*//   <Routes>*/}
+      {/*//     <Route path="/" element={<Sidebar/>}></Route>*/}
+      {/*//   </Routes>*/}
+      {/*// </BrowserRouter>*/}
+      </>
   );
 }
 
