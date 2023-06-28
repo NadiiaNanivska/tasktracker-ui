@@ -5,12 +5,11 @@ import Home from "./components/Home";
 function App() {
   return (
       <>
-        <Home />
-      {/*// <BrowserRouter>*/}
-      {/*//   <Routes>*/}
-      {/*//     <Route path="/" element={<Sidebar/>}></Route>*/}
-      {/*//   </Routes>*/}
-      {/*// </BrowserRouter>*/}
+       <BrowserRouter>
+         <Routes>
+           <Route path="/" element={<Home />}></Route>
+         </Routes>
+       </BrowserRouter>
       </>
   );
 }
