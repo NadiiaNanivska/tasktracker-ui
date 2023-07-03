@@ -1,0 +1,25 @@
+.list-card {
+    background-color: #a7c9b859;
+    border-radius: 13px;
+    width: 27%;
+    height: 75vh;
+}
+
+.card-content {
+    padding: 12px;
+}
+
+.card-heading {
+    margin: 0;
+    color: #333;
+    font-weight: 500;
+}
+
+.card-add-btn {
+    margin-top: 15px;
+}
+
+.ant-btn.ant-btn-default:hover {
+    border-color: #00410042;
+    color: initial;
+}

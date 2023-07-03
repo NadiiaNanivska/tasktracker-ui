@@ -1,5 +1,5 @@
 import '../styles/Sidebar.css';
-import React, {useRef, useState} from 'react';
+import React, {useRef, useState, useEffect} from 'react';
 import HomeIcon from '../images/home.svg';
 import TaskIcon from '../images/tasks1.svg';
 import CalendarIcon from '../images/calendar.svg';
@@ -7,9 +7,9 @@ import SettingsIcon from '../images/settings.svg';
 import LogoutIcon from '../images/log-out.svg';
 import MenuItem from '../images/burger-menu.svg';
 import Navbar from './Navbar';
+import SidebarContext from '../SidebarContext';
 
-const Sidebar = () => {
-    const [sidebarWidth, setSidebarWidth] = useState(18);
+const Sidebar = ({updateSidebarWidth}) => {
     const sidebarHeadingRef = useRef(null);
     const sidebarTextRef = useRef([]);
     const [isSidebarOpen, setIsSidebarOpen] = useState(true);
@@ -20,7 +20,7 @@ const Sidebar = () => {
 
     const hideMenu = () => {
         if (sidebarHeadingRef.current.style.display !== 'none') {
-            setSidebarWidth(5);
+            updateSidebarWidth(5);
             sidebarHeadingRef.current.style.display = 'none';
             sidebarTextRef.current.forEach((ref) => {
                 if (ref.style.display !== 'none') {
@@ -29,7 +29,7 @@ const Sidebar = () => {
             });
         } else {
             sidebarHeadingRef.current.style.display = 'flex';
-            setSidebarWidth(18);
+            updateSidebarWidth(18);
             sidebarTextRef.current.forEach((ref) => {
                     ref.style.display = 'flex';
             });
@@ -37,8 +37,6 @@ const Sidebar = () => {
     }
 
     return (
-        <>
-        <Navbar sidebarWidth={sidebarWidth} />
         <div className={`sidebar ${isSidebarOpen ? 'open' : 'closed'}`}>
             <div className="sidebar-header" >
                 <div className="sidebar-heading-wrapper">
@@ -95,7 +93,6 @@ const Sidebar = () => {
                 </ul>
             </div>
         </div>
-        </>
     );
 };
 

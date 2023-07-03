@@ -1,11 +1,13 @@
-import React, {useRef, useState} from "react";
+import React, {useRef, useState, useContext} from "react";
 import '../styles/Navbar.css';
 import Search from "./Search";
 import DogItem from '../images/dog.png';
 import NotificationsItem from '../images/notifications.svg';
 import FaqItem from "../images/faq.svg";
+import SidebarContext from "../SidebarContext";
 
-const Navbar = ({ sidebarWidth }) => {
+const Navbar = () => {
+    const sidebarWidth = useContext(SidebarContext);
     const navbarWidth = `calc(100% - ${sidebarWidth}em)`;
     return (
         <div className="navbar" style={{ width: navbarWidth}}>
