@@ -20,6 +20,6 @@
 }
 
 .ant-btn.ant-btn-default:hover {
-    border-color: #00410042;
-    color: initial;
+    border-color: #00410042!important;
+    color: initial!important;
 }
