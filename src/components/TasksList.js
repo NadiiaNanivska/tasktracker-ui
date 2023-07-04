@@ -3,6 +3,7 @@ import SidebarContext from '../SidebarContext';
 import '../styles/TasksList.css';
 import { Button } from 'antd';
 import {PlusOutlined} from '@ant-design/icons';
+import Task from "./Task";
 
 const TasksList = ({name}) => {
     return (
@@ -10,6 +11,9 @@ const TasksList = ({name}) => {
             <div className="card-content">
             <p className="card-heading">{name}</p>
             <Button type="default" className="card-add-btn" icon={<PlusOutlined />} block></Button>
+                <Task />
+                <Task />
+                <Task />
             </div>
         </div>
     );
