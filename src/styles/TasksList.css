@@ -3,6 +3,13 @@
     border-radius: 13px;
     width: 27%;
     height: 75vh;
+    overflow: auto;
+}
+
+.list-card::-webkit-scrollbar {
+    border-radius: 13px;
+    width: 0.5em; 
+    background-color: transparent;
 }
 
 .card-content {
@@ -17,9 +24,14 @@
 
 .card-add-btn {
     margin-top: 15px;
+    /* margin-bottom: 15px; */
 }
 
 .ant-btn.ant-btn-default:hover {
     border-color: #00410042!important;
     color: initial!important;
+}
+
+.task-card {
+    margin-top: 15px;
 }
