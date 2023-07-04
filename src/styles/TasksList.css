@@ -8,7 +8,7 @@
 
 .list-card::-webkit-scrollbar {
     border-radius: 13px;
-    width: 0.5em; 
+    width: 0; 
     background-color: transparent;
     height: auto;
 }

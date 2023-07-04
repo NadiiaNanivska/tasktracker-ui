@@ -1,25 +1,35 @@
 import React, { useContext } from 'react';
 import '../styles/Task.css';
 import AttachIcon from "../images/attach.svg";
-import { useDrag, useDrop } from 'react-dnd';
+// import { useDrag, useDrop } from 'react-dnd';
 
-const Task = () => {
+const Task = ({title, description, name}) => {
+
+    const getDotColorClass = (name) => {
+        switch (name) {
+          case 'To do':
+            return 'dot-red';
+          case 'In progress':
+            return 'dot-blue';
+          case 'Done':
+            return 'dot-green';
+          default:
+            return '';
+        }
+      };
+
+      const dotColorClass = getDotColorClass(name);
+
     return (
         <div className="task">
             <div className="task-name">
                 <div>
-                <span className="dot"></span>
-                <span className="sidebar-text">Development</span>
-                </div>
-                <div className="icon-wrapper">
-                    <img src={AttachIcon} alt="Name" className="sidebar-icon" />
+                <span className={`dot ${dotColorClass}`}></span>
+                <span className="sidebar-text">{title}</span>
                 </div>
             </div>
             <div className="task-content">
-                Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vivamus lacinia eros ac consequat semper.
-            </div>
-            <div className="assigned-users">
-                <div className="user-avatar">YV</div>
+               {description}
             </div>
         </div>
     );
