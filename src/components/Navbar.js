@@ -4,7 +4,7 @@ import Search from "./Search";
 import DogItem from '../images/dog.png';
 import NotificationsItem from '../images/notifications.svg';
 import FaqItem from "../images/faq.svg";
-import SidebarContext from "../SidebarContext";
+import SidebarContext from "../contexts/SidebarContext";
 
 const Navbar = () => {
     const sidebarWidth = useContext(SidebarContext);

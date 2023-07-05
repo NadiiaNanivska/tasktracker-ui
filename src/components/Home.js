@@ -3,7 +3,8 @@ import '../styles/Home.css';
 import Navbar from "./Navbar";
 import Sidebar from "./Sidebar";
 import TasksList from "./TasksList";
-import SidebarContext from "../SidebarContext";
+import SidebarContext from "../contexts/SidebarContext";
+import {SearchProvider} from "../contexts/SearchContext";
 
 const Home = () => {
     const [sidebarWidth, setSidebarWidth] = useState(18);
@@ -13,6 +14,7 @@ const Home = () => {
     };
 
   return (
+      <SearchProvider>
     <SidebarContext.Provider value={sidebarWidth}>
       <div className="home">
       <Navbar />
@@ -24,6 +26,7 @@ const Home = () => {
       </div>
       </div>
     </SidebarContext.Provider>
+      </SearchProvider>
   );
 };
 

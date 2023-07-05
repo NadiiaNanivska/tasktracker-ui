@@ -7,7 +7,7 @@ import SettingsIcon from '../images/settings.svg';
 import LogoutIcon from '../images/log-out.svg';
 import MenuItem from '../images/burger-menu.svg';
 import Navbar from './Navbar';
-import SidebarContext from '../SidebarContext';
+import SidebarContext from '../contexts/SidebarContext';
 
 const Sidebar = ({updateSidebarWidth}) => {
     const sidebarHeadingRef = useRef(null);
@@ -55,7 +55,7 @@ const Sidebar = ({updateSidebarWidth}) => {
                     </a>
                 </li>
                 <li className="sidebar-item">
-                    <a href="#" className="sidebar-link">
+                    <a href="/tasks" className="sidebar-link">
                         <div className="icon-wrapper">
                             <img src={TaskIcon} alt="Home" className="sidebar-icon" />
                         </div>
