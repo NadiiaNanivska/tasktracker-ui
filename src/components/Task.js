@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import '../styles/Task.css';
 import DeleteIcon from "../images/delete.svg";
-import { Modal, Input, Button } from 'antd';
+import { Modal, Input, Button, Popconfirm } from 'antd';
 import { updateTask } from '../utils/tasksRequests';
 
 const Task = ({ title: initialTitle, description: initialDescription, name, onDeleteTask, taskId }) => {
@@ -27,7 +27,8 @@ const Task = ({ title: initialTitle, description: initialDescription, name, onDe
     }
   };
 
-  const onDeleteClick = () => {
+  const onDeleteClick = (e) => {
+    e.stopPropagation();
     onDeleteTask();
   };
 
@@ -50,9 +51,18 @@ const Task = ({ title: initialTitle, description: initialDescription, name, onDe
         visible={isModalVisible}
         onCancel={handleCancel}
         footer={[
-          <Button key="cancel" onClick={handleCancel}>
+          <Popconfirm
+    title="Cancel changes"
+    description="Are you sure to cancel changes?"
+    okText="Yes"
+    cancelText="No"
+    onConfirm={handleCancel}
+  >
+    <Button key="cancel">
             Cancel
-          </Button>,
+          </Button>
+  </Popconfirm>
+          ,
           <Button key="save" type="primary" onClick={handleSave}>
             Save
           </Button>,
