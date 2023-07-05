@@ -63,6 +63,7 @@ const TasksList = ({name}) => {
                         title={task.title}
                         description={task.description}
                         key={task.id}
+                        taskId={task.id}
                         onDeleteTask={() => onDeleteTask(task.id)}
                         name={name}
                     />
