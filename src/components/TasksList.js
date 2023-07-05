@@ -6,7 +6,7 @@ import {PlusOutlined} from '@ant-design/icons';
 import Task from "./Task";
 import AddTask from './AddTask';
 import axios from "axios";
-import {deleteTask} from "../utils/tasksRequests";
+import {deleteTask, fetchTasks} from "../utils/tasksRequests";
 import {SearchContext} from "../contexts/SearchContext";
 
 const TasksList = ({name}) => {
@@ -18,7 +18,7 @@ const TasksList = ({name}) => {
     const { searchText } = useContext(SearchContext);
 
     const toggleTasksList = () => {
-        fetchTasks();
+        fetchTasks(name, setTasks);
     }
 
     const showModal = () => {
@@ -30,19 +30,8 @@ const TasksList = ({name}) => {
     };
 
     useEffect(() => {
-        fetchTasks();
+        fetchTasks(name, setTasks);
     }, [isNewTaskAdded]);
-
-    const fetchTasks = async () => {
-        try {
-            const url = `http://localhost:8080/tasks?status=${name}`;
-            const response = await axios.get(url);
-            const data = response.data;
-            setTasks(data);
-        } catch (error) {
-            console.error('Error fetching tasks:', error);
-        }
-    };
 
     const onDeleteTask = (id) => {
         setTaskIdToDelete(id);
@@ -52,7 +41,7 @@ const TasksList = ({name}) => {
     const handleDeleteTask = async (id) => {
         await deleteTask(id);
         setIsDeleteModalVisible(false);
-        fetchTasks();
+        fetchTasks(name, setTasks);
     };
 
     const filterTasksByTitle = (tasks, searchText) => {

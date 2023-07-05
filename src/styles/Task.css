@@ -30,14 +30,14 @@
     margin-right: 10px;
 }
 
-.sidebar-icon {
+.title-icon {
     cursor: pointer;
     color: #a19b9b;
     width: 25px;
     height: 25px;
 }
 
-.sidebar-text {
+.title-text {
     margin-left: 5px;
     font-weight: bold;
 }

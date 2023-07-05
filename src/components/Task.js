@@ -24,10 +24,10 @@ const Task = ({title, description, name, onDeleteTask}) => {
             <div className="task-name">
                 <div>
                 <span className={`dot ${dotColorClass}`}></span>
-                <span className="sidebar-text">{title}</span>
+                <span className="title-text">{title}</span>
                 </div>
                 <div className="icon-wrapper">
-                    <img src={DeleteIcon} className="sidebar-icon" onClick={onDeleteTask}/>
+                    <img src={DeleteIcon} className="title-icon" onClick={onDeleteTask}/>
                 </div>
             </div>
             <div className="task-content">
