@@ -1,9 +1,8 @@
 import React, { useContext } from 'react';
 import '../styles/Task.css';
-import AttachIcon from "../images/attach.svg";
-// import { useDrag, useDrop } from 'react-dnd';
+import DeleteIcon from "../images/delete.svg";
 
-const Task = ({title, description, name}) => {
+const Task = ({title, description, name, onDeleteTask}) => {
 
     const getDotColorClass = (name) => {
         switch (name) {
@@ -26,6 +25,9 @@ const Task = ({title, description, name}) => {
                 <div>
                 <span className={`dot ${dotColorClass}`}></span>
                 <span className="sidebar-text">{title}</span>
+                </div>
+                <div className="icon-wrapper">
+                    <img src={DeleteIcon} className="sidebar-icon" onClick={onDeleteTask}/>
                 </div>
             </div>
             <div className="task-content">

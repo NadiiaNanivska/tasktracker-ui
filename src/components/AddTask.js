@@ -3,12 +3,13 @@ import '../styles/TasksList.css';
 import {Modal, Input } from 'antd';
 import {addTask } from '../utils/tasksRequests';
 
-const AddTask = ({isModalVisible, setIsModalVisible, name}) => {
+const AddTask = ({isModalVisible, setIsModalVisible, name, isNewTaskAdded}) => {
     const [title, setTitle] = useState('');
     const [description, setDescription] = useState('');    
 
     const handleOk = () => {
         addTask(title, description, name);
+        isNewTaskAdded();
         setIsModalVisible(false);
         setTitle('');
         setDescription('');
