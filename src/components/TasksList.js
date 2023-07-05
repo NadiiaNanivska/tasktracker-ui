@@ -17,10 +17,6 @@ const TasksList = ({name}) => {
     const [taskIdToDelete, setTaskIdToDelete] = useState(null);
     const { searchText } = useContext(SearchContext);
 
-    const toggleTasksList = () => {
-        fetchTasks(name, setTasks);
-    }
-
     const showModal = () => {
         setIsModalVisible(true);
     };
@@ -68,7 +64,7 @@ const TasksList = ({name}) => {
                         name={name}
                     />
                 ))}
-            <AddTask isNewTaskAdded={toggleTasksList} isModalVisible={isModalVisible} setIsModalVisible={setIsModalVisible} name={name}></AddTask>
+            <AddTask setIsNewTaskAdded={setIsNewTaskAdded} isModalVisible={isModalVisible} setIsModalVisible={setIsModalVisible} name={name}></AddTask>
                 <Modal
                     title="Delete confirmation"
                     visible={isDeleteModalVisible}

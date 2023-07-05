@@ -3,13 +3,13 @@ import '../styles/TasksList.css';
 import {Modal, Input } from 'antd';
 import {addTask } from '../utils/tasksRequests';
 
-const AddTask = ({isModalVisible, setIsModalVisible, name, isNewTaskAdded}) => {
+const AddTask = ({isModalVisible, setIsModalVisible, name, setIsNewTaskAdded}) => {
     const [title, setTitle] = useState('');
     const [description, setDescription] = useState('');    
 
     const handleOk = () => {
         addTask(title, description, name);
-        isNewTaskAdded();
+        setIsNewTaskAdded(true);
         setIsModalVisible(false);
         setTitle('');
         setDescription('');
@@ -17,6 +17,7 @@ const AddTask = ({isModalVisible, setIsModalVisible, name, isNewTaskAdded}) => {
 
     const handleCancel = () => {
         setIsModalVisible(false);
+        setIsNewTaskAdded(false);
         setTitle('');
         setDescription('');
     };
