@@ -66,8 +66,7 @@ const TasksList = ({name}) => {
 
         const updatedTask = { title: draggedTask.title, description: draggedTask.description, status: name };
         await updateTask(taskId, updatedTask);
-        // TODO: how to rerender tasklist with name of  previousStatus
-        // fetchTasks(previousStatus, setTasks);
+        fetchTasks(name, setTasks);
         
     };
 
