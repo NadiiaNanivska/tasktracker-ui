@@ -6,7 +6,7 @@ import {PlusOutlined} from '@ant-design/icons';
 import Task from "./Task";
 import AddTask from './AddTask';
 import axios from "axios";
-import {deleteTask, fetchTasks, fetchTasksWithoutName} from "../utils/tasksRequests";
+import {deleteTask, fetchTasks, fetchTasksWithoutName, updateTask} from "../utils/tasksRequests";
 import {SearchContext} from "../contexts/SearchContext";
 
 const TasksList = ({name}) => {
@@ -59,18 +59,16 @@ const TasksList = ({name}) => {
         setAllTasks(allTasks);
 
         const draggedTask = allTasks.find((task) => task.id === taskId);
-        console.log(taskId);
-        console.log(allTasks);
+        const previousStatus = draggedTask.status;
+        // console.log(taskId);
         console.log(draggedTask);
+        console.log(previousStatus);
 
-        // Видалити перетягувану задачу зі списку allTasks
-        const updatedAllTasks = allTasks.filter((task) => task.id !== taskId);
-
-        // Додати перетягувану задачу до списку updatedTasks
-        const updatedTasks = [...tasks, draggedTask];
-
-        setAllTasks(updatedAllTasks);
-        setTasks(updatedTasks);
+        const updatedTask = { title: draggedTask.title, description: draggedTask.description, status: name };
+        await updateTask(taskId, updatedTask);
+        // TODO: how to rerender tasklist with name of  previousStatus
+        // fetchTasks(previousStatus, setTasks);
+        
     };
 
 

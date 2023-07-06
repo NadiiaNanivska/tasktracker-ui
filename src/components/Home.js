@@ -14,6 +14,7 @@ const Home = () => {
       setSidebarWidth(newWidth);
     };
 
+    
   return (
       <SearchProvider>
     <SidebarContext.Provider value={sidebarWidth}>
