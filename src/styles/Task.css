@@ -40,6 +40,7 @@
 .title-text {
     margin-left: 5px;
     font-weight: bold;
+    cursor: pointer;
 }
 
 .dot {

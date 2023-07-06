@@ -37,7 +37,7 @@ const Task = ({ title: initialTitle, description: initialDescription, name, onDe
       <div className="task-name" onClick={showModal}>
         <div>
           <span className={`dot ${getDotColorClass(name)}`}></span>
-          <span className="title-text">{title}</span>
+          <span className="title-text" title="Edit task">{title}</span>
         </div>
         <div className="icon-wrapper">
           <img src={DeleteIcon} className="title-icon" onClick={onDeleteClick} />
