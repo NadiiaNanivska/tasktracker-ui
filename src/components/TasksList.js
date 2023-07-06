@@ -66,7 +66,14 @@ const TasksList = ({name}) => {
 
         const updatedTask = { title: draggedTask.title, description: draggedTask.description, status: name };
         await updateTask(taskId, updatedTask);
-        fetchTasks(name, setTasks);
+         // Видалити перетягувану задачу зі списку allTasks
+         const updatedAllTasks = allTasks.filter((task) => task.id !== taskId);
+
+         // Додати перетягувану задачу до списку updatedTasks
+         const updatedTasks = [...tasks, draggedTask];
+ 
+        //  setAllTasks(updatedAllTasks);
+         setTasks(updatedTasks);
         
     };
 
