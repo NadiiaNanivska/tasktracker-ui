@@ -5,6 +5,7 @@ import Sidebar from "./Sidebar";
 import TasksList from "./TasksList";
 import SidebarContext from "../contexts/SidebarContext";
 import {SearchProvider} from "../contexts/SearchContext";
+import {fetchTasksWithoutName} from "../utils/tasksRequests";
 
 const Home = () => {
     const [sidebarWidth, setSidebarWidth] = useState(18);

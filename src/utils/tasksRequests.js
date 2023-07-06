@@ -30,6 +30,16 @@ export const fetchTasks = async (name, setTasks) => {
     }
 };
 
+export const fetchTasksWithoutName = async () => {
+    try {
+        const url = `http://localhost:8080/tasks`;
+        const response = await axios.get(url);
+        return response.data;
+    } catch (error) {
+        console.error('Error fetching tasks:', error);
+    }
+};
+
 export const updateTask = async (taskId, updatedTask) => {
     try {
         const response = await axios.put(`http://localhost:8080/tasks/${taskId}`, updatedTask);

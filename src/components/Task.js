@@ -32,8 +32,12 @@ const Task = ({ title: initialTitle, description: initialDescription, name, onDe
     onDeleteTask();
   };
 
+    const onDragStart = (e, id) => {
+        e.dataTransfer.setData("taskId", id)
+    }
+
   return (
-    <div className="task">
+    <div className="task" draggable={true} onDragStart={(e) => onDragStart(e, taskId)}>
       <div className="task-name" onClick={showModal}>
         <div>
           <span className={`dot ${getDotColorClass(name)}`}></span>

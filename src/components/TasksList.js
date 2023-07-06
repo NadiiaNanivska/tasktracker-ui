@@ -6,12 +6,13 @@ import {PlusOutlined} from '@ant-design/icons';
 import Task from "./Task";
 import AddTask from './AddTask';
 import axios from "axios";
-import {deleteTask, fetchTasks} from "../utils/tasksRequests";
+import {deleteTask, fetchTasks, fetchTasksWithoutName} from "../utils/tasksRequests";
 import {SearchContext} from "../contexts/SearchContext";
 
 const TasksList = ({name}) => {
     const [isModalVisible, setIsModalVisible] = useState(false);
     const [tasks, setTasks] = useState([]);
+    const [tasksAll, setAllTasks] = useState([]);
     const [isNewTaskAdded, setIsNewTaskAdded] = useState(false);
     const [isDeleteModalVisible, setIsDeleteModalVisible] = useState(false);
     const [taskIdToDelete, setTaskIdToDelete] = useState(null);
@@ -48,8 +49,33 @@ const TasksList = ({name}) => {
 
     const filteredTasks = filterTasksByTitle(tasks, searchText);
 
+    const handleDragOver = (e) => {
+        e.preventDefault();
+    }
+
+    const handleOnDrop = async (e) => {
+        const taskId = parseInt(e.dataTransfer.getData("taskId"), 10);
+        const allTasks = await fetchTasksWithoutName();
+        setAllTasks(allTasks);
+
+        const draggedTask = allTasks.find((task) => task.id === taskId);
+        console.log(taskId);
+        console.log(allTasks);
+        console.log(draggedTask);
+
+        // Видалити перетягувану задачу зі списку allTasks
+        const updatedAllTasks = allTasks.filter((task) => task.id !== taskId);
+
+        // Додати перетягувану задачу до списку updatedTasks
+        const updatedTasks = [...tasks, draggedTask];
+
+        setAllTasks(updatedAllTasks);
+        setTasks(updatedTasks);
+    };
+
+
     return (
-        <div className="list-card">
+        <div className="list-card" onDrop={handleOnDrop} onDragOver={handleDragOver}>
             <div className="card-content">
             <p className="card-heading">{name}</p>
             <Button type="default" className="card-add-btn" icon={<PlusOutlined />} onClick={showModal}
