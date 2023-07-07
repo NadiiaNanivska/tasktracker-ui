@@ -23,28 +23,28 @@ const AddTask = ({ isModalVisible, setIsModalVisible, name, setIsNewTaskAdded })
     };
 
     return (<>
-            <Modal
-        title="Add Task"
-        visible={isModalVisible}
-        onOk={handleOk}
-        onCancel={handleCancel}
-        footer={[
-          <Popconfirm
-    title="Are you sure to cancel changes?"
-    okText="Yes"
-    cancelText="No"
-    onConfirm={handleCancel}
-  >
-    <Button key="cancel">
-            Cancel
-          </Button>
-  </Popconfirm>
-          ,
-          <Button key="save" type="primary" onClick={handleOk}>
-            Add
-          </Button>,
-        ]}
-      >
+        <Modal
+            title="Add Task"
+            visible={isModalVisible}
+            onOk={handleOk}
+            onCancel={handleCancel}
+            footer={[
+                <Popconfirm
+                    title="Are you sure to cancel changes?"
+                    okText="Yes"
+                    cancelText="No"
+                    onConfirm={handleCancel}
+                >
+                    <Button key="cancel">
+                        Cancel
+                    </Button>
+                </Popconfirm>
+                ,
+                <Button key="save" type="primary" onClick={handleOk}>
+                    Add
+                </Button>,
+            ]}
+        >
             <div>
                 <label>Title:</label>
                 <Input
