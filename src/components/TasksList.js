@@ -1,15 +1,15 @@
 import React, { useContext, useState, useEffect } from 'react';
 import SidebarContext from '../contexts/SidebarContext';
 import '../styles/TasksList.css';
-import {Button, Modal} from 'antd';
-import {PlusOutlined} from '@ant-design/icons';
+import { Button, Modal } from 'antd';
+import { PlusOutlined } from '@ant-design/icons';
 import Task from "./Task";
 import AddTask from './AddTask';
 import axios from "axios";
-import {deleteTask, fetchTasks, fetchTasksWithoutName, updateTask} from "../utils/tasksRequests";
-import {SearchContext} from "../contexts/SearchContext";
+import { deleteTask, fetchTasks, fetchTasksWithoutName, updateTask } from "../utils/tasksRequests";
+import { SearchContext } from "../contexts/SearchContext";
 
-const TasksList = ({name, afterdragtasks, updateTasks}) => {
+const TasksList = ({ name, afterdragtasks, updateTasks }) => {
     const [isModalVisible, setIsModalVisible] = useState(false);
     const [tasks, setTasks] = useState([]);
     const [isNewTaskAdded, setIsNewTaskAdded] = useState(false);
@@ -21,7 +21,7 @@ const TasksList = ({name, afterdragtasks, updateTasks}) => {
     useEffect(() => {
         console.log(afterdragtasks);
         setTasks(afterdragtasks);
-      }, [afterdragtasks]);
+    }, [afterdragtasks]);
 
     const showModal = () => {
         setIsModalVisible(true);
@@ -68,20 +68,23 @@ const TasksList = ({name, afterdragtasks, updateTasks}) => {
         const updatedTask = { id: draggedTask.id, title: draggedTask.title, description: draggedTask.description, status: name };
         await updateTask(taskId, updatedTask);
 
-        const updatedTasks = [...tasks, draggedTask];
+        const taskExists = tasks.some((task) => task.id === draggedTask.id);
+        console.log(taskExists)
 
-        updateTasks(previousStatus, allTasks.filter((task) => task.id !== updatedTask.id && task.status === previousStatus));
-
-        setTasks(updatedTasks);
+        if (!taskExists) {
+            const updatedTasks = [...tasks, draggedTask];
+            setTasks(updatedTasks);
+            updateTasks(previousStatus, allTasks.filter((task) => task.id !== updatedTask.id && task.status === previousStatus));
+        }
     };
 
 
     return (
         <div className="list-card" onDrop={handleOnDrop} onDragOver={handleDragOver}>
             <div className="card-content">
-            <p className="card-heading">{name}</p>
-            <Button type="default" className="card-add-btn" icon={<PlusOutlined />} onClick={showModal}
-            block></Button>
+                <p className="card-heading">{name}</p>
+                <Button type="default" className="card-add-btn" icon={<PlusOutlined />} onClick={showModal}
+                    block></Button>
                 {filteredTasks.map((task) => (
                     <Task
                         title={task.title}
@@ -92,7 +95,7 @@ const TasksList = ({name, afterdragtasks, updateTasks}) => {
                         name={name}
                     />
                 ))}
-            <AddTask setIsNewTaskAdded={setIsNewTaskAdded} isModalVisible={isModalVisible} setIsModalVisible={setIsModalVisible} name={name}></AddTask>
+                <AddTask setIsNewTaskAdded={setIsNewTaskAdded} isModalVisible={isModalVisible} setIsModalVisible={setIsModalVisible} name={name}></AddTask>
                 <Modal
                     title="Delete confirmation"
                     visible={isDeleteModalVisible}
