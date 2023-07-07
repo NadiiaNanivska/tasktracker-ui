@@ -2,7 +2,7 @@
     background-color: #fafafa;
     display: flex;
     justify-content: center;
-    align-items: center; /* Додайте цей рядок для вертикального вирівнювання */
+    align-items: center;
     height: 100vh;
 }
 
@@ -10,7 +10,7 @@
     border-radius: 10px;
     background-color: white;
     width: 450px;
-    height: 400px;
+    height: 375px;
     display: flex;
     justify-content: center;
     padding: 10px;
@@ -42,17 +42,11 @@
 }
 
 .login-input {
-    margin-bottom: 20px;
+    margin-bottom: 15px;
 }
 
-.login-remember-wrapper {
-    display: flex;
-    align-items: center;
-    gap: 10px;
-}
-
-.login-remember-wrapper span{
-    font-size: 16px;
+.login-input:hover {
+    border-color: #a7c9b999!important;
 }
 
 .login-button-wrapper {
@@ -64,7 +58,7 @@
     width: 100%;
     margin-bottom: 10px;
     background-color: #a7c9b859;
-    color: black;
+    color: #a19b9b;
 }
 
 .ant-btn.ant-btn-primary:hover {

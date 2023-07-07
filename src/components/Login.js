@@ -15,10 +15,6 @@ const Login = () => {
                         <Input size="large" className="login-input" placeholder="Enter email" />
                         <Input size="large" className="login-input" placeholder="Enter password" />
                     </div>
-                    <div className="login-remember-wrapper">
-                        <Checkbox />
-                        <span>Remember me</span>
-                    </div>
                     <div className="login-button-wrapper">
                     <Button type="primary" className="card-add-btn">
                         LOGIN
