@@ -3,6 +3,18 @@
     flex-direction: row-reverse;
 }
   
+.ant-btn.ant-btn-primary {
+  background-color: #00410075!important;
+}
+
+.ant-btn.ant-btn-primary:hover {
+  background-color: #0041009f!important;
+}
+
+.ant-input:hover, .ant-input:focus {
+  border-color: #A7C9B8!important;
+}
+
   .content {
     margin-top: 90px;
     /* margin-left: 18em; */

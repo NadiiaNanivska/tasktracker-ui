@@ -45,35 +45,29 @@
     margin-bottom: 15px;
 }
 
-.register-input:hover {
-    border-color: #a7c9b999!important;
-}
-
 .register-button-wrapper {
     display: flex;
     justify-content: center;
 }
 
-.ant-btn.ant-btn-primary {
+.register-btn {
     width: 100%;
     margin-bottom: 10px;
-    background-color: #b7c9b959;
-    color: #a19b9b;
+    color: #4c4848;
 }
 
-.ant-btn.ant-btn-primary:hover {
-    background-color: #a7c9b999!important;
+.register-btn:hover {
     color: black!important;
 }
 
 .register-without-account{
     text-decoration: none;
-    color: #4758b7;
+    color: #004100;
     font-size: 14px;
 }
 
 .register-without-account:hover{
-    color: #8994d1;
+    color: #00410075;
 }
 
 .register-copyright {

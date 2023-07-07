@@ -16,7 +16,7 @@ const Login = () => {
                         <Input size="large" className="login-input" placeholder="Enter password" />
                     </div>
                     <div className="login-button-wrapper">
-                    <Button type="primary" className="card-add-btn">
+                    <Button type="primary" className="card-add-btn login-btn">
                         LOGIN
                     </Button>
                     </div>

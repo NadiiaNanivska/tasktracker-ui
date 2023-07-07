@@ -13,14 +13,14 @@ const Register = () => {
                     </div>
                     <div className="register-credentials-wrapper">
                         <Input size="large" className="register-input" placeholder="First Name*" />
-                        <Input size="large" className="login-input" placeholder="Last Name*" />
-                        <Input size="large" className="login-input" placeholder="Email*" />
-                        <Input size="large" className="login-input" placeholder="Password*" />
-                        <Input size="large" className="login-input" placeholder="Repeat password*" />
-                        <Input size="large" className="login-input" placeholder="Phone Number" />
+                        <Input size="large" className="register-input" placeholder="Last Name*" />
+                        <Input size="large" className="register-input" placeholder="Email*" />
+                        <Input size="large" className="register-input" placeholder="Password*" />
+                        <Input size="large" className="register-input" placeholder="Repeat password*" />
+                        <Input size="large" className="register-input" placeholder="Phone Number" />
                     </div>
                     <div className="register-button-wrapper">
-                        <Button type="primary" className="card-add-btn">
+                        <Button type="primary" className="card-add-btn register-btn">
                             SIGN UP
                         </Button>
                     </div>
