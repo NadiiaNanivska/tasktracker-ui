@@ -83,7 +83,7 @@ const Sidebar = ({updateSidebarWidth}) => {
                         </a>
                     </li>
                     <li className="sidebar-item">
-                        <a href="#" className="sidebar-link">
+                        <a href="/login" className="sidebar-link">
                             <div className="icon-wrapper">
                                 <img src={LogoutIcon} alt="Home" className="sidebar-icon" />
                             </div>
