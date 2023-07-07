@@ -1,0 +1,85 @@
+.register {
+    background-color: #fafafa;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+}
+
+.register-block {
+    border-radius: 10px;
+    background-color: white;
+    width: 450px;
+    height: 600px;
+    display: flex;
+    justify-content: center;
+    padding: 10px;
+}
+
+.register-head-wrapper {
+    padding-top: 10px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.register-head-name {
+    font-size: 24px;
+    font-weight: bold;
+    color: #333;
+    margin-bottom: 10px;
+}
+
+.register-head-text {
+    margin-top: 10px;
+    font-size: 24px;
+    font-weight: 600;
+    color: #333;
+}
+
+.register-credentials-wrapper {
+    padding-top: 25px;
+}
+
+.register-input {
+    margin-bottom: 15px;
+}
+
+.register-input:hover {
+    border-color: #a7c9b999!important;
+}
+
+.register-button-wrapper {
+    display: flex;
+    justify-content: center;
+}
+
+.ant-btn.ant-btn-primary {
+    width: 100%;
+    margin-bottom: 10px;
+    background-color: #a7c9b859;
+    color: #a19b9b;
+}
+
+.ant-btn.ant-btn-primary:hover {
+    background-color: #a7c9b999!important;
+    color: black!important;
+}
+
+.register-without-account{
+    text-decoration: none;
+    color: #4758b7;
+    font-size: 14px;
+}
+
+.register-without-account:hover{
+    color: #8994d1;
+}
+
+.register-copyright {
+    font-size: 14px;
+    color: #777;
+    text-align: center;
+    margin-top: 40px;
+}
+
