@@ -1,0 +1,91 @@
+.login {
+    background-color: #fafafa;
+    display: flex;
+    justify-content: center;
+    align-items: center; /* Додайте цей рядок для вертикального вирівнювання */
+    height: 100vh;
+}
+
+.login-block {
+    border-radius: 10px;
+    background-color: white;
+    width: 450px;
+    height: 400px;
+    display: flex;
+    justify-content: center;
+    padding: 10px;
+}
+
+.login-head-wrapper {
+    padding-top: 10px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.login-head-name {
+    font-size: 24px;
+    font-weight: bold;
+    color: #333;
+    margin-bottom: 10px;
+}
+
+.login-head-text {
+    margin-top: 10px;
+    font-size: 24px;
+    font-weight: 600;
+    color: #333;
+}
+
+.login-credentials-wrapper {
+    padding-top: 25px;
+}
+
+.login-input {
+    margin-bottom: 20px;
+}
+
+.login-remember-wrapper {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.login-remember-wrapper span{
+    font-size: 16px;
+}
+
+.login-button-wrapper {
+    display: flex;
+    justify-content: center;
+}
+
+.ant-btn.ant-btn-primary {
+    width: 100%;
+    margin-bottom: 10px;
+    background-color: #a7c9b859;
+    color: black;
+}
+
+.ant-btn.ant-btn-primary:hover {
+    background-color: #a7c9b999!important;
+    color: black!important;
+}
+
+.login-without-account{
+    text-decoration: none;
+    color: #4758b7;
+    font-size: 14px;
+}
+
+.login-without-account:hover{
+    color: #8994d1;
+}
+
+.login-copyright {
+    font-size: 14px;
+    color: #777;
+    text-align: center;
+    margin-top: 40px;
+}
+
