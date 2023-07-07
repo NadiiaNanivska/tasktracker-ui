@@ -9,13 +9,19 @@ import axios from "axios";
 import {deleteTask, fetchTasks, fetchTasksWithoutName, updateTask} from "../utils/tasksRequests";
 import {SearchContext} from "../contexts/SearchContext";
 
-const TasksList = ({name}) => {
+const TasksList = ({name, afterdragtasks, updateTasks}) => {
     const [isModalVisible, setIsModalVisible] = useState(false);
     const [tasks, setTasks] = useState([]);
     const [isNewTaskAdded, setIsNewTaskAdded] = useState(false);
     const [isDeleteModalVisible, setIsDeleteModalVisible] = useState(false);
     const [taskIdToDelete, setTaskIdToDelete] = useState(null);
     const { searchText } = useContext(SearchContext);
+
+
+    useEffect(() => {
+        console.log(afterdragtasks);
+        setTasks(afterdragtasks);
+      }, [afterdragtasks]);
 
     const showModal = () => {
         setIsModalVisible(true);
@@ -57,11 +63,14 @@ const TasksList = ({name}) => {
         const allTasks = await fetchTasksWithoutName();
 
         const draggedTask = allTasks.find((task) => task.id === taskId);
+        const previousStatus = draggedTask.status;
 
-        const updatedTask = { title: draggedTask.title, description: draggedTask.description, status: name };
+        const updatedTask = { id: draggedTask.id, title: draggedTask.title, description: draggedTask.description, status: name };
         await updateTask(taskId, updatedTask);
 
         const updatedTasks = [...tasks, draggedTask];
+
+        updateTasks(previousStatus, allTasks.filter((task) => task.id !== updatedTask.id && task.status === previousStatus));
 
         setTasks(updatedTasks);
     };
