@@ -1,0 +1,43 @@
+.user-menu {
+    position: absolute;
+    top: 100%;
+    right: 0;
+    background-color: #fff;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    display: flex;
+    flex-direction: column;
+    margin-right: 20px;
+}
+
+.user-menu-link {
+    height: 22px;
+    padding: 8px 12px 8px 12px;
+    display: flex;
+    align-items: center;
+    text-decoration: none;
+    color: #a19b9b;
+    transition: color 0.3s ease;
+}
+
+.user-menu-link:hover {
+    color: black;
+}
+
+.user-menu-icon-wrapper {
+    display: flex;
+    align-items: center;
+    margin-right: 5px;
+}
+
+.user-menu-icon{
+    cursor: pointer;
+    color: #a19b9b;
+    width: 20px;
+    height: 20px;
+}
+
+.user-menu-text{
+    margin-left: 5px;
+}

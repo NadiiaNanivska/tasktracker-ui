@@ -2,6 +2,7 @@
     background-color: #ffffff;
     margin-top: 10px;
     border-radius: 13px;
+    opacity: 1!important;
 }
 
 .task-name {

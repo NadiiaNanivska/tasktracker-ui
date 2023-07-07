@@ -12,7 +12,6 @@ import {SearchContext} from "../contexts/SearchContext";
 const TasksList = ({name}) => {
     const [isModalVisible, setIsModalVisible] = useState(false);
     const [tasks, setTasks] = useState([]);
-    const [tasksAll, setAllTasks] = useState([]);
     const [isNewTaskAdded, setIsNewTaskAdded] = useState(false);
     const [isDeleteModalVisible, setIsDeleteModalVisible] = useState(false);
     const [taskIdToDelete, setTaskIdToDelete] = useState(null);
@@ -56,25 +55,15 @@ const TasksList = ({name}) => {
     const handleOnDrop = async (e) => {
         const taskId = parseInt(e.dataTransfer.getData("taskId"), 10);
         const allTasks = await fetchTasksWithoutName();
-        setAllTasks(allTasks);
 
         const draggedTask = allTasks.find((task) => task.id === taskId);
-        const previousStatus = draggedTask.status;
-        // console.log(taskId);
-        console.log(draggedTask);
-        console.log(previousStatus);
 
         const updatedTask = { title: draggedTask.title, description: draggedTask.description, status: name };
         await updateTask(taskId, updatedTask);
-         // Видалити перетягувану задачу зі списку allTasks
-         const updatedAllTasks = allTasks.filter((task) => task.id !== taskId);
 
-         // Додати перетягувану задачу до списку updatedTasks
-         const updatedTasks = [...tasks, draggedTask];
- 
-        //  setAllTasks(updatedAllTasks);
-         setTasks(updatedTasks);
-        
+        const updatedTasks = [...tasks, draggedTask];
+
+        setTasks(updatedTasks);
     };
 
 
