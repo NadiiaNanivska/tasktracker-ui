@@ -65,11 +65,10 @@ const TasksList = ({ name, afterdragtasks, updateTasks }) => {
         const draggedTask = allTasks.find((task) => task.id === taskId);
         const previousStatus = draggedTask.status;
 
-        const updatedTask = { id: draggedTask.id, title: draggedTask.title, description: draggedTask.description, status: name };
+        const updatedTask = { ...draggedTask, status: name };
         await updateTask(taskId, updatedTask);
 
         const taskExists = tasks.some((task) => task.id === draggedTask.id);
-        console.log(taskExists)
 
         if (!taskExists) {
             const updatedTasks = [...tasks, draggedTask];
