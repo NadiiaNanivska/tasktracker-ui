@@ -12,11 +12,11 @@ const Register = () => {
                         <div className="register-head-text">Register</div>
                     </div>
                     <div className="register-credentials-wrapper">
-                        <Input size="large" className="register-input" placeholder="First Name" />
-                        <Input size="large" className="login-input" placeholder="Last Name" />
-                        <Input size="large" className="login-input" placeholder="Email" />
-                        <Input size="large" className="login-input" placeholder="Password" />
-                        <Input size="large" className="login-input" placeholder="Repeat password" />
+                        <Input size="large" className="register-input" placeholder="First Name*" />
+                        <Input size="large" className="login-input" placeholder="Last Name*" />
+                        <Input size="large" className="login-input" placeholder="Email*" />
+                        <Input size="large" className="login-input" placeholder="Password*" />
+                        <Input size="large" className="login-input" placeholder="Repeat password*" />
                         <Input size="large" className="login-input" placeholder="Phone Number" />
                     </div>
                     <div className="register-button-wrapper">
