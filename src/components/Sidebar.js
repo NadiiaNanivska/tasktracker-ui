@@ -9,7 +9,7 @@ import MenuItem from '../images/burger-menu.svg';
 import Navbar from './Navbar';
 import SidebarContext from '../contexts/SidebarContext';
 
-const Sidebar = ({updateSidebarWidth}) => {
+const Sidebar = ({updateSidebarWidth, updateContentWidth}) => {
     const sidebarHeadingRef = useRef(null);
     const sidebarTextRef = useRef([]);
     const [isSidebarOpen, setIsSidebarOpen] = useState(true);
@@ -19,6 +19,7 @@ const Sidebar = ({updateSidebarWidth}) => {
     };
 
     const hideMenu = () => {
+        updateContentWidth();
         if (sidebarHeadingRef.current.style.display !== 'none') {
             updateSidebarWidth(5);
             sidebarHeadingRef.current.style.display = 'none';
@@ -47,7 +48,7 @@ const Sidebar = ({updateSidebarWidth}) => {
                 </div>
             <ul className={`sidebar-nav ${isSidebarOpen ? 'open-text' : 'closed-text'}`}>
                 <li className="sidebar-item">
-                    <a href="#" className="sidebar-link">
+                    <a href="/" className="sidebar-link">
                         <div className="icon-wrapper">
                             <img src={HomeIcon} alt="Home" className="sidebar-icon" />
                         </div>

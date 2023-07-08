@@ -1,0 +1,96 @@
+.home-page {
+    display: flex;
+    flex-direction: column;
+}
+
+.home-page-content {
+    display: flex;
+    margin-left: 25em;
+    flex-direction: row;
+    position: relative;
+    height: 100vh;
+    border-radius: 8px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+.home-page-left {
+    padding-left: 20px;
+    flex: 1;
+}
+
+.home-page-right {
+    flex: 1;
+}
+
+.home-page-left-head {
+    margin-top: 150px;
+    font-size: 24px;
+    font-weight: bold;
+    color: #fff;
+    background-color: #00410042;
+    width: 132px;
+}
+
+.home-page-left-middle {
+    margin-top: 15px;
+    padding-left: 10px;
+    font-size: 40px;
+    font-weight: bold;
+    color: #333;
+    letter-spacing: 1px;
+    white-space: pre-line;
+    width: 40%;
+}
+
+.home-page-left-end {
+    margin-top: 15px;
+    padding-left: 10px;
+    font-size: 16px;
+    width: 70%;
+    color: #a19b9b;
+}
+
+.home-page-icon {
+    margin-top: 100px;
+    width: 400px;
+    height: 400px;
+}
+
+.home-page-buttons {
+    display: flex;
+    flex-direction: column;
+    width: 300px;
+}
+
+.home-page-login {
+    margin-top: 10px;
+    height: 40px;
+}
+
+.home-page-register {
+    margin-top: 10px;
+    height: 40px;
+}
+
+.home-page-about {
+    margin-top: 170px;
+}
+
+.icon {
+    width: 24px;
+    height: 24px;
+    margin-right: 10px;
+}
+
+.social-media-icons {
+    display: flex;
+    align-items: center;
+}
+
+.social-media-icons a {
+    display: flex;
+    align-items: center;
+    margin-right: 10px;
+    text-decoration: none;
+    color: #000000;
+}
