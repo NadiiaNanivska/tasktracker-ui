@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import '../styles/TasksList.css';
-import { Modal, Input, Button, Popconfirm } from 'antd';
+import { Form, Modal, Input, Button, Popconfirm } from 'antd';
 import { addTask } from '../utils/tasksRequests';
 
 const AddTask = ({ isModalVisible, setIsModalVisible, name, setIsNewTaskAdded }) => {
@@ -16,6 +16,7 @@ const AddTask = ({ isModalVisible, setIsModalVisible, name, setIsNewTaskAdded })
     };
 
     const handleCancel = () => {
+        console.log(title)
         setIsModalVisible(false);
         setIsNewTaskAdded(false);
         setTitle('');
@@ -28,41 +29,45 @@ const AddTask = ({ isModalVisible, setIsModalVisible, name, setIsNewTaskAdded })
             visible={isModalVisible}
             onOk={handleOk}
             onCancel={handleCancel}
-            footer={[
-                <Popconfirm
-                    title="Are you sure to cancel changes?"
-                    okText="Yes"
-                    cancelText="No"
-                    onConfirm={handleCancel}
-                >
-                    <Button key="cancel">
-                        Cancel
-                    </Button>
-                </Popconfirm>
-                ,
-                <Button key="save" type="primary" onClick={handleOk}>
-                    Add
-                </Button>,
-            ]}
         >
+            <Form>
             <div>
-                <label>Title:</label>
+                <label>Title</label>
+                <Form.Item
+                    name="title"
+                    rules={[
+                        { required: true, message: 'Please enter the task title' },
+                    ]}
+                    style={{ marginBottom: 0 }}
+                >
                 <Input
                     value={title}
                     onChange={(e) => setTitle(e.target.value)}
                     placeholder="Enter task title"
                 />
+                </Form.Item>
             </div>
             <div>
                 <label>Description:</label>
+                <Form.Item
+                    name="description"
+                    rules={[
+                        { required: true, message: 'Please enter the task description' },
+                        { min: 40, message: 'The description should be at least 40 characters long' },
+                        { max: 400, message: 'The description should not exceed 400 characters' },
+                    ]}
+                >
                 <Input.TextArea
                     value={description}
                     onChange={(e) => setDescription(e.target.value)}
                     placeholder="Enter task description"
-                    autoSize={{ minRows: 2, maxRows: 6 }}
                 />
+                </Form.Item>
             </div>
-        </Modal></>);
+            </Form>
+        </Modal>
+    </>
+    );
 }
 
 export default AddTask;

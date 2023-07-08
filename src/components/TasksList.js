@@ -19,7 +19,6 @@ const TasksList = ({ name, afterdragtasks, updateTasks }) => {
 
 
     useEffect(() => {
-        console.log(afterdragtasks);
         setTasks(afterdragtasks);
     }, [afterdragtasks]);
 
