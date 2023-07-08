@@ -1,20 +1,11 @@
 import React, { useContext, useState, useEffect } from 'react';
 import '../styles/Login.css';
 import {Button, Input, Checkbox, Form} from 'antd';
+import {passwordValidator, emailValidator} from "../utils/validation";
 
 const Login = () => {
     const onFinish = (values) => {
         console.log('Form values:', values);
-    };
-
-    const emailValidator = {
-        type: 'email',
-        message: 'Please enter a valid email address',
-    };
-
-    const passwordValidator = {
-        pattern: /^(?=.*[A-Z])[a-zA-Z0-9]{8,}$/,
-        message: 'Password must be at least 8 characters long, include uppercase letters, and contain only alphanumeric characters',
     };
 
     return (
