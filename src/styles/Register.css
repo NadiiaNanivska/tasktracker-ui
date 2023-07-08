@@ -17,7 +17,7 @@
 }
 
 .register-head-wrapper {
-    padding-top: 10px;
+    padding-top: 5px;
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -27,30 +27,26 @@
     font-size: 24px;
     font-weight: bold;
     color: #333;
-    margin-bottom: 10px;
 }
 
 .register-head-text {
-    margin-top: 10px;
     font-size: 24px;
     font-weight: 600;
     color: #333;
+    margin-bottom: 25px;
 }
 
-.register-credentials-wrapper {
-    padding-top: 25px;
+.register-form {
+    width: 400px;
 }
 
 .register-input {
-    margin-bottom: 15px;
-}
-
-.register-button-wrapper {
-    display: flex;
-    justify-content: center;
+    margin-bottom: 20px;
 }
 
 .register-btn {
+    margin-top: 0;
+    margin-bottom: 10px;
     width: 100%;
     color: #4c4848;
 }
@@ -73,6 +69,6 @@
     font-size: 14px;
     color: #777;
     text-align: center;
-    margin-top: 40px;
+    margin-top: 50px;
 }
 
