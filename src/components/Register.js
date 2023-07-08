@@ -81,7 +81,7 @@ const Register = () => {
                         <Input size="large" placeholder="Password*" />
                     </Form.Item>
                     <Form.Item
-                        name="repeatPassword"
+                        name="repeat-password"
                         rules={[
                             { required: true, message: 'Please repeat your password' },
                             { ...passwordValidator },
