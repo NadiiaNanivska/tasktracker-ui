@@ -102,3 +102,14 @@
 .sidebar-text {
   margin-left: 5px;
 }
+
+.sidebar-link.active {
+  height: 22px;
+  padding: 8px 8px 8px 12px;
+  display: flex;
+  align-items: center;
+  text-decoration: none;
+  transition: color 0.3s ease;
+  border-right: 2px solid #004100;
+  color: #000;
+}

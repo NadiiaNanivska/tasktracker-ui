@@ -8,11 +8,31 @@ import LogoutIcon from '../images/log-out.svg';
 import MenuItem from '../images/burger-menu.svg';
 import Navbar from './Navbar';
 import SidebarContext from '../contexts/SidebarContext';
+import {useLocation} from "react-router-dom";
 
 const Sidebar = ({updateSidebarWidth, updateContentWidth}) => {
     const sidebarHeadingRef = useRef(null);
     const sidebarTextRef = useRef([]);
     const [isSidebarOpen, setIsSidebarOpen] = useState(true);
+    const [activeTab, setActiveTab] = useState('');
+    const location = useLocation();
+
+    useEffect(() => {
+        const path = location.pathname;
+        if(path.includes('/tasks')){
+            setActiveTab('tasks');
+        } else if(path.includes('/')) {
+            setActiveTab('home')
+        } else if(path.includes('/calendar')) {
+            setActiveTab('calendar')
+        } else {
+            setActiveTab('settings')
+        }
+    }, [location]);
+
+    const handleTabClick = (tab) => {
+        setActiveTab(tab);
+    };
 
     const toggleSidebar = () => {
         setIsSidebarOpen(prevState => !prevState);
@@ -48,7 +68,7 @@ const Sidebar = ({updateSidebarWidth, updateContentWidth}) => {
                 </div>
             <ul className={`sidebar-nav ${isSidebarOpen ? 'open-text' : 'closed-text'}`}>
                 <li className="sidebar-item">
-                    <a href="/" className="sidebar-link">
+                    <a href="/" className={`sidebar-link ${activeTab === 'home' ? 'active' : ''}`} onClick={() => handleTabClick('home')}>
                         <div className="icon-wrapper">
                             <img src={HomeIcon} alt="Home" className="sidebar-icon" />
                         </div>
@@ -56,7 +76,7 @@ const Sidebar = ({updateSidebarWidth, updateContentWidth}) => {
                     </a>
                 </li>
                 <li className="sidebar-item">
-                    <a href="/tasks" className="sidebar-link">
+                    <a href="/tasks" className={`sidebar-link ${activeTab === 'tasks' ? 'active' : ''}`} onClick={() => handleTabClick('tasks')}>
                         <div className="icon-wrapper">
                             <img src={TaskIcon} alt="Home" className="sidebar-icon" />
                         </div>
@@ -64,7 +84,7 @@ const Sidebar = ({updateSidebarWidth, updateContentWidth}) => {
                     </a>
                 </li>
                 <li className="sidebar-item">
-                    <a href="#" className="sidebar-link">
+                    <a href="#" className={`sidebar-link ${activeTab === 'calendar' ? 'active' : ''}`} onClick={() => handleTabClick('calendar')}>
                         <div className="icon-wrapper">
                             <img src={CalendarIcon} alt="Home" className="sidebar-icon" />
                         </div>
@@ -76,7 +96,7 @@ const Sidebar = ({updateSidebarWidth, updateContentWidth}) => {
             <div className="sidebar-footer">
                 <ul className={`sidebar-nav ${isSidebarOpen ? 'open-text' : 'closed-text'}`}>
                     <li className="sidebar-item">
-                        <a href="#" className="sidebar-link">
+                        <a href="#" className={`sidebar-link ${activeTab === 'settings' ? 'active' : ''}`} onClick={() => handleTabClick('settings')}>
                             <div className="icon-wrapper">
                                 <img src={SettingsIcon} alt="Home" className="sidebar-icon" />
                             </div>
