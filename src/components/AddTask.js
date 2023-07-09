@@ -1,9 +1,9 @@
 import React, { useState } from 'react';
 import '../styles/TasksList.css';
-import { Form, Modal, Input, Button, Popconfirm } from 'antd';
+import { Form, Modal, Input, Button, Popconfirm, theme, ConfigProvider } from 'antd';
 import { addTask } from '../utils/tasksRequests';
 
-const AddTask = ({ isModalVisible, setIsModalVisible, name, setIsNewTaskAdded }) => {
+const AddTask = ({ isModalVisible, setIsModalVisible, name, setIsNewTaskAdded, isDarkMode }) => {
     const [form] = Form.useForm();
     const [title, setTitle] = useState('');
     const [description, setDescription] = useState('');
@@ -26,7 +26,10 @@ const AddTask = ({ isModalVisible, setIsModalVisible, name, setIsNewTaskAdded })
         form.resetFields();
     };
 
-    return (<>
+    return (<ConfigProvider
+        theme={{
+         algorithm: isDarkMode ? theme.darkAlgorithm : theme.defaultAlgorithm,
+        }}>
         <Modal
             title="Add Task"
             visible={isModalVisible}
@@ -87,7 +90,7 @@ const AddTask = ({ isModalVisible, setIsModalVisible, name, setIsNewTaskAdded })
             </Form>
         </Modal>
 
-    </>
+    </ConfigProvider>
     );
 }
 

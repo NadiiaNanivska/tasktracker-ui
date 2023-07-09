@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import '../styles/Task.css';
 import DeleteIcon from "../images/delete.svg";
-import { Modal, Input, Button, Popconfirm, Form } from 'antd';
+import { Modal, Input, Button, Popconfirm, Form, ConfigProvider, theme } from 'antd';
 import { updateTask } from '../utils/tasksRequests';
 
 const Task = ({ title: initialTitle, description: initialDescription, name, onDeleteTask, taskId, isDarkMode }) => {
@@ -60,6 +60,10 @@ const Task = ({ title: initialTitle, description: initialDescription, name, onDe
       <div className="task-content">
         {description}
       </div>
+      <ConfigProvider
+        theme={{
+         algorithm: isDarkMode ? theme.darkAlgorithm : theme.defaultAlgorithm,
+        }}>
       <Modal
         title="Edit Task"
         visible={isModalVisible}
@@ -119,6 +123,7 @@ const Task = ({ title: initialTitle, description: initialDescription, name, onDe
           </div>
         </Form>
       </Modal>
+      </ConfigProvider>
     </div>
   );
 };

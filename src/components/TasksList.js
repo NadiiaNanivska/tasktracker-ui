@@ -1,7 +1,7 @@
 import React, { useContext, useState, useEffect } from 'react';
 import SidebarContext from '../contexts/SidebarContext';
 import '../styles/TasksList.css';
-import { Button, Modal } from 'antd';
+import { Button, Modal, ConfigProvider, theme } from 'antd';
 import { PlusOutlined } from '@ant-design/icons';
 import Task from "./Task";
 import AddTask from './AddTask';
@@ -31,7 +31,7 @@ const TasksList = ({ name, afterdragtasks, updateTasks, isDarkMode }) => {
     };
 
     useEffect(() => {
-        
+
         fetchTasks(name, setTasks);
     }, [isNewTaskAdded]);
 
@@ -95,15 +95,20 @@ const TasksList = ({ name, afterdragtasks, updateTasks, isDarkMode }) => {
                         isDarkMode={isDarkMode}
                     />
                 ))}
-                <AddTask setIsNewTaskAdded={setIsNewTaskAdded} isModalVisible={isModalVisible} setIsModalVisible={setIsModalVisible} name={name}></AddTask>
-                <Modal
-                    title="Delete confirmation"
-                    visible={isDeleteModalVisible}
-                    onOk={() => handleDeleteTask(taskIdToDelete)}
-                    onCancel={() => setIsDeleteModalVisible(false)}
-                >
-                    <p>Are you sure you want to delete the task?</p>
-                </Modal>
+                <AddTask isDarkMode={isDarkMode} setIsNewTaskAdded={setIsNewTaskAdded} isModalVisible={isModalVisible} setIsModalVisible={setIsModalVisible} name={name}></AddTask>
+                <ConfigProvider
+                    theme={{
+                        algorithm: isDarkMode ? theme.darkAlgorithm : theme.defaultAlgorithm,
+                    }}>
+                    <Modal
+                        title="Delete confirmation"
+                        visible={isDeleteModalVisible}
+                        onOk={() => handleDeleteTask(taskIdToDelete)}
+                        onCancel={() => setIsDeleteModalVisible(false)}
+                    >
+                        <p>Are you sure you want to delete the task?</p>
+                    </Modal>
+                </ConfigProvider>
             </div>
         </div>
     );
