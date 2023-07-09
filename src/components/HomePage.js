@@ -26,14 +26,6 @@ const HomePage = () => {
         }
     }
 
-    const handleLogin = () => {
-        window.location.href = '/login';
-    };
-
-    const handleRegister = () => {
-        window.location.href = '/register';
-    };
-
     return (
         <div className="home-page">
             <Sidebar updateSidebarWidth={updateSidebarWidth} updateContentWidth={updateContentWidth}/>

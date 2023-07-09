@@ -61,7 +61,7 @@ const Home = () => {
     <SidebarContext.Provider value={sidebarWidth}>
       <div className="home">
       <Navbar />
-      <Sidebar updateSidebarWidth={updateSidebarWidth} />
+      <Sidebar updateSidebarWidth={updateSidebarWidth} updateContentWidth={() => {}}/>
       <div className="content" style={{width: navbarWidth , paddingLeft: `${sidebarWidth + 1}em`}}>
           <TasksList name="To do" afterdragtasks={tasks['To do']} updateTasks={updateTasks} />
             <TasksList name="In progress" afterdragtasks={tasks['In progress']} updateTasks={updateTasks} />
