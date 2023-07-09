@@ -9,7 +9,7 @@ import axios from "axios";
 import { deleteTask, fetchTasks, fetchTasksWithoutName, updateTask } from "../utils/tasksRequests";
 import { SearchContext } from "../contexts/SearchContext";
 
-const TasksList = ({ name, afterdragtasks, updateTasks }) => {
+const TasksList = ({ name, afterdragtasks, updateTasks, isDarkMode }) => {
     const [isModalVisible, setIsModalVisible] = useState(false);
     const [tasks, setTasks] = useState([]);
     const [isNewTaskAdded, setIsNewTaskAdded] = useState(false);
@@ -78,10 +78,10 @@ const TasksList = ({ name, afterdragtasks, updateTasks }) => {
 
 
     return (
-        <div className="list-card" onDrop={handleOnDrop} onDragOver={handleDragOver}>
+        <div className={`list-card ${isDarkMode ? 'dark' : ''}`} onDrop={handleOnDrop} onDragOver={handleDragOver}>
             <div className="card-content">
                 <p className="card-heading">{name}</p>
-                <Button type="default" className="card-add-btn" icon={<PlusOutlined />} onClick={showModal}
+                <Button type="default" className={`card-add-btn ${isDarkMode ? 'dark' : ''}`} icon={<PlusOutlined />} onClick={showModal}
                     block></Button>
                 {filteredTasks.map((task) => (
                     <Task
@@ -91,6 +91,7 @@ const TasksList = ({ name, afterdragtasks, updateTasks }) => {
                         taskId={task.id}
                         onDeleteTask={() => onDeleteTask(task.id)}
                         name={name}
+                        isDarkMode={isDarkMode}
                     />
                 ))}
                 <AddTask setIsNewTaskAdded={setIsNewTaskAdded} isModalVisible={isModalVisible} setIsModalVisible={setIsModalVisible} name={name}></AddTask>

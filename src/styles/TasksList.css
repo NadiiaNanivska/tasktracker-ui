@@ -6,6 +6,25 @@
     overflow: auto;
 }
 
+.list-card.dark {
+    background-color: #444;
+    color: #fff;
+}
+
+.list-card.dark .card-heading {
+    color: #fff;
+}
+
+.card-add-btn.dark {
+    background-color: #555;
+    color: #fff!important;
+}
+
+.ant-btn.ant-btn-default.dark:hover {
+    background-color: #666;
+    color: #fff!important;
+}
+
 .list-card::-webkit-scrollbar {
     border-radius: 13px;
     width: 0; 

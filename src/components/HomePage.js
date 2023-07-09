@@ -1,18 +1,23 @@
 import React, {useEffect, useRef, useState} from "react";
 import Sidebar from "./Sidebar";
 import "../styles/HomePage.css";
-import HomePageIcon from "../images/home-page.jpg";
+import HomePageIcon from "../images/todolist.svg";
 import mailIcon from "../images/email.svg";
 import facebookIcon from "../images/facebook.svg";
 import instagramIcon from "../images/instagram.svg";
 import telegramIcon from "../images/telegram.svg";
-import {Button} from "antd";
+import DarkModeItem from "../images/dark-mode.svg";
 
 
 const HomePage = () => {
     const [sidebarWidth, setSidebarWidth] = useState(18);
     const contentWidth = `calc(67.5vh - ${sidebarWidth}em)`;
     const contentRef = useRef(null);
+    const [isDarkMode, setIsDarkMode] = useState(localStorage.getItem('isDarkMode') === 'true');
+
+    useEffect(() => {
+        localStorage.setItem('isDarkMode', String(isDarkMode));
+    }, [isDarkMode]);
 
     const updateSidebarWidth = (newWidth) => {
         setSidebarWidth(newWidth);
@@ -27,7 +32,7 @@ const HomePage = () => {
     }
 
     return (
-        <div className="home-page">
+        <div className={`home-page ${isDarkMode ? 'dark' : ''}`}>
             <Sidebar updateSidebarWidth={updateSidebarWidth} updateContentWidth={updateContentWidth}/>
             <div className="home-page-content" ref={contentRef}>
                 <div className="home-page-left">
@@ -63,6 +68,8 @@ const HomePage = () => {
                     </div>
                 </div>
                 <div className="home-page-right">
+                    <img src={DarkModeItem} onClick={() => setIsDarkMode(prevState => !prevState)}
+                         alt="dark-mode" className="home-page-icon-mode" />
                     <img src={HomePageIcon} className="home-page-icon"/>
                 </div>
             </div>

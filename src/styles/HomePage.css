@@ -3,6 +3,11 @@
     flex-direction: column;
 }
 
+.dark {
+    background-color: #444;
+    color: white;
+}
+
 .home-page-content {
     display: flex;
     margin-left: 25em;
@@ -19,6 +24,9 @@
 }
 
 .home-page-right {
+    display: flex;
+    justify-content: space-between;
+    flex-direction: row-reverse;
     flex: 1;
 }
 
@@ -26,8 +34,7 @@
     margin-top: 150px;
     font-size: 24px;
     font-weight: bold;
-    color: #fff;
-    background-color: #00410042;
+    color: #a19b9b;
     width: 132px;
 }
 
@@ -87,4 +94,11 @@
     margin-right: 10px;
     text-decoration: none;
     color: #000000;
+}
+
+.home-page-icon-mode {
+    height: 40px;
+    width: 40px;
+    cursor: pointer;
+    margin: 30px;
 }

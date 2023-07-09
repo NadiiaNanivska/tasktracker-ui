@@ -22,6 +22,10 @@
     padding-right: 50px;
 }
 
+.navbar-person-div.dark {
+    color: white!important;
+}
+
 .navbar-person-img {
     height: 40px;
     width: 40px;
@@ -33,4 +37,8 @@
     height: 30px;
     width: 30px;
     cursor: pointer;
+}
+
+.navbar-name.dark {
+    color: white!important;
 }

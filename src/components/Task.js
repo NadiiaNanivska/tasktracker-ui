@@ -4,7 +4,7 @@ import DeleteIcon from "../images/delete.svg";
 import { Modal, Input, Button, Popconfirm } from 'antd';
 import { updateTask } from '../utils/tasksRequests';
 
-const Task = ({ title: initialTitle, description: initialDescription, name, onDeleteTask, taskId }) => {
+const Task = ({ title: initialTitle, description: initialDescription, name, onDeleteTask, taskId, isDarkMode }) => {
   const [isModalVisible, setIsModalVisible] = useState(false);
   const [title, setTitle] = useState(initialTitle);
   const [description, setDescription] = useState(initialDescription);
@@ -37,7 +37,7 @@ const Task = ({ title: initialTitle, description: initialDescription, name, onDe
     }
 
   return (
-    <div className="task" draggable={true} onDragStart={(e) => onDragStart(e, taskId)}>
+    <div className={`task ${isDarkMode ? 'dark' : ''}`} draggable={true} onDragStart={(e) => onDragStart(e, taskId)}>
       <div className="task-name" onClick={showModal}>
         <div>
           <span className={`dot ${getDotColorClass(name)}`}></span>

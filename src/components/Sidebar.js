@@ -10,7 +10,7 @@ import Navbar from './Navbar';
 import SidebarContext from '../contexts/SidebarContext';
 import {useLocation} from "react-router-dom";
 
-const Sidebar = ({updateSidebarWidth, updateContentWidth}) => {
+const Sidebar = ({updateSidebarWidth, updateContentWidth, isDarkMode}) => {
     const sidebarHeadingRef = useRef(null);
     const sidebarTextRef = useRef([]);
     const [isSidebarOpen, setIsSidebarOpen] = useState(true);
@@ -61,11 +61,11 @@ const Sidebar = ({updateSidebarWidth, updateContentWidth}) => {
             <div onClick={() => {hideMenu(); toggleSidebar();}} className="icon-wrapper">
                 <img src={MenuItem} alt="Home" className="sidebar-icon-heading" />
             </div>
-            <span className="sidebar-heading" ref={sidebarHeadingRef}>TaskTracker</span>
+            <span className={`sidebar-heading ${isDarkMode ? 'dark' : ''}`} ref={sidebarHeadingRef}>TaskTracker</span>
                 </div>
             <ul className={`sidebar-nav ${isSidebarOpen ? 'open-text' : 'closed-text'}`}>
                 <li className="sidebar-item">
-                    <a href="/" className={`sidebar-link ${activeTab === 'home' ? 'active' : ''}`}>
+                    <a href="/" className={`sidebar-link ${isDarkMode ? 'dark' : ''} ${activeTab === 'home' ? 'active' : ''} `}>
                         <div className="icon-wrapper">
                             <img src={HomeIcon} alt="Home" className="sidebar-icon" />
                         </div>
@@ -73,7 +73,7 @@ const Sidebar = ({updateSidebarWidth, updateContentWidth}) => {
                     </a>
                 </li>
                 <li className="sidebar-item">
-                    <a href="/tasks" className={`sidebar-link ${activeTab === 'tasks' ? 'active' : ''}`}>
+                    <a href="/tasks" className={`sidebar-link ${isDarkMode ? 'dark' : ''} ${activeTab === 'tasks' ? 'active' : ''}`}>
                         <div className="icon-wrapper">
                             <img src={TaskIcon} alt="Home" className="sidebar-icon" />
                         </div>
@@ -81,7 +81,7 @@ const Sidebar = ({updateSidebarWidth, updateContentWidth}) => {
                     </a>
                 </li>
                 <li className="sidebar-item">
-                    <a href="#" className={`sidebar-link ${activeTab === 'calendar' ? 'active' : ''}`}>
+                    <a href="#" className={`sidebar-link ${isDarkMode ? 'dark' : ''} ${activeTab === 'calendar' ? 'active' : ''}`}>
                         <div className="icon-wrapper">
                             <img src={CalendarIcon} alt="Home" className="sidebar-icon" />
                         </div>
@@ -93,7 +93,7 @@ const Sidebar = ({updateSidebarWidth, updateContentWidth}) => {
             <div className="sidebar-footer">
                 <ul className={`sidebar-nav ${isSidebarOpen ? 'open-text' : 'closed-text'}`}>
                     <li className="sidebar-item">
-                        <a href="#" className={`sidebar-link ${activeTab === 'settings' ? 'active' : ''}`}>
+                        <a href="#" className={`sidebar-link ${isDarkMode ? 'dark' : ''} ${activeTab === 'settings' ? 'active' : ''}`}>
                             <div className="icon-wrapper">
                                 <img src={SettingsIcon} alt="Home" className="sidebar-icon" />
                             </div>
@@ -101,7 +101,7 @@ const Sidebar = ({updateSidebarWidth, updateContentWidth}) => {
                         </a>
                     </li>
                     <li className="sidebar-item">
-                        <a href="/login" className="sidebar-link">
+                        <a href="/login" className={`sidebar-link ${isDarkMode ? 'dark' : ''}`}>
                             <div className="icon-wrapper">
                                 <img src={LogoutIcon} alt="Home" className="sidebar-icon" />
                             </div>
