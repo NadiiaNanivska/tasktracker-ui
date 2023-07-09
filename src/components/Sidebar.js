@@ -6,14 +6,12 @@ import CalendarIcon from '../images/calendar.svg';
 import SettingsIcon from '../images/settings.svg';
 import LogoutIcon from '../images/log-out.svg';
 import MenuItem from '../images/burger-menu.svg';
-import Navbar from './Navbar';
-import SidebarContext from '../contexts/SidebarContext';
 import {useLocation} from "react-router-dom";
 
-const Sidebar = ({updateSidebarWidth, updateContentWidth, isDarkMode}) => {
+const Sidebar = ({updateSidebarWidth, isDarkMode}) => {
     const sidebarHeadingRef = useRef(null);
     const sidebarTextRef = useRef([]);
-    const [isSidebarOpen, setIsSidebarOpen] = useState(true);
+    const [isSidebarOpen, setIsSidebarOpen] = useState(false);
     const [activeTab, setActiveTab] = useState('');
     const location = useLocation();
 
@@ -35,25 +33,28 @@ const Sidebar = ({updateSidebarWidth, updateContentWidth, isDarkMode}) => {
         setIsSidebarOpen(prevState => !prevState);
     };
 
-    const hideMenu = () => {
-        updateContentWidth();
-        if (sidebarHeadingRef.current.style.display !== 'none') {
-            updateSidebarWidth(5);
-            sidebarHeadingRef.current.style.display = 'none';
-            sidebarTextRef.current.forEach((ref) => {
-                if (ref.style.display !== 'none') {
-                    ref.style.display = 'none';
-                }
-            });
-        } else {
-            sidebarHeadingRef.current.style.display = 'flex';
-            updateSidebarWidth(18);
-            sidebarTextRef.current.forEach((ref) => {
-                    ref.style.display = 'flex';
-            });
-        }
-    }
+    const hideElements = (isHidden) => {
+        const displayValue = isHidden ? 'none' : 'flex';
+        sidebarHeadingRef.current.style.display = displayValue;
+        sidebarTextRef.current.forEach((ref) => {
+          ref.style.display = displayValue;
+        });
+      };
 
+      const hideMenu = () => {
+        if (isSidebarOpen) {
+          updateSidebarWidth(5);
+          hideElements(true);
+        } else {
+          updateSidebarWidth(18);
+          hideElements(false);
+        }
+      };
+    
+      useEffect(() => {
+        hideElements(true);
+      }, []);
+      
     return (
         <div className={`sidebar ${isSidebarOpen ? 'open' : 'closed'}`}>
             <div className="sidebar-header" >
@@ -81,7 +82,7 @@ const Sidebar = ({updateSidebarWidth, updateContentWidth, isDarkMode}) => {
                     </a>
                 </li>
                 <li className="sidebar-item">
-                    <a href="#" className={`sidebar-link ${isDarkMode ? 'dark' : ''} ${activeTab === 'calendar' ? 'active' : ''}`}>
+                    <a href="/calendar" className={`sidebar-link ${isDarkMode ? 'dark' : ''} ${activeTab === 'calendar' ? 'active' : ''}`}>
                         <div className="icon-wrapper">
                             <img src={CalendarIcon} alt="Home" className="sidebar-icon" />
                         </div>

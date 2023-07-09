@@ -1,4 +1,4 @@
-import React, {useEffect, useRef, useState} from "react";
+import React, {useEffect, useContext, useState} from "react";
 import Sidebar from "./Sidebar";
 import "../styles/HomePage.css";
 import HomePageIcon from "../images/todolist.svg";
@@ -7,12 +7,13 @@ import facebookIcon from "../images/facebook.svg";
 import instagramIcon from "../images/instagram.svg";
 import telegramIcon from "../images/telegram.svg";
 import DarkModeItem from "../images/dark-mode.svg";
+import SidebarContext from "../contexts/SidebarContext";
 
 
 const HomePage = () => {
-    const [sidebarWidth, setSidebarWidth] = useState(18);
-    const contentWidth = `calc(67.5vh - ${sidebarWidth}em)`;
-    const contentRef = useRef(null);
+    const contextData = useContext(SidebarContext);
+    const [sidebarWidth, setSidebarWidth] = useState(contextData);
+    const contentWidth = `calc(100% - ${sidebarWidth}em)`;
     const [isDarkMode, setIsDarkMode] = useState(localStorage.getItem('isDarkMode') === 'true');
 
     useEffect(() => {
@@ -23,18 +24,10 @@ const HomePage = () => {
         setSidebarWidth(newWidth);
     };
 
-    const updateContentWidth = () => {
-        if(sidebarWidth === 18) {
-            contentRef.current.style.marginLeft = `${contentWidth}`;
-        } else {
-            contentRef.current.style.marginLeft = `${contentWidth}`;
-        }
-    }
-
     return (
         <div className={`home-page ${isDarkMode ? 'dark' : ''}`}>
-            <Sidebar isDarkMode={isDarkMode} updateSidebarWidth={updateSidebarWidth} updateContentWidth={updateContentWidth}/>
-            <div className="home-page-content" ref={contentRef}>
+            <Sidebar isDarkMode={isDarkMode} updateSidebarWidth={updateSidebarWidth}/>
+            <div className="home-page-content" style={{ width: contentWidth, paddingLeft: `${sidebarWidth + 1}em` }}>
                 <div className="home-page-left">
                     <div className="home-page-left-head">
                         TaskTracker

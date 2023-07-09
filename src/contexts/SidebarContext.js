@@ -1,5 +1,5 @@
 import React from 'react';
 
-const SidebarContext = React.createContext(18);
+const SidebarContext = React.createContext(5);
 
 export default SidebarContext;
