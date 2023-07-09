@@ -48,14 +48,6 @@ const HomePage = () => {
                     <div className="home-page-left-end">
                         Make a business plan or list of resolutions to achieve goals or achieve success.
                     </div>
-                    <div className="home-page-buttons">
-                    <Button type="primary" htmlType="submit" className="home-page-login" onClick={handleLogin}>
-                        LOGIN
-                    </Button>
-                    <Button type="primary" htmlType="submit" className="home-page-register" onClick={handleRegister}>
-                        REGISTER
-                    </Button>
-                    </div>
                     <div className="home-page-about">
                         <p>Contact us:</p>
                         <div className="social-media-icons">

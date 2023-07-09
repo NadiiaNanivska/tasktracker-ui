@@ -56,12 +56,6 @@
     height: 400px;
 }
 
-.home-page-buttons {
-    display: flex;
-    flex-direction: column;
-    width: 300px;
-}
-
 .home-page-login {
     margin-top: 10px;
     height: 40px;
@@ -73,7 +67,7 @@
 }
 
 .home-page-about {
-    margin-top: 170px;
+    margin-top: 250px;
 }
 
 .icon {
