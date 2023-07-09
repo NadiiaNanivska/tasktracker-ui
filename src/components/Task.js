@@ -1,10 +1,11 @@
 import React, { useState } from 'react';
 import '../styles/Task.css';
 import DeleteIcon from "../images/delete.svg";
-import { Modal, Input, Button, Popconfirm } from 'antd';
+import { Modal, Input, Button, Popconfirm, Form } from 'antd';
 import { updateTask } from '../utils/tasksRequests';
 
 const Task = ({ title: initialTitle, description: initialDescription, name, onDeleteTask, taskId, isDarkMode }) => {
+  const [form] = Form.useForm();
   const [isModalVisible, setIsModalVisible] = useState(false);
   const [title, setTitle] = useState(initialTitle);
   const [description, setDescription] = useState(initialDescription);
@@ -15,16 +16,25 @@ const Task = ({ title: initialTitle, description: initialDescription, name, onDe
 
   const handleCancel = () => {
     setIsModalVisible(false);
+    form.resetFields();
   };
 
   const handleSave = async () => {
-    try {
-      const updatedTask = { title: title, description: description, status: name };
-      await updateTask(taskId, updatedTask);
-      setIsModalVisible(false);
-    } catch (error) {
-      console.log("Error");
-    }
+    form.validateFields().then((data) => {
+      form.resetFields();
+      try {
+        const updatedTask = { title: data.title, description: data.description, status: name };
+        updateTask(taskId, updatedTask);
+        setTitle(data.title);
+        setDescription(data.description);
+        setIsModalVisible(false);
+      } catch (error) {
+        console.log("Error");
+      }
+    })
+      .catch((err) => {
+        console.log('err', err);
+      });
   };
 
   const onDeleteClick = (e) => {
@@ -32,9 +42,9 @@ const Task = ({ title: initialTitle, description: initialDescription, name, onDe
     onDeleteTask();
   };
 
-    const onDragStart = (e, id) => {
-        e.dataTransfer.setData("taskId", id)
-    }
+  const onDragStart = (e, id) => {
+    e.dataTransfer.setData("taskId", id)
+  }
 
   return (
     <div className={`task ${isDarkMode ? 'dark' : ''}`} draggable={true} onDragStart={(e) => onDragStart(e, taskId)}>
@@ -56,39 +66,58 @@ const Task = ({ title: initialTitle, description: initialDescription, name, onDe
         onCancel={handleCancel}
         footer={[
           <Popconfirm
-    title="Cancel changes"
-    description="Are you sure to cancel changes?"
-    okText="Yes"
-    cancelText="No"
-    onConfirm={handleCancel}
-  >
-    <Button key="cancel">
-            Cancel
-          </Button>
-  </Popconfirm>
+            title="Cancel changes"
+            description="Are you sure to cancel changes?"
+            okText="Yes"
+            cancelText="No"
+            onConfirm={handleCancel}
+          >
+            <Button key="cancel">
+              Cancel
+            </Button>
+          </Popconfirm>
           ,
           <Button key="save" type="primary" onClick={handleSave}>
             Save
           </Button>,
         ]}
       >
-        <div>
-          <label>Title:</label>
-          <Input
-            value={title}
-            onChange={(e) => setTitle(e.target.value)}
-            placeholder="Title"
-          />
-        </div>
-        <div>
-          <label>Description:</label>
-          <Input.TextArea
-            value={description}
-            onChange={(e) => setDescription(e.target.value)}
-            placeholder="Description"
-            rows={4}
-          />
-        </div>
+        <Form form={form}>
+          <div>
+            <label>Title:</label>
+            <Form.Item
+              initialValue={title}
+              name="title"
+              rules={[
+                { required: true, message: 'Please enter the task title' },
+              ]}
+              style={{ marginBottom: 0 }}
+            >
+              <Input
+                value={title}
+                placeholder="Title"
+              />
+            </Form.Item>
+          </div>
+          <div>
+            <label>Description:</label>
+            <Form.Item
+              initialValue={description}
+              name="description"
+              rules={[
+                { required: true, message: 'Please enter the task description' },
+                { min: 10, message: 'The description should be at least 10 characters long' },
+                { max: 400, message: 'The description should not exceed 400 characters' },
+              ]}
+            >
+              <Input.TextArea
+                value={description}
+                placeholder="Description"
+                rows={4}
+              />
+            </Form.Item>
+          </div>
+        </Form>
       </Modal>
     </div>
   );

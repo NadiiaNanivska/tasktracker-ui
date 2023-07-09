@@ -31,6 +31,7 @@ const TasksList = ({ name, afterdragtasks, updateTasks, isDarkMode }) => {
     };
 
     useEffect(() => {
+        
         fetchTasks(name, setTasks);
     }, [isNewTaskAdded]);
 
