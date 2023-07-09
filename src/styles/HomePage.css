@@ -49,6 +49,17 @@
     width: 40%;
 }
 
+.home-page-left-middle.dark {
+    margin-top: 15px;
+    padding-left: 10px;
+    font-size: 40px;
+    font-weight: bold;
+    color: white!important;
+    letter-spacing: 1px;
+    white-space: pre-line;
+    width: 40%;
+}
+
 .home-page-left-end {
     margin-top: 15px;
     padding-left: 10px;
@@ -77,10 +88,14 @@
     margin-top: 250px;
 }
 
-.icon {
+.home-page-about-icon {
     width: 24px;
     height: 24px;
     margin-right: 10px;
+}
+
+.home-page-about-text.dark {
+    color: white!important;
 }
 
 .social-media-icons {
