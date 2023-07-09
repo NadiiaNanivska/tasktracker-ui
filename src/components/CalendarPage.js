@@ -15,6 +15,7 @@ const CalendarPage = () => {
     useEffect(() => {
         localStorage.setItem('isDarkMode', String(isDarkMode));
     }, [isDarkMode]);
+
     return (<>
         <Sidebar isDarkMode={isDarkMode} updateSidebarWidth={updateSidebarWidth} updateContentWidth={() => { }} />
         <div style={{ width: navbarWidth, paddingLeft: `${sidebarWidth + 1}em` }}>

@@ -11,6 +11,7 @@ import {
     passwordValidator,
     phoneValidator
 } from "../utils/validation";
+import DarkModeItem from "../images/dark-mode.svg";
 
 
 const Settings = () => {
@@ -39,138 +40,130 @@ const Settings = () => {
         <div className={`settings ${isDarkMode ? 'dark' : ''}`}>
             <Sidebar isDarkMode={isDarkMode} updateSidebarWidth={updateSidebarWidth} updateContentWidth={updateContentWidth}/>
             <div className="settings-content" ref={contentRef}>
-                <div className="settings-header">
+                <div className={`settings-header ${isDarkMode ? 'dark' : ''}`}>
                     Account Settings
                 </div>
                 <div className="settings-fields">
                     <Form className="settings-form">
                         <div className="settings-form-parts">
                         <div className="settings-form-part">
-                            <span className="settings-input-text">First name</span>
+                            <span className={`settings-input-text ${isDarkMode ? 'dark' : ''}`}>First name</span>
                         <Form.Item
                             name="first-name"
                             rules={[
                                 { required: true, message: 'Please enter your first name' },
                                 { ...firstNameValidator },
                             ]}
-                            className="settings-input"
                         >
-                            <Input size="large" placeholder="First Name*" />
+                            <Input size="large" className={`settings-input ${isDarkMode ? 'dark' : ''}`} placeholder="First Name*" />
                         </Form.Item>
-                            <span className="settings-input-text">Last name</span>
+                            <span className={`settings-input-text ${isDarkMode ? 'dark' : ''}`}>Last name</span>
                         <Form.Item
                             name="last-name"
                             rules={[
                                 { required: true, message: 'Please enter your last name' },
                                 { ...lastNameValidator },
                             ]}
-                            className="settings-input"
                         >
-                            <Input size="large" placeholder="Last Name*" />
+                            <Input size="large" className={`settings-input ${isDarkMode ? 'dark' : ''}`} placeholder="Last Name*" />
                         </Form.Item>
-                            <span className="settings-input-text">Email</span>
+                            <span className={`settings-input-text ${isDarkMode ? 'dark' : ''}`}>Email</span>
                         <Form.Item
                             name="email"
                             rules={[
                                 { required: true, message: 'Please enter your email' },
                                 { ...emailValidator },
                             ]}
-                            className="settings-input"
                         >
-                            <Input size="large" placeholder="Email*" />
+                            <Input size="large" className={`settings-input ${isDarkMode ? 'dark' : ''}`}  placeholder="Email*" />
                         </Form.Item>
-                            <span className="settings-input-text">Country</span>
+                            <span className={`settings-input-text ${isDarkMode ? 'dark' : ''}`}>Country</span>
                         <Form.Item
                             name="country"
                             rules={[
                                 { required: true, message: 'Please enter your country' },
                                 { ...countryValidator },
                             ]}
-                            className="settings-input"
                         >
-                            <Input size="large" placeholder="Country" />
+                            <Input size="large" className={`settings-input ${isDarkMode ? 'dark' : ''}`} placeholder="Country" />
                         </Form.Item>
-                            <span className="settings-input-text">Company</span>
+                            <span className={`settings-input-text ${isDarkMode ? 'dark' : ''}`}>Company</span>
                         <Form.Item
                             name="company"
                             rules={[
                                 { required: true, message: 'Please enter your company' },
                                 { ...companyValidator },
                             ]}
-                            className="settings-input"
                         >
-                            <Input size="large" placeholder="Company" />
+                            <Input size="large" className={`settings-input ${isDarkMode ? 'dark' : ''}`} placeholder="Company" />
                         </Form.Item>
                         </div>
                         <div className="settings-form-part">
-                            <span className="settings-input-text">Password</span>
+                            <span className={`settings-input-text ${isDarkMode ? 'dark' : ''}`}>Password</span>
                         <Form.Item
                             name="password"
                             rules={[
                                 { required: true, message: 'Please enter your password' },
                                 { ...passwordValidator },
                             ]}
-                            className="settings-input"
                         >
-                            <Input size="large" placeholder="Password*" />
+                            <Input size="large" className={`settings-input ${isDarkMode ? 'dark' : ''}`} placeholder="Password*" />
                         </Form.Item>
-                            <span className="settings-input-text">Repeat Password</span>
+                            <span className={`settings-input-text ${isDarkMode ? 'dark' : ''}`}>Repeat Password</span>
                         <Form.Item
                             name="repeat-password"
                             rules={[
                                 { required: true, message: 'Please repeat your password' },
                                 { ...passwordValidator },
                             ]}
-                            className="settings-input"
                         >
-                            <Input size="large" placeholder="Repeat password*" />
+                            <Input size="large" className={`settings-input ${isDarkMode ? 'dark' : ''}`} placeholder="Repeat password*" />
                         </Form.Item>
-                            <span className="settings-input-text">Phone number</span>
+                            <span className={`settings-input-text ${isDarkMode ? 'dark' : ''}`}>Phone number</span>
                         <Form.Item
                             name="phone"
                             rules={[
                                 { required: true, message: 'Please enter your phone number' },
                                 { ...phoneValidator },
                             ]}
-                            className="settings-input"
                         >
-                            <Input size="large" placeholder="Phone Number" />
+                            <Input size="large" className={`settings-input ${isDarkMode ? 'dark' : ''}`} placeholder="Phone Number" />
                         </Form.Item>
-                            <span className="settings-input-text">City</span>
+                            <span className={`settings-input-text ${isDarkMode ? 'dark' : ''}`}>City</span>
                         <Form.Item
                             name="city"
                             rules={[
                                 { required: true, message: 'Please enter your city' },
                                 { ...cityValidator },
                             ]}
-                            className="settings-input"
                         >
-                            <Input size="large" placeholder="City" />
+                            <Input size="large" className={`settings-input ${isDarkMode ? 'dark' : ''}`} placeholder="City" />
                         </Form.Item>
-                            <span className="settings-input-text">Address</span>
+                            <span className={`settings-input-text ${isDarkMode ? 'dark' : ''}`}>Address</span>
                             <Form.Item
                                 name="address"
                                 rules={[
                                     { required: true, message: 'Please enter your address' },
                                     { ...addressValidator },
                                 ]}
-                                className="settings-input"
                             >
-                                <Input size="large" placeholder="Address" />
+                                <Input size="large" className={`settings-input ${isDarkMode ? 'dark' : ''}`} placeholder="Address" />
                             </Form.Item>
                         </div>
                         </div>
                         <div className="settings-button-wrapper">
-                            <Button type="primary" htmlType="submit" className="card-add-btn settings-btn">
+                            <Button type="primary" htmlType="submit" className={`card-add-btn settings-btn ${isDarkMode ? 'dark' : ''}`}>
                                 Save changes
                             </Button>
-                            <Button type="primary" htmlType="reset" className="card-add-btn settings-btn">
+                            <Button type="primary" htmlType="reset" className={`card-add-btn settings-btn ${isDarkMode ? 'dark' : ''}`}>
                                 Cancel
                             </Button>
                         </div>
                     </Form>
                 </div>
             </div>
+            <img src={DarkModeItem} onClick={() => setIsDarkMode(prevState => !prevState)}
+                 alt="dark-mode" className="home-page-icon-mode" />
         </div>
     );
 };
