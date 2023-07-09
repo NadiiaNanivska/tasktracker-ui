@@ -21,12 +21,12 @@ const Sidebar = ({updateSidebarWidth, updateContentWidth, isDarkMode}) => {
         const path = location.pathname;
         if (path.includes('/tasks')){
             setActiveTab('tasks');
+        }  else if(path.includes('/calendar')) {
+            setActiveTab('calendar')
+        } else if(path.includes('/settings')){
+            setActiveTab('settings')
         } else if(path.includes('/')) {
             setActiveTab('home')
-        } else if(path.includes('/calendar')) {
-            setActiveTab('calendar')
-        } else {
-            setActiveTab('settings')
         }
     }, [location]);
 
@@ -93,7 +93,7 @@ const Sidebar = ({updateSidebarWidth, updateContentWidth, isDarkMode}) => {
             <div className="sidebar-footer">
                 <ul className={`sidebar-nav ${isSidebarOpen ? 'open-text' : 'closed-text'}`}>
                     <li className="sidebar-item">
-                        <a href="#" className={`sidebar-link ${isDarkMode ? 'dark' : ''} ${activeTab === 'settings' ? 'active' : ''}`}>
+                        <a href="/settings" className={`sidebar-link ${isDarkMode ? 'dark' : ''} ${activeTab === 'settings' ? 'active' : ''}`}>
                             <div className="icon-wrapper">
                                 <img src={SettingsIcon} alt="Home" className="sidebar-icon" />
                             </div>

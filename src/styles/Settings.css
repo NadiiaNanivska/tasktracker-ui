@@ -1,0 +1,63 @@
+.settings {
+    display: flex;
+    flex-direction: row;
+}
+
+.dark {
+    background-color: #444;
+    color: white;
+}
+
+.settings-content {
+    display: flex;
+    margin-left: 25em;
+    flex-direction: column;
+    position: relative;
+    height: 100vh;
+    width: 100vh;
+}
+
+.settings-header {
+    margin-top: 40px;
+    font-size: 30px;
+    font-weight: 400;
+    letter-spacing: 0.1vh;
+    font-family: Roboto, serif;
+    margin-bottom: 20px;
+}
+
+.settings-form-parts {
+    display: flex;
+}
+
+.settings-form-part {
+    flex: 6;
+}
+
+.settings-input {
+    width: 90%;
+}
+
+.settings-input-text {
+    padding: 3px;
+    font-size: 18px;
+    font-family: Roboto, serif;
+}
+
+.settings-button-wrapper {
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    align-items: center;
+}
+
+.settings-btn {
+    margin-top: 10px;
+    margin-bottom: 10px;
+    width: 40%;
+    color: #4c4848;
+}
+
+.settings-btn:hover {
+    color: black!important;
+}
