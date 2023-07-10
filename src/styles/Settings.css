@@ -10,7 +10,7 @@
 .settings-content {
     display: flex;
     flex-direction: column;
-    height: 100vh;
+    height: 135vh;
     margin-left: 100px;
 }
 
@@ -92,4 +92,41 @@
     width: 40px;
     cursor: pointer;
     margin: 30px 30px 0 0;
+}
+
+.settings-collapse {
+    margin-top: 20px;
+    width: 70%;
+}
+
+.settings-input-panel {
+    width: 500px !important;
+}
+
+.settings-button-wrapper-panel {
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-start;
+    gap: 30px;
+}
+
+.settings-btn-panel {
+    margin-top: 10px;
+    margin-bottom: 10px;
+    width: 20%;
+    color: #4c4848;
+}
+
+.settings-btn-panel.dark {
+    color: white;
+    background-color: green!important;
+}
+
+.settings-btn-panel.dark:hover {
+    color: #cccccc!important;
+    background-color: forestgreen!important;
+}
+
+.settings-btn-panel:hover {
+    color: black!important;
 }

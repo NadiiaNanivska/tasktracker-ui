@@ -1,7 +1,7 @@
 import React, {useContext, useEffect, useRef, useState} from "react";
 import Sidebar from "./Sidebar";
 import "../styles/Settings.css";
-import {Button, Form, Input} from "antd";
+import {Button, Form, Input, Collapse} from "antd";
 import {
     addressValidator,
     cityValidator, companyValidator, countryValidator,
@@ -9,7 +9,7 @@ import {
     firstNameValidator,
     lastNameValidator,
     passwordValidator,
-    phoneValidator
+    phoneValidator,
 } from "../utils/validation";
 import DarkModeItem from "../images/dark-mode.svg";
 import SidebarContext from "../contexts/SidebarContext";
@@ -20,6 +20,11 @@ const Settings = () => {
     const [sidebarWidth, setSidebarWidth] = useState(contextData);
     const contentWidth = `calc(100% - ${sidebarWidth}em)`;
     const [isDarkMode, setIsDarkMode] = useState(localStorage.getItem('isDarkMode') === 'true');
+    const [password, setPassword] = useState('');
+    const [repeatPassword, setRepeatPassword] = useState('');
+
+
+    const { Panel } = Collapse;
 
     useEffect(() => {
         localStorage.setItem('isDarkMode', String(isDarkMode));
@@ -29,6 +34,21 @@ const Settings = () => {
         setSidebarWidth(newWidth);
     };
 
+    function passwordMatchValidator(_, value, callback) {
+        if (value !== repeatPassword) {
+            callback("Passwords don't match");
+        } else {
+            callback();
+        }
+    }
+
+    function repeatPasswordMatchValidator(_, value, callback) {
+        if (value !== password) {
+            callback("Passwords don't match");
+        } else {
+            callback();
+        }
+    }
 
     return (
         <div className={`settings ${isDarkMode ? 'dark' : ''}`}>
@@ -93,26 +113,6 @@ const Settings = () => {
                         </Form.Item>
                         </div>
                         <div className="settings-form-part">
-                            <span className={`settings-input-text ${isDarkMode ? 'dark' : ''}`}>Password</span>
-                        <Form.Item
-                            name="password"
-                            rules={[
-                                { required: true, message: 'Please enter your password' },
-                                { ...passwordValidator },
-                            ]}
-                        >
-                            <Input size="large" className={`settings-input ${isDarkMode ? 'dark' : ''}`} placeholder="Password*" />
-                        </Form.Item>
-                            <span className={`settings-input-text ${isDarkMode ? 'dark' : ''}`}>Repeat Password</span>
-                        <Form.Item
-                            name="repeat-password"
-                            rules={[
-                                { required: true, message: 'Please repeat your password' },
-                                { ...passwordValidator },
-                            ]}
-                        >
-                            <Input size="large" className={`settings-input ${isDarkMode ? 'dark' : ''}`} placeholder="Repeat password*" />
-                        </Form.Item>
                             <span className={`settings-input-text ${isDarkMode ? 'dark' : ''}`}>Phone number</span>
                         <Form.Item
                             name="phone"
@@ -154,6 +154,44 @@ const Settings = () => {
                             </Button>
                         </div>
                     </Form>
+                    <Collapse className="settings-collapse">
+                        <Panel className="settings-password-panel" header="Change Password" key="1">
+                            <Form>
+                            <span className={`settings-input-text ${isDarkMode ? 'dark' : ''}`}>Password</span>
+                            <Form.Item
+                                name="password"
+                                rules={[
+                                    { required: true, message: 'Please enter your password' },
+                                    { ...passwordValidator },
+                                    { validator: passwordMatchValidator },
+                                ]}
+                            >
+                                <Input size="large" onChange={e => setPassword(e.target.value)}
+                                       className={`settings-input-panel ${isDarkMode ? 'dark' : ''}`} placeholder="Password" />
+                            </Form.Item>
+                            <span className={`settings-input-text ${isDarkMode ? 'dark' : ''}`}>Repeat Password</span>
+                            <Form.Item
+                                name="repeat-password"
+                                rules={[
+                                    { required: true, message: 'Please repeat your password' },
+                                    { ...passwordValidator },
+                                    { validator: repeatPasswordMatchValidator },
+                                ]}
+                            >
+                                <Input onChange={e => setRepeatPassword(e.target.value)} size="large"
+                                       className={`settings-input-panel ${isDarkMode ? 'dark' : ''}`} placeholder="Repeat password" />
+                            </Form.Item>
+                            <div className="settings-button-wrapper-panel">
+                                <Button type="primary" htmlType="submit" className={`card-add-btn settings-btn-panel ${isDarkMode ? 'dark' : ''}`}>
+                                    Change Password
+                                </Button>
+                                <Button type="primary" htmlType="reset" className={`card-add-btn settings-btn-panel ${isDarkMode ? 'dark' : ''}`}>
+                                    Cancel
+                                </Button>
+                            </div>
+                            </Form>
+                        </Panel>
+                    </Collapse>
                 </div>
             </div>
             <img src={DarkModeItem} onClick={() => setIsDarkMode(prevState => !prevState)}
