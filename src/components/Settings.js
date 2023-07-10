@@ -1,4 +1,4 @@
-import React, {useEffect, useRef, useState} from "react";
+import React, {useContext, useEffect, useRef, useState} from "react";
 import Sidebar from "./Sidebar";
 import "../styles/Settings.css";
 import {Button, Form, Input} from "antd";
@@ -12,12 +12,13 @@ import {
     phoneValidator
 } from "../utils/validation";
 import DarkModeItem from "../images/dark-mode.svg";
+import SidebarContext from "../contexts/SidebarContext";
 
 
 const Settings = () => {
-    const [sidebarWidth, setSidebarWidth] = useState(18);
-    const contentWidth = `calc(67.5vh - ${sidebarWidth}em)`;
-    const contentRef = useRef(null);
+    const contextData = useContext(SidebarContext);
+    const [sidebarWidth, setSidebarWidth] = useState(contextData);
+    const contentWidth = `calc(100% - ${sidebarWidth}em)`;
     const [isDarkMode, setIsDarkMode] = useState(localStorage.getItem('isDarkMode') === 'true');
 
     useEffect(() => {
@@ -28,18 +29,11 @@ const Settings = () => {
         setSidebarWidth(newWidth);
     };
 
-    const updateContentWidth = () => {
-        if(sidebarWidth === 18) {
-            contentRef.current.style.marginLeft = `${contentWidth}`;
-        } else {
-            contentRef.current.style.marginLeft = `${contentWidth}`;
-        }
-    }
 
     return (
         <div className={`settings ${isDarkMode ? 'dark' : ''}`}>
-            <Sidebar isDarkMode={isDarkMode} updateSidebarWidth={updateSidebarWidth} updateContentWidth={updateContentWidth}/>
-            <div className="settings-content" ref={contentRef}>
+            <Sidebar isDarkMode={isDarkMode} updateSidebarWidth={updateSidebarWidth}/>
+            <div className="settings-content" style={{ width: contentWidth, paddingLeft: `${sidebarWidth + 1}em` }}>
                 <div className={`settings-header ${isDarkMode ? 'dark' : ''}`}>
                     Account Settings
                 </div>
