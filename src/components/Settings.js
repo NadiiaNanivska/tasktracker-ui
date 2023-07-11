@@ -201,7 +201,7 @@ const Settings = () => {
                     {selectedPhoto ? (
                         <img src={selectedPhoto} alt="selected" className="settings-selected-photo" />
                     ) : (
-                        <span className={`settings-photo-placeholder-text ${isDarkMode ? 'dark' : ''}`}>Виберіть фото</span>
+                        <span className={`settings-photo-placeholder-text ${isDarkMode ? 'dark' : ''}`}>Choose photo</span>
                     )}
                 </div>
                 {(selectedPhoto || showMenu) && <span className={`change-photo-text ${isDarkMode ? 'dark' : ''}`} onClick={handleShowMenu}>Change</span>}
