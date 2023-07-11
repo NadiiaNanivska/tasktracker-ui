@@ -68,7 +68,7 @@ const Settings = () => {
                 setSelectedPhoto(photoURL);
             };
             reader.readAsDataURL(file);
-        } else {
+        } else if(file && !file.type.startsWith('image/')){
             alert('Будь ласка, виберіть зображення');
         }
     }
