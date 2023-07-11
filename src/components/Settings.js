@@ -89,7 +89,7 @@ const Settings = () => {
                     Account Settings
                 </div>
                 <div className="settings-user-img-block">
-                <span className={`settings-right-side-text ${isDarkMode ? 'dark' : ''}`}>Your <br />avatar:</span>
+                <span className={`settings-right-side-text ${isDarkMode ? 'dark' : ''}`}>Your avatar:</span>
                 <div className="file-input-wrapper">
                     <input type="file" accept="image/*" onChange={handlePhotoChange} />
                     {selectedPhoto ? (
