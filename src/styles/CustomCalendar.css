@@ -17,3 +17,34 @@
   .notes-month section {
     font-size: 28px;
   }
+
+.add-even-btn {
+  display: flex;
+  justify-content: space-between
+}
+
+.calendar-controls {
+  display: flex;
+  justify-content: space-around;
+  padding-right: 10px;
+}
+
+.input-label {
+  padding-right: 10px;
+}
+
+.yellow {
+  color: yellow!important;
+}
+
+.green {
+  color: green!important;
+}
+
+.red {
+  color: red!important;
+}
+
+.ant-select-selector:hover, .ant-select-selector:focus, .ant-picker:hover, .ant-picker:focus {
+  border-color: #A7C9B8!important;
+}
