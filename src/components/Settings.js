@@ -22,9 +22,18 @@ const Settings = () => {
     const [isDarkMode, setIsDarkMode] = useState(localStorage.getItem('isDarkMode') === 'true');
     const [password, setPassword] = useState('');
     const [repeatPassword, setRepeatPassword] = useState('');
-
-
+    const [passwordForm] = Form.useForm();
+    const [isPanelOpen, setIsPanelOpen] = useState(false);
     const { Panel } = Collapse;
+
+    const handlePanelClose = () => {
+        setIsPanelOpen(false);
+        passwordForm.resetFields();
+    };
+
+    const handlePanelOpen = () => {
+        setIsPanelOpen(true);
+    };
 
     useEffect(() => {
         localStorage.setItem('isDarkMode', String(isDarkMode));
@@ -121,9 +130,9 @@ const Settings = () => {
                                 colorText: isDarkMode ? '#fff' : 'black',
                             },
                         }}>
-                    <Collapse className="settings-collapse">
+                    <Collapse className="settings-collapse" activeKey={isPanelOpen ? '1' : null} onChange={isPanelOpen ? handlePanelClose : handlePanelOpen}>
                         <Panel className="settings-password-panel" header="Change Password" key="1">
-                            <Form>
+                            <Form form={passwordForm}>
                             <span className={`settings-input-text ${isDarkMode ? 'dark' : ''}`}>Password</span>
                             <Form.Item
                                 name="password"
