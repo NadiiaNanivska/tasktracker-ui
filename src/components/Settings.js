@@ -3,13 +3,11 @@ import Sidebar from "./Sidebar";
 import "../styles/Settings.css";
 import {Button, Form, Input, Collapse, theme, ConfigProvider} from "antd";
 import {
-    addressValidator,
-    cityValidator, companyValidator, countryValidator,
+    countryValidator,
     emailValidator,
     firstNameValidator,
     lastNameValidator,
     passwordValidator,
-    phoneValidator,
 } from "../utils/validation";
 import DarkModeItem from "../images/dark-mode.svg";
 import SidebarContext from "../contexts/SidebarContext";
@@ -20,8 +18,6 @@ const Settings = () => {
     const [sidebarWidth, setSidebarWidth] = useState(contextData);
     const contentWidth = `calc(100% - ${sidebarWidth}em)`;
     const [isDarkMode, setIsDarkMode] = useState(localStorage.getItem('isDarkMode') === 'true');
-    const [password, setPassword] = useState('');
-    const [repeatPassword, setRepeatPassword] = useState('');
     const [passwordForm] = Form.useForm();
     const [isPanelOpen, setIsPanelOpen] = useState(false);
     const { Panel } = Collapse;
@@ -43,16 +39,16 @@ const Settings = () => {
         setSidebarWidth(newWidth);
     };
 
-    function passwordMatchValidator(_, value, callback) {
-        if (value !== repeatPassword) {
+    function passwordMatchValidator(rule, value, callback) {
+        if (value && value !== passwordForm.getFieldValue('repeat-password')) {
             callback("Passwords don't match");
         } else {
             callback();
         }
     }
 
-    function repeatPasswordMatchValidator(_, value, callback) {
-        if (value !== password) {
+    function repeatPasswordMatchValidator(rule, value, callback) {
+        if (value && value !== passwordForm.getFieldValue('password')) {
             callback("Passwords don't match");
         } else {
             callback();
@@ -138,11 +134,11 @@ const Settings = () => {
                                 name="password"
                                 rules={[
                                     { required: true, message: 'Please enter your password' },
-                                    { ...passwordValidator },
+                                    { validator: passwordValidator },
                                     { validator: passwordMatchValidator },
                                 ]}
                             >
-                                <Input size="large" onChange={e => setPassword(e.target.value)}
+                                <Input size="large"
                                        className={`settings-input-panel ${isDarkMode ? 'dark' : ''}`} placeholder="Password" />
                             </Form.Item>
                             <span className={`settings-input-text ${isDarkMode ? 'dark' : ''}`}>Repeat Password</span>
@@ -150,11 +146,10 @@ const Settings = () => {
                                 name="repeat-password"
                                 rules={[
                                     { required: true, message: 'Please repeat your password' },
-                                    { ...passwordValidator },
                                     { validator: repeatPasswordMatchValidator },
                                 ]}
                             >
-                                <Input onChange={e => setRepeatPassword(e.target.value)} size="large"
+                                <Input  size="large"
                                        className={`settings-input-panel ${isDarkMode ? 'dark' : ''}`} placeholder="Repeat password" />
                             </Form.Item>
                             <div className="settings-button-wrapper-panel">

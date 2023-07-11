@@ -31,7 +31,7 @@ const Login = () => {
                                 name="password"
                                 rules={[
                                     { required: true, message: 'Please enter your password' },
-                                    { ...passwordValidator },
+                                    { validator: passwordValidator },
                                 ]}
                                 className="login-input"
                             >

@@ -17,9 +17,31 @@ const emailPattern = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
 const emailMessage = 'Please enter a valid email';
 export const emailValidator = createValidator(emailPattern, emailMessage);
 
-const passwordPattern = /^(?=.*[A-Z])[a-zA-Z0-9]{8,}$/;
-const passwordMessage = 'Please enter a valid password';
-export const passwordValidator = createValidator(passwordPattern, passwordMessage);
+export function passwordValidator(rule, value, callback) {
+    const errors = [];
+
+    if (value.length < 8) {
+        errors.push('Password should be at least 8 characters long');
+    }
+
+    if (!/[A-Z]/.test(value)) {
+        errors.push('Password should contain at least one uppercase letter');
+    }
+
+    if (!/[a-z]/.test(value)) {
+        errors.push('Password should contain at least one lowercase letter');
+    }
+
+    if (!/[0-9]/.test(value)) {
+        errors.push('Password should contain at least one digit');
+    }
+
+    if (errors.length > 0) {
+        callback(errors);
+    } else {
+        callback();
+    }
+}
 
 const phonePattern = /^\+?\d{1,4}?[-.\s]?\(?\d{1,3}?\)?[-.\s]?\d{1,4}[-.\s]?\d{1,4}[-.\s]?\d{1,9}$/;
 const phoneMessage = 'Please enter a valid phone number in the format +XXX (XXX) XXX-XXXX';
