@@ -88,6 +88,33 @@ const Settings = () => {
                 <div className={`settings-header ${isDarkMode ? 'dark' : ''}`}>
                     Account Settings
                 </div>
+                <div className="settings-user-img-block">
+                <span className={`settings-right-side-text ${isDarkMode ? 'dark' : ''}`}>Your <br />avatar:</span>
+                <div className="file-input-wrapper">
+                    <input type="file" accept="image/*" onChange={handlePhotoChange} />
+                    {selectedPhoto ? (
+                        <img src={selectedPhoto} alt="selected" className="settings-selected-photo" />
+                    ) : (
+                        <span className={`settings-photo-placeholder-text ${isDarkMode ? 'dark' : ''}`}>Choose photo</span>
+                    )}
+                </div>
+                {(selectedPhoto || showMenu) && <span className={`change-photo-text ${isDarkMode ? 'dark' : ''}`} onClick={handleShowMenu}>Change</span>}
+                {showMenu &&
+                    <div className="settings-user-menu">
+                        <a className="user-menu-link" onClick={() => document.querySelector('.file-input-wrapper input[type="file"]').click()}>
+                            <div className="user-menu-icon-wrapper">
+                                <img src={EditIcon} alt="Home" className="user-menu-icon" />
+                            </div>
+                            <span className="user-menu-text" >Change</span>
+                        </a>
+                        <a className="user-menu-link" onClick={handleDeletePhoto}>
+                            <div className="user-menu-icon-wrapper">
+                                <img src={DeleteIcon} alt="Home" className="user-menu-icon" />
+                            </div>
+                            <span className="user-menu-text">Delete</span>
+                        </a>
+                    </div>}
+                </div>
                 <div className="settings-fields">
                     <Form className="settings-form">
                         <div className="settings-form-parts">
@@ -195,31 +222,6 @@ const Settings = () => {
             <div className="settings-right-side">
                 <img src={DarkModeItem} onClick={() => setIsDarkMode(prevState => !prevState)}
                      alt="dark-mode" className="home-page-icon-mode" />
-                <span className={`settings-right-side-text ${isDarkMode ? 'dark' : ''}`}>Your <br />avatar:</span>
-                <div className="file-input-wrapper">
-                    <input type="file" accept="image/*" onChange={handlePhotoChange} />
-                    {selectedPhoto ? (
-                        <img src={selectedPhoto} alt="selected" className="settings-selected-photo" />
-                    ) : (
-                        <span className={`settings-photo-placeholder-text ${isDarkMode ? 'dark' : ''}`}>Choose photo</span>
-                    )}
-                </div>
-                {(selectedPhoto || showMenu) && <span className={`change-photo-text ${isDarkMode ? 'dark' : ''}`} onClick={handleShowMenu}>Change</span>}
-                {showMenu &&
-                    <div className="settings-user-menu">
-                        <a className="user-menu-link" onClick={() => document.querySelector('.file-input-wrapper input[type="file"]').click()}>
-                            <div className="user-menu-icon-wrapper">
-                                <img src={EditIcon} alt="Home" className="user-menu-icon" />
-                            </div>
-                            <span className="user-menu-text" >Change</span>
-                        </a>
-                        <a className="user-menu-link" onClick={handleDeletePhoto}>
-                            <div className="user-menu-icon-wrapper">
-                                <img src={DeleteIcon} alt="Home" className="user-menu-icon" />
-                            </div>
-                            <span className="user-menu-text">Delete</span>
-                        </a>
-                    </div>}
             </div>
         </div>
     );
