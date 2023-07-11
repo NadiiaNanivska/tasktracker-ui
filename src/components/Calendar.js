@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Badge, Calendar, ConfigProvider, Modal, Input, Button, Select, DatePicker, Radio, Col, Row, Typography } from 'antd';
+import { Badge, Calendar, ConfigProvider, Modal, Input, Button, Select, DatePicker, Radio, Col, Row, theme } from 'antd';
 import '../styles/CustomCalendar.css';
 
 const { Option } = Select;
@@ -141,6 +141,7 @@ const CustomCalendar = ({ isDarkMode }) => {
   
 
   return (
+    <>
     <ConfigProvider
       theme={{
         token: {
@@ -154,41 +155,47 @@ const CustomCalendar = ({ isDarkMode }) => {
       }}
     >
       <Calendar cellRender={cellRender}  headerRender={headerRender}/>
-      <Modal
-        title="Add Event"
-        visible={isModalVisible}
-        onCancel={() => setIsModalVisible(false)}
-        onOk={handleCreateEvent}
-      >
-        <div>
-          <label>Type:</label>
-          <Select
-            value={newEvent?.type}
-            onChange={(value) => setNewEvent({ ...newEvent, type: value })}
-            placeholder="Select Type"
-          >
-            <Option value="warning">Warning</Option>
-            <Option value="success">Success</Option>
-            <Option value="error">Error</Option>
-          </Select>
-        </div>
-        <div>
-          <label>Date:</label>
-          <DatePicker
-            value={newEvent?.date}
-            onChange={(date) => setNewEvent({ ...newEvent, date })}
-          />
-        </div>
-        <div>
-          <label>Content:</label>
-          <Input
-            value={newEvent?.content}
-            onChange={(e) => setNewEvent({ ...newEvent, content: e.target.value })}
-            placeholder="Event Content"
-          />
-        </div>
-      </Modal>
     </ConfigProvider>
+    <ConfigProvider
+    theme={{
+     algorithm: isDarkMode ? theme.darkAlgorithm : theme.defaultAlgorithm,
+    }}>
+  <Modal
+    title="Add Event"
+    visible={isModalVisible}
+    onCancel={() => setIsModalVisible(false)}
+    onOk={handleCreateEvent}
+  >
+    <div>
+      <label>Type:</label>
+      <Select
+        value={newEvent?.type}
+        onChange={(value) => setNewEvent({ ...newEvent, type: value })}
+        placeholder="Select Type"
+      >
+        <Option value="warning">Warning</Option>
+        <Option value="success">Success</Option>
+        <Option value="error">Error</Option>
+      </Select>
+    </div>
+    <div>
+      <label>Date:</label>
+      <DatePicker
+        value={newEvent?.date}
+        onChange={(date) => setNewEvent({ ...newEvent, date })}
+      />
+    </div>
+    <div>
+      <label>Content:</label>
+      <Input
+        value={newEvent?.content}
+        onChange={(e) => setNewEvent({ ...newEvent, content: e.target.value })}
+        placeholder="Event Content"
+      />
+    </div>
+  </Modal>
+  </ConfigProvider>
+  </>
   );
 };
 
