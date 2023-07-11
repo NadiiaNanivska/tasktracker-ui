@@ -4,7 +4,7 @@
 
 .dark {
     background-color: #444;
-    color: white;
+    color: white!important;
 }
 
 .settings-content {
@@ -21,10 +21,6 @@
     letter-spacing: 0.1vh;
     font-family: Roboto, serif;
     margin-bottom: 20px;
-}
-
-.settings-header.dark {
-    color: white!important;
 }
 
 .settings-form-parts {
@@ -54,10 +50,6 @@
     font-family: Roboto, serif;
 }
 
-.settings-input-text.dark {
-    color: white!important;
-}
-
 .settings-button-wrapper {
     display: flex;
     flex-direction: row;
@@ -74,7 +66,6 @@
 }
 
 .settings-btn.dark {
-    color: white;
     background-color: green!important;
 }
 
@@ -115,10 +106,10 @@
     margin-bottom: 10px;
     width: 20%;
     color: #4c4848;
+    box-shadow: none!important;
 }
 
 .settings-btn-panel.dark {
-    color: white;
     background-color: green!important;
 }
 

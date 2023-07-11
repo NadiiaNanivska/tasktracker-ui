@@ -1,7 +1,7 @@
 import React, {useContext, useEffect, useRef, useState} from "react";
 import Sidebar from "./Sidebar";
 import "../styles/Settings.css";
-import {Button, Form, Input, Collapse} from "antd";
+import {Button, Form, Input, Collapse, theme, ConfigProvider} from "antd";
 import {
     addressValidator,
     cityValidator, companyValidator, countryValidator,
@@ -114,6 +114,13 @@ const Settings = () => {
                             </Button>
                         </div>
                     </Form>
+                    <ConfigProvider
+                        theme={{
+                            token: {
+                                colorBgContainer: isDarkMode ? '#444' : '#fff',
+                                colorText: isDarkMode ? '#fff' : 'black',
+                            },
+                        }}>
                     <Collapse className="settings-collapse">
                         <Panel className="settings-password-panel" header="Change Password" key="1">
                             <Form>
@@ -152,6 +159,7 @@ const Settings = () => {
                             </Form>
                         </Panel>
                     </Collapse>
+                    </ConfigProvider>
                 </div>
             </div>
             <img src={DarkModeItem} onClick={() => setIsDarkMode(prevState => !prevState)}
