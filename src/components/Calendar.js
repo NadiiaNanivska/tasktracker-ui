@@ -1,4 +1,4 @@
-import { Badge, Calendar } from 'antd';
+import { Badge, Calendar, ConfigProvider, theme } from 'antd';
 import '../styles/CustomCalendar.css';
 
 const getListData = (value) => {
@@ -69,7 +69,7 @@ const getMonthData = (value) => {
         return 1394;
     }
 };
-const CustomCalendar = () => {
+const CustomCalendar = ({isDarkMode}) => {
     const monthCellRender = (value) => {
         const num = getMonthData(value);
         return num ? (
@@ -96,9 +96,19 @@ const CustomCalendar = () => {
         if (info.type === 'month') return monthCellRender(current);
         return info.originNode;
     };
-    return <>
-    <Calendar cellRender={cellRender} />
-    </>;
+    
+    return (<ConfigProvider
+        theme={{
+            token: {
+              colorPrimary: 'forestgreen',
+              colorBgContainer: isDarkMode ? '#444' : '#fff',
+              colorText: isDarkMode ? '#cccccc' : 'black',
+              colorBgElevated: isDarkMode ? '#444' : '#fff',
+              controlItemBgActive: '#00410075',
+              controlItemBgHover: '#0041003c',
+            }}}>
+    <Calendar cellRender={cellRender}/>
+    </ConfigProvider>);
 };
 
 export default CustomCalendar;

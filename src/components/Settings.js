@@ -81,7 +81,9 @@ const Settings = () => {
                         >
                             <Input size="large" className={`settings-input ${isDarkMode ? 'dark' : ''}`} placeholder="Last Name*" />
                         </Form.Item>
-                            <span className={`settings-input-text ${isDarkMode ? 'dark' : ''}`}>Email</span>
+                        </div>
+                        <div className="settings-form-part">
+                          <span className={`settings-input-text ${isDarkMode ? 'dark' : ''}`}>Email</span>
                         <Form.Item
                             name="email"
                             rules={[
@@ -101,48 +103,6 @@ const Settings = () => {
                         >
                             <Input size="large" className={`settings-input ${isDarkMode ? 'dark' : ''}`} placeholder="Country" />
                         </Form.Item>
-                            <span className={`settings-input-text ${isDarkMode ? 'dark' : ''}`}>Company</span>
-                        <Form.Item
-                            name="company"
-                            rules={[
-                                { required: true, message: 'Please enter your company' },
-                                { ...companyValidator },
-                            ]}
-                        >
-                            <Input size="large" className={`settings-input ${isDarkMode ? 'dark' : ''}`} placeholder="Company" />
-                        </Form.Item>
-                        </div>
-                        <div className="settings-form-part">
-                            <span className={`settings-input-text ${isDarkMode ? 'dark' : ''}`}>Phone number</span>
-                        <Form.Item
-                            name="phone"
-                            rules={[
-                                { required: true, message: 'Please enter your phone number' },
-                                { ...phoneValidator },
-                            ]}
-                        >
-                            <Input size="large" className={`settings-input ${isDarkMode ? 'dark' : ''}`} placeholder="Phone Number" />
-                        </Form.Item>
-                            <span className={`settings-input-text ${isDarkMode ? 'dark' : ''}`}>City</span>
-                        <Form.Item
-                            name="city"
-                            rules={[
-                                { required: true, message: 'Please enter your city' },
-                                { ...cityValidator },
-                            ]}
-                        >
-                            <Input size="large" className={`settings-input ${isDarkMode ? 'dark' : ''}`} placeholder="City" />
-                        </Form.Item>
-                            <span className={`settings-input-text ${isDarkMode ? 'dark' : ''}`}>Address</span>
-                            <Form.Item
-                                name="address"
-                                rules={[
-                                    { required: true, message: 'Please enter your address' },
-                                    { ...addressValidator },
-                                ]}
-                            >
-                                <Input size="large" className={`settings-input ${isDarkMode ? 'dark' : ''}`} placeholder="Address" />
-                            </Form.Item>
                         </div>
                         </div>
                         <div className="settings-button-wrapper">

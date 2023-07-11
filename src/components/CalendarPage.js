@@ -16,12 +16,12 @@ const CalendarPage = () => {
         localStorage.setItem('isDarkMode', String(isDarkMode));
     }, [isDarkMode]);
 
-    return (<>
+    return (<div className={`home ${isDarkMode ? 'dark' : ''}`} style={{height: '125vh'}}>
         <Sidebar isDarkMode={isDarkMode} updateSidebarWidth={updateSidebarWidth} updateContentWidth={() => { }} />
         <div style={{ width: navbarWidth, paddingLeft: `${sidebarWidth + 1}em` }}>
-            <CustomCalendar></CustomCalendar>
+            <CustomCalendar isDarkMode={isDarkMode}></CustomCalendar>
         </div>
-    </>)
+    </div>)
 }
 
 export default CalendarPage;
