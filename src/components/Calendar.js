@@ -86,13 +86,19 @@ const CustomCalendar = ({ isDarkMode }) => {
           return (
             <div
               style={{
-                display: 'flex',
-                justifyContent: 'flex-end',
                 padding: 10,
               }}
             >
-              <Row gutter={8}>
+              <Row gutter={10} style={{
+                display: 'flex',
+                justifyContent: 'space-between',
+              }}>
                 <Col><Button onClick={handleOpenModal}>Add Event</Button></Col>
+                <Row style={{
+                display: 'flex',
+                justifyContent: 'space-around',
+                paddingRight: 10
+              }}>
                 <Col>
                   <Radio.Group
                     onChange={(e) => onTypeChange(e.target.value)}
@@ -127,6 +133,7 @@ const CustomCalendar = ({ isDarkMode }) => {
                     {monthOptions}
                   </Select>
                 </Col>
+                </Row>
               </Row>
             </div>
     );
