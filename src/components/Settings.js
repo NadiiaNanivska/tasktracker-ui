@@ -21,6 +21,7 @@ const Settings = () => {
     const [passwordForm] = Form.useForm();
     const [isPanelOpen, setIsPanelOpen] = useState(false);
     const { Panel } = Collapse;
+    const [selectedPhoto, setSelectedPhoto] = useState(null);
 
     const handlePanelClose = () => {
         setIsPanelOpen(false);
@@ -53,6 +54,24 @@ const Settings = () => {
         } else {
             callback();
         }
+    }
+
+    function handlePhotoChange(e) {
+        const file = e.target.files[0];
+        if (file && file.type.startsWith('image/')) {
+            const reader = new FileReader();
+            reader.onload = function(e) {
+                const photoURL = e.target.result;
+                setSelectedPhoto(photoURL);
+            };
+            reader.readAsDataURL(file);
+        } else {
+            alert('Будь ласка, виберіть зображення');
+        }
+    }
+
+    function handleDeletePhoto() {
+        setSelectedPhoto(null);
     }
 
     return (
@@ -166,8 +185,25 @@ const Settings = () => {
                     </ConfigProvider>
                 </div>
             </div>
-            <img src={DarkModeItem} onClick={() => setIsDarkMode(prevState => !prevState)}
-                 alt="dark-mode" className="home-page-icon-mode" />
+            <div className="settings-right-side">
+                <img src={DarkModeItem} onClick={() => setIsDarkMode(prevState => !prevState)}
+                     alt="dark-mode" className="home-page-icon-mode" />
+                <span className={`settings-right-side-text ${isDarkMode ? 'dark' : ''}`}>Your <br />avatar:</span>
+                <div className="file-input-wrapper">
+                    <input type="file" accept="image/*" onChange={handlePhotoChange} />
+                    {selectedPhoto ? (
+                        <img src={selectedPhoto} alt="selected" className="settings-selected-photo" />
+                    ) : (
+                        <span className={`settings-photo-placeholder-text ${isDarkMode ? 'dark' : ''}`}>Виберіть фото</span>
+                    )}
+                </div>
+                {selectedPhoto && <span className={`change-photo-text ${isDarkMode ? 'dark' : ''}`} onClick={() => document.querySelector('.file-input-wrapper input[type="file"]').click()}>
+                    Change <br /> photo
+                </span>}
+                {selectedPhoto && <span className={`change-photo-text ${isDarkMode ? 'dark' : ''}`} onClick={handleDeletePhoto}>
+                    Delete <br /> photo
+                </span>}
+            </div>
         </div>
     );
 };
