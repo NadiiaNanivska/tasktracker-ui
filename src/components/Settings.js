@@ -11,6 +11,8 @@ import {
 } from "../utils/validation";
 import DarkModeItem from "../images/dark-mode.svg";
 import SidebarContext from "../contexts/SidebarContext";
+import DeleteIcon from "../images/delete.svg";
+import EditIcon from "../images/edit.svg";
 
 
 const Settings = () => {
@@ -22,6 +24,7 @@ const Settings = () => {
     const [isPanelOpen, setIsPanelOpen] = useState(false);
     const { Panel } = Collapse;
     const [selectedPhoto, setSelectedPhoto] = useState(null);
+    const [showMenu, setShowMenu] = useState(false);
 
     const handlePanelClose = () => {
         setIsPanelOpen(false);
@@ -69,6 +72,10 @@ const Settings = () => {
             alert('Будь ласка, виберіть зображення');
         }
     }
+
+    const handleShowMenu = () => {
+        setShowMenu(prevState => !prevState);
+    };
 
     function handleDeletePhoto() {
         setSelectedPhoto(null);
@@ -197,12 +204,22 @@ const Settings = () => {
                         <span className={`settings-photo-placeholder-text ${isDarkMode ? 'dark' : ''}`}>Виберіть фото</span>
                     )}
                 </div>
-                {selectedPhoto && <span className={`change-photo-text ${isDarkMode ? 'dark' : ''}`} onClick={() => document.querySelector('.file-input-wrapper input[type="file"]').click()}>
-                    Change <br /> photo
-                </span>}
-                {selectedPhoto && <span className={`change-photo-text ${isDarkMode ? 'dark' : ''}`} onClick={handleDeletePhoto}>
-                    Delete <br /> photo
-                </span>}
+                {(selectedPhoto || showMenu) && <span className={`change-photo-text ${isDarkMode ? 'dark' : ''}`} onClick={handleShowMenu}>Change</span>}
+                {showMenu &&
+                    <div className="settings-user-menu">
+                        <a className="user-menu-link" onClick={() => document.querySelector('.file-input-wrapper input[type="file"]').click()}>
+                            <div className="user-menu-icon-wrapper">
+                                <img src={EditIcon} alt="Home" className="user-menu-icon" />
+                            </div>
+                            <span className="user-menu-text" >Change</span>
+                        </a>
+                        <a className="user-menu-link" onClick={handleDeletePhoto}>
+                            <div className="user-menu-icon-wrapper">
+                                <img src={DeleteIcon} alt="Home" className="user-menu-icon" />
+                            </div>
+                            <span className="user-menu-text">Delete</span>
+                        </a>
+                    </div>}
             </div>
         </div>
     );

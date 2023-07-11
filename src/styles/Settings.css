@@ -191,3 +191,14 @@
     margin-top: 5px;
     margin-right: 30px;
 }
+
+.settings-user-menu {
+    background-color: #fff;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    display: flex;
+    flex-direction: column;
+    margin-right: 20px;
+    margin-top: 10px;
+}

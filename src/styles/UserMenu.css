@@ -19,6 +19,7 @@
     text-decoration: none;
     color: #a19b9b;
     transition: color 0.3s ease;
+    cursor: pointer;
 }
 
 .user-menu-link:hover {
