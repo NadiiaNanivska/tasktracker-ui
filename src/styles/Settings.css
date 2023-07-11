@@ -36,7 +36,6 @@
 }
 
 .settings-input.dark {
-    color: #ffffff!important;
     background-color: #777;
 }
 
@@ -92,6 +91,14 @@
 
 .settings-input-panel {
     width: 500px !important;
+}
+
+.settings-input-panel.dark {
+    background-color: #777;
+}
+
+.settings-input-panel.dark::placeholder {
+    color: #cccccc;
 }
 
 .settings-button-wrapper-panel {
