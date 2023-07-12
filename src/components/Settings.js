@@ -1,18 +1,18 @@
-import React, {useContext, useEffect, useRef, useState} from "react";
+import React, {useContext, useEffect, useState} from "react";
 import Sidebar from "./Sidebar";
 import "../styles/Settings.css";
-import {Button, Form, Input, Collapse, theme, ConfigProvider} from "antd";
+import {Button, Form, Input, Collapse} from "antd";
 import {
     countryValidator,
     emailValidator,
     firstNameValidator,
     lastNameValidator,
-    passwordValidator,
 } from "../utils/validation";
 import DarkModeItem from "../images/dark-mode.svg";
 import SidebarContext from "../contexts/SidebarContext";
 import DeleteIcon from "../images/delete.svg";
 import EditIcon from "../images/edit.svg";
+import PasswordCollapse from "./PasswordCollapse";
 
 
 const Settings = () => {
@@ -20,20 +20,9 @@ const Settings = () => {
     const [sidebarWidth, setSidebarWidth] = useState(contextData);
     const contentWidth = `calc(100% - ${sidebarWidth}em)`;
     const [isDarkMode, setIsDarkMode] = useState(localStorage.getItem('isDarkMode') === 'true');
-    const [passwordForm] = Form.useForm();
-    const [isPanelOpen, setIsPanelOpen] = useState(false);
-    const { Panel } = Collapse;
     const [selectedPhoto, setSelectedPhoto] = useState(null);
     const [showMenu, setShowMenu] = useState(false);
 
-    const handlePanelClose = () => {
-        setIsPanelOpen(false);
-        passwordForm.resetFields();
-    };
-
-    const handlePanelOpen = () => {
-        setIsPanelOpen(true);
-    };
 
     useEffect(() => {
         localStorage.setItem('isDarkMode', String(isDarkMode));
@@ -43,21 +32,6 @@ const Settings = () => {
         setSidebarWidth(newWidth);
     };
 
-    function passwordMatchValidator(rule, value, callback) {
-        if (value && value !== passwordForm.getFieldValue('repeat-password')) {
-            callback("Passwords don't match");
-        } else {
-            callback();
-        }
-    }
-
-    function repeatPasswordMatchValidator(rule, value, callback) {
-        if (value && value !== passwordForm.getFieldValue('password')) {
-            callback("Passwords don't match");
-        } else {
-            callback();
-        }
-    }
 
     function handlePhotoChange(e) {
         const file = e.target.files[0];
@@ -172,51 +146,7 @@ const Settings = () => {
                             </Button>
                         </div>
                     </Form>
-                    <ConfigProvider
-                        theme={{
-                            token: {
-                                colorBgContainer: isDarkMode ? '#444' : '#fff',
-                                colorText: isDarkMode ? '#fff' : 'black',
-                            },
-                        }}>
-                    <Collapse className="settings-collapse" activeKey={isPanelOpen ? '1' : null} onChange={isPanelOpen ? handlePanelClose : handlePanelOpen}>
-                        <Panel className="settings-password-panel" header="Change Password" key="1">
-                            <Form form={passwordForm}>
-                            <span className={`settings-input-text ${isDarkMode ? 'dark' : ''}`}>Password</span>
-                            <Form.Item
-                                name="password"
-                                rules={[
-                                    { required: true, message: 'Please enter your password' },
-                                    { validator: passwordValidator },
-                                    { validator: passwordMatchValidator },
-                                ]}
-                            >
-                                <Input size="large"
-                                       className={`settings-input-panel ${isDarkMode ? 'dark' : ''}`} placeholder="Password" />
-                            </Form.Item>
-                            <span className={`settings-input-text ${isDarkMode ? 'dark' : ''}`}>Repeat Password</span>
-                            <Form.Item
-                                name="repeat-password"
-                                rules={[
-                                    { required: true, message: 'Please repeat your password' },
-                                    { validator: repeatPasswordMatchValidator },
-                                ]}
-                            >
-                                <Input  size="large"
-                                       className={`settings-input-panel ${isDarkMode ? 'dark' : ''}`} placeholder="Repeat password" />
-                            </Form.Item>
-                            <div className="settings-button-wrapper-panel">
-                                <Button type="primary" htmlType="submit" className={`card-add-btn settings-btn-panel ${isDarkMode ? 'dark' : ''}`}>
-                                    Change Password
-                                </Button>
-                                <Button type="primary" htmlType="reset" className={`card-add-btn settings-btn-panel ${isDarkMode ? 'dark' : ''}`}>
-                                    Cancel
-                                </Button>
-                            </div>
-                            </Form>
-                        </Panel>
-                    </Collapse>
-                    </ConfigProvider>
+                    <PasswordCollapse isDarkMode={isDarkMode}/>
                 </div>
             </div>
             <div className="settings-right-side">
