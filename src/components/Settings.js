@@ -1,7 +1,7 @@
 import React, {useContext, useEffect, useState} from "react";
 import Sidebar from "./Sidebar";
 import "../styles/Settings.css";
-import {Button, Form, Input, Collapse} from "antd";
+import {Button, Form, Input} from "antd";
 import {
     countryValidator,
     emailValidator,
@@ -10,9 +10,8 @@ import {
 } from "../utils/validation";
 import DarkModeItem from "../images/dark-mode.svg";
 import SidebarContext from "../contexts/SidebarContext";
-import DeleteIcon from "../images/delete.svg";
-import EditIcon from "../images/edit.svg";
 import PasswordCollapse from "./PasswordCollapse";
+import ChangePhotoPopover from "./ChangePhotoPopover";
 
 
 const Settings = () => {
@@ -21,8 +20,6 @@ const Settings = () => {
     const contentWidth = `calc(100% - ${sidebarWidth}em)`;
     const [isDarkMode, setIsDarkMode] = useState(localStorage.getItem('isDarkMode') === 'true');
     const [selectedPhoto, setSelectedPhoto] = useState(null);
-    const [showMenu, setShowMenu] = useState(false);
-
 
     useEffect(() => {
         localStorage.setItem('isDarkMode', String(isDarkMode));
@@ -31,7 +28,6 @@ const Settings = () => {
     const updateSidebarWidth = (newWidth) => {
         setSidebarWidth(newWidth);
     };
-
 
     function handlePhotoChange(e) {
         const file = e.target.files[0];
@@ -46,10 +42,6 @@ const Settings = () => {
             alert('Будь ласка, виберіть зображення');
         }
     }
-
-    const handleShowMenu = () => {
-        setShowMenu(prevState => !prevState);
-    };
 
     function handleDeletePhoto() {
         setSelectedPhoto(null);
@@ -72,22 +64,7 @@ const Settings = () => {
                         <span className={`settings-photo-placeholder-text ${isDarkMode ? 'dark' : ''}`}>Choose photo</span>
                     )}
                 </div>
-                {(selectedPhoto || showMenu) && <span className={`change-photo-text ${isDarkMode ? 'dark' : ''}`} onClick={handleShowMenu}>Change</span>}
-                {showMenu &&
-                    <div className="settings-user-menu">
-                        <a className="user-menu-link" onClick={() => document.querySelector('.file-input-wrapper input[type="file"]').click()}>
-                            <div className="user-menu-icon-wrapper">
-                                <img src={EditIcon} alt="Home" className="user-menu-icon" />
-                            </div>
-                            <span className="user-menu-text" >Change</span>
-                        </a>
-                        <a className="user-menu-link" onClick={handleDeletePhoto}>
-                            <div className="user-menu-icon-wrapper">
-                                <img src={DeleteIcon} alt="Home" className="user-menu-icon" />
-                            </div>
-                            <span className="user-menu-text">Delete</span>
-                        </a>
-                    </div>}
+                {selectedPhoto && <ChangePhotoPopover handleDeletePhoto={handleDeletePhoto} isDarkMode={isDarkMode}/>}
                 </div>
                 <div className="settings-fields">
                     <Form className="settings-form">

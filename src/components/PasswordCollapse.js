@@ -5,8 +5,6 @@ import {
     passwordValidator,
 } from "../utils/validation";
 
-
-
 const PasswordCollapse = ({isDarkMode}) => {
     const [passwordForm] = Form.useForm();
     const [isPanelOpen, setIsPanelOpen] = useState(false);
