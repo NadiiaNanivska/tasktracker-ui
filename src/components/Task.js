@@ -71,7 +71,7 @@ const Task = ({ title: initialTitle, description: initialDescription, name, onDe
         footer={[
           <Popconfirm
             title="Cancel changes"
-            description="Are you sure to cancel changes?"
+            description="Are you sure you want to cancel changes?"
             okText="Yes"
             cancelText="No"
             onConfirm={handleCancel}

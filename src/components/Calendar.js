@@ -2,8 +2,9 @@ import React, { useState } from 'react';
 import { Badge, Calendar, ConfigProvider, Modal, Input, Button, Select, DatePicker, Radio, Col, Row, theme, TimePicker } from 'antd';
 import '../styles/CustomCalendar.css';
 import EventsList from './Eventslist';
+import AddEvent from './AddEvent';
+import { v4 as uuidv4 } from 'uuid';
 
-const { Option } = Select;
 
 const CustomCalendar = ({ isDarkMode }) => {
   const [isModalVisible, setIsModalVisible] = useState(false);
@@ -11,7 +12,6 @@ const CustomCalendar = ({ isDarkMode }) => {
   const [newEvent, setNewEvent] = useState(null);
   const [events, setEvents] = useState([]);
   const [selectedDate, setSelectedDate] = useState(null);
-  const format = 'HH:mm';
 
   const handleOpenModal = () => {
     setIsModalVisible(true);
@@ -23,7 +23,9 @@ const CustomCalendar = ({ isDarkMode }) => {
   };
 
   const handleCreateEvent = () => {
-    setEvents((prevEvents) => [...prevEvents, newEvent]);
+    const eventId = uuidv4();
+    const eventWithId = { ...newEvent, id: eventId };
+    setEvents((prevEvents) => [...prevEvents, eventWithId]);
     setIsModalVisible(false);
     setNewEvent(null);
   };
@@ -155,76 +157,18 @@ const CustomCalendar = ({ isDarkMode }) => {
             colorBgElevated: isDarkMode ? '#444' : '#fff',
             controlItemBgActive: '#00410075',
             controlItemBgHover: '#0041003c',
+            colorIcon: isDarkMode ? '#444' : '#fff',
           },
         }}
       >
-        <Calendar cellRender={cellRender} headerRender={headerRender} onSelect={handleOpenEventsModal}/>
+        <Calendar cellRender={cellRender} headerRender={headerRender} onSelect={(value, type) => {
+          if (type.source === 'date') {
+            handleOpenEventsModal(value.toDate());
+          }
+        }} />
       </ConfigProvider>
-      <ConfigProvider
-        theme={{
-          algorithm: isDarkMode ? theme.darkAlgorithm : theme.defaultAlgorithm,
-        }}>
-        <Modal
-          title="Add Event"
-          visible={isModalVisible}
-          onCancel={() => setIsModalVisible(false)}
-          onOk={handleCreateEvent}
-        >
-          <ConfigProvider
-        theme={{
-          token: {
-            colorPrimary: 'forestgreen',
-            colorBgContainer: isDarkMode ? '#444' : '#fff',
-            colorText: isDarkMode ? '#cccccc' : 'black',
-            colorBgElevated: isDarkMode ? '#444' : '#fff',
-            controlItemBgActive: '#00410075',
-            controlItemBgHover: '#0041003c',
-            colorLink: 'forestgreen',
-            colorLinkHover: '#00410075'
-          },
-        }}
-      >
-          <Row gutter={[0, 10]}>
-          <Col span={24}>
-            <label className='input-label'>Type:</label>
-            <Select
-              className=''
-              value={newEvent?.type}
-              onChange={(value) => setNewEvent({ ...newEvent, type: value })}
-              placeholder="Select Type"
-            >
-              <Option value="warning">Minor</Option>
-              <Option value="success">Important</Option>
-              <Option value="error">Urgent</Option>
-            </Select>
-          </Col>
-          <Col span={24}>
-          <label className='input-label'>Time:</label>
-          <TimePicker format={format} 
-          value={newEvent?.time} 
-          onChange={(time) => setNewEvent({ ...newEvent, time })}
-          />
-          </Col>
-          <Col span={24}>
-            <label className='input-label'>Date:</label>
-            <DatePicker
-              value={newEvent?.date}
-              onChange={(date) => setNewEvent({ ...newEvent, date })}
-            />
-          </Col>
-          <Col span={24}>
-            <label>Content:</label>
-            <Input
-              value={newEvent?.content}
-              onChange={(e) => setNewEvent({ ...newEvent, content: e.target.value })}
-              placeholder="Event Content"
-            />
-          </Col>
-          </Row>
-          </ConfigProvider>
-        </Modal>
-        <EventsList isDarkMode={isDarkMode} isModalVisible={isEventsModalVisible} setIsModalVisible={setIsEventsModalVisible} date={selectedDate} dataList={events} />
-      </ConfigProvider>
+      <AddEvent newEvent={newEvent} setNewEvent={setNewEvent} isModalVisible={isModalVisible} setIsModalVisible={setIsModalVisible} handleCreateEvent={handleCreateEvent} isDarkMode={isDarkMode} />
+      <EventsList isDarkMode={isDarkMode} setEvents={setEvents} isModalVisible={isEventsModalVisible} setIsModalVisible={setIsEventsModalVisible} date={selectedDate} dataList={events} />
     </>
   );
 };
