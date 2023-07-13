@@ -1,18 +1,11 @@
 import "../styles/Settings.css";
-import {Button, Space, Popover, ConfigProvider} from "antd";
+import {Button, Space, Popover, ConfigProvider, theme} from "antd";
 import {DeleteOutlined, EditOutlined} from "@ant-design/icons";
 
 
 const ChangePhotoPopover = ({handleDeletePhoto, isDarkMode}) => {
 
     const content = (
-    <ConfigProvider
-        theme={{
-            token: {
-                colorBgContainer: isDarkMode ? '#444' : '#fff',
-                colorText: isDarkMode ? '#fff' : 'black',
-            },
-        }}>
         <Space direction="vertical">
             <Button type="text" onClick={() => document.querySelector('.file-input-wrapper input[type="file"]').click()}>
                 <Space>
@@ -27,16 +20,16 @@ const ChangePhotoPopover = ({handleDeletePhoto, isDarkMode}) => {
                 </Space>
             </Button>
         </Space>
-    </ConfigProvider>
     );
 
     return (
         <ConfigProvider
             theme={{
                 token: {
-                    colorBgContainer: isDarkMode ? '#444' : '#fff',
+                    colorBgContainer: isDarkMode ? '#555' : '#fff',
                     colorText: isDarkMode ? '#fff' : 'black',
                 },
+                algorithm: isDarkMode ? theme.darkAlgorithm : theme.defaultAlgorithm,
             }}>
         <Popover content={content} trigger="click">
             <Button>Change</Button>
