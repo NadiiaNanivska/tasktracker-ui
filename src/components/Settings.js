@@ -12,6 +12,7 @@ import DarkModeItem from "../images/dark-mode.svg";
 import SidebarContext from "../contexts/SidebarContext";
 import PasswordCollapse from "./PasswordCollapse";
 import ChangePhotoPopover from "./ChangePhotoPopover";
+import fieldConfig from '../data/fieldConfig.json';
 
 
 const Settings = () => {
@@ -39,13 +40,25 @@ const Settings = () => {
             };
             reader.readAsDataURL(file);
         } else if(file && !file.type.startsWith('image/')){
-            alert('Будь ласка, виберіть зображення');
+            alert('Please choose an image');
         }
     }
 
     function handleDeletePhoto() {
         setSelectedPhoto(null);
     }
+
+    const formFields = fieldConfig.map(field => (
+        <div>
+            <span className={`settings-input-text ${isDarkMode ? 'dark' : ''}`}>{field.label}</span>
+            <Form.Item
+                name={field.name}
+                rules={field.rules}
+            >
+                <Input size="large" className={`settings-input ${isDarkMode ? 'dark' : ''}`} placeholder={field.label} />
+            </Form.Item>
+        </div>
+    ));
 
     return (
         <div className={`settings ${isDarkMode ? 'dark' : ''}`}>
@@ -69,50 +82,7 @@ const Settings = () => {
                 <div className="settings-fields">
                     <Form className="settings-form">
                         <div className="settings-form-parts">
-                        <div className="settings-form-part">
-                            <span className={`settings-input-text ${isDarkMode ? 'dark' : ''}`}>First name</span>
-                        <Form.Item
-                            name="first-name"
-                            rules={[
-                                { required: true, message: 'Please enter your first name' },
-                                { ...firstNameValidator },
-                            ]}
-                        >
-                            <Input size="large" className={`settings-input ${isDarkMode ? 'dark' : ''}`} placeholder="First Name*" />
-                        </Form.Item>
-                            <span className={`settings-input-text ${isDarkMode ? 'dark' : ''}`}>Last name</span>
-                        <Form.Item
-                            name="last-name"
-                            rules={[
-                                { required: true, message: 'Please enter your last name' },
-                                { ...lastNameValidator },
-                            ]}
-                        >
-                            <Input size="large" className={`settings-input ${isDarkMode ? 'dark' : ''}`} placeholder="Last Name*" />
-                        </Form.Item>
-                        </div>
-                        <div className="settings-form-part">
-                          <span className={`settings-input-text ${isDarkMode ? 'dark' : ''}`}>Email</span>
-                        <Form.Item
-                            name="email"
-                            rules={[
-                                { required: true, message: 'Please enter your email' },
-                                { ...emailValidator },
-                            ]}
-                        >
-                            <Input size="large" className={`settings-input ${isDarkMode ? 'dark' : ''}`}  placeholder="Email*" />
-                        </Form.Item>
-                            <span className={`settings-input-text ${isDarkMode ? 'dark' : ''}`}>Country</span>
-                        <Form.Item
-                            name="country"
-                            rules={[
-                                { required: true, message: 'Please enter your country' },
-                                { ...countryValidator },
-                            ]}
-                        >
-                            <Input size="large" className={`settings-input ${isDarkMode ? 'dark' : ''}`} placeholder="Country" />
-                        </Form.Item>
-                        </div>
+                            {formFields}
                         </div>
                         <div className="settings-button-wrapper">
                             <Button type="primary" htmlType="submit" className={`card-add-btn settings-btn ${isDarkMode ? 'dark' : ''}`}>
