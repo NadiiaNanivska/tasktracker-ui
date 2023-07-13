@@ -1,8 +1,15 @@
 import React from "react";
-import { Modal, List, ConfigProvider } from 'antd';
+import { Modal, List, ConfigProvider, Skeleton } from 'antd';
+import { DeleteTwoTone} from '@ant-design/icons';
 
-const EventsList = ({ isModalVisible, setIsModalVisible, dataList, date, isDarkMode }) => {
+const EventsList = ({ setEvents, isModalVisible, setIsModalVisible, dataList, date, isDarkMode }) => {
     const options = { hour: 'numeric', minute: 'numeric' };
+
+    const handleDelete = (event) => {
+        const updatedDataList = dataList.filter((item) => item.id !== event.id);
+        setEvents(updatedDataList);
+      };
+      
 
     const handleCancel = () => {
         setIsModalVisible(false);
@@ -16,8 +23,6 @@ const EventsList = ({ isModalVisible, setIsModalVisible, dataList, date, isDarkM
         const eventYear = eventDate.getFullYear();
         return eventDay === selectedDate.getDay() && eventMonth === selectedDate.getMonth() && eventYear === selectedDate.getFullYear();
     });
-
-    console.log(dataList)
 
     const getTitleColor = (type) => {
         switch (type) {
@@ -51,10 +56,13 @@ const EventsList = ({ isModalVisible, setIsModalVisible, dataList, date, isDarkM
                 dataSource={filteredEvents}
                 renderItem={(item) => (
                     <List.Item>
+                        <Skeleton loading={false} title={false}>
                         <List.Item.Meta
                             title={<a className={`${getTitleColor(item.type)}`}>{item.content}</a>}
                             description={new Date(item.time).toLocaleTimeString(undefined, options)}
                         />
+                        <DeleteTwoTone twoToneColor="forestgreen" style={{ fontSize: '16px', cursor: 'pointer'}} onClick={() => handleDelete(item)}/>
+                        </Skeleton>
                     </List.Item>
                 )}
             />

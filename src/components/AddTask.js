@@ -28,8 +28,14 @@ const AddTask = ({ isModalVisible, setIsModalVisible, name, setIsNewTaskAdded, i
 
     return (<ConfigProvider
         theme={{
-         algorithm: isDarkMode ? theme.darkAlgorithm : theme.defaultAlgorithm,
-        }}>
+          token: {
+            colorPrimary: 'forestgreen',
+            colorBgContainer: isDarkMode ? '#444' : '#fff',
+            colorText: isDarkMode ? '#cccccc' : 'black',
+          },
+          algorithm: isDarkMode ? theme.darkAlgorithm : theme.defaultAlgorithm,
+        }}
+      >
         <Modal
             title="Add Task"
             visible={isModalVisible}
@@ -38,7 +44,7 @@ const AddTask = ({ isModalVisible, setIsModalVisible, name, setIsNewTaskAdded, i
             footer={[
                 <Popconfirm
                     title="Cancel changes"
-                    description="Are you sure to cancel changes?"
+                    description="Are you sure you want to cancel changes?"
                     okText="Yes"
                     cancelText="No"
                     onConfirm={handleCancel}
