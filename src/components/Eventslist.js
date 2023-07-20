@@ -6,6 +6,11 @@ import {deleteEvent} from "../utils/eventsRequests";
 const EventsList = ({ setEvents, isModalVisible, setIsModalVisible, dataList, date, isDarkMode }) => {
     const options = { hour: 'numeric', minute: 'numeric' };
 
+    if(dataList.length !== 0) {
+        dataList.forEach(element => {
+            element.time = new Date(`1970-01-01T${element.time}`).toLocaleTimeString(undefined, options);
+        });
+    }
     const handleDelete = (event) => {
         const updatedDataList = dataList.filter((item) => item.id !== event.id);
         deleteEvent(event.id);
@@ -20,10 +25,11 @@ const EventsList = ({ setEvents, isModalVisible, setIsModalVisible, dataList, da
     const selectedDate = new Date(date);
     const filteredEvents = dataList.filter((item) => {
         const eventDate = new Date(item.date);
-        const eventDay = eventDate.getDay();
+        const eventDay = eventDate.getDate();
         const eventMonth = eventDate.getMonth();
         const eventYear = eventDate.getFullYear();
-        return eventDay === selectedDate.getDay() && eventMonth === selectedDate.getMonth() && eventYear === selectedDate.getFullYear();
+        console.log(selectedDate.getDate())
+        return eventDay === selectedDate.getDate() && eventMonth === selectedDate.getMonth() && eventYear === selectedDate.getFullYear();
     });
 
     const getTitleColor = (type) => {
@@ -61,7 +67,7 @@ const EventsList = ({ setEvents, isModalVisible, setIsModalVisible, dataList, da
                         <Skeleton loading={false} title={false}>
                         <List.Item.Meta
                             title={<a className={`${getTitleColor(item.type)}`}>{item.content}</a>}
-                            description={new Date(item.time).toLocaleTimeString(undefined, options)}
+                            description={item.time}
                         />
                         <DeleteTwoTone twoToneColor="forestgreen" style={{ fontSize: '16px', cursor: 'pointer'}} onClick={() => handleDelete(item)}/>
                         </Skeleton>

@@ -26,8 +26,7 @@ const CustomCalendar = ({ isDarkMode }) => {
 
   useEffect(() => {
     fetchEvents(setEvents);
-    console.log(events)
-  }, [newEvent]);
+  }, []);
 
   const handleCreateEvent = () => {
     const eventId = uuidv4();
@@ -47,7 +46,6 @@ const CustomCalendar = ({ isDarkMode }) => {
       const eventDay = eventDate.getDate();
       const eventMonth = eventDate.getMonth();
       const eventYear = eventDate.getFullYear();
-
       return eventDay === date && eventMonth === month && eventYear === year;
     });
 

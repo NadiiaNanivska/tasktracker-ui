@@ -10,8 +10,9 @@ const AddEvent = ({ newEvent, setNewEvent, isModalVisible, setIsModalVisible, ha
     const handleSave = () => {
         form.validateFields().then(values => {
             const { time, date, content, type } = newEvent;
-            const formattedTime = time.format("HH:mm");
+            const formattedTime = time.format("HH:mm:ss");
             const formattedDate = date.format("YYYY-MM-DD");
+            setNewEvent({ ...newEvent, time: formattedTime })
 
             addEvent(type, formattedTime, formattedDate, content);
             handleCreateEvent();
