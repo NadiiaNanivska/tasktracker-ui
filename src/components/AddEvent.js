@@ -1,5 +1,6 @@
 import React from "react";
 import { ConfigProvider, theme, Modal, Col, Row, Select, TimePicker, DatePicker, Input, Button, Popconfirm, Form } from "antd";
+import {addEvent} from "../utils/eventsRequests";
 
 const { Option } = Select;
 
@@ -8,6 +9,11 @@ const AddEvent = ({ newEvent, setNewEvent, isModalVisible, setIsModalVisible, ha
 
     const handleSave = () => {
         form.validateFields().then(values => {
+            const { time, date, content, type } = newEvent;
+            const formattedTime = time.format("HH:mm");
+            const formattedDate = date.format("YYYY-MM-DD");
+
+            addEvent(type, formattedTime, formattedDate, content);
             handleCreateEvent();
             form.resetFields();
         }).catch(error => {

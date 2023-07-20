@@ -1,12 +1,14 @@
 import React from "react";
 import { Modal, List, ConfigProvider, Skeleton } from 'antd';
 import { DeleteTwoTone} from '@ant-design/icons';
+import {deleteEvent} from "../utils/eventsRequests";
 
 const EventsList = ({ setEvents, isModalVisible, setIsModalVisible, dataList, date, isDarkMode }) => {
     const options = { hour: 'numeric', minute: 'numeric' };
 
     const handleDelete = (event) => {
         const updatedDataList = dataList.filter((item) => item.id !== event.id);
+        deleteEvent(event.id);
         setEvents(updatedDataList);
       };
       
