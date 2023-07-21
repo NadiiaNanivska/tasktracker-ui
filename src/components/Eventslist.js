@@ -1,5 +1,5 @@
 import React from "react";
-import { Modal, List, ConfigProvider, Skeleton } from 'antd';
+import { Modal, List, ConfigProvider, Skeleton, theme } from 'antd';
 import { DeleteTwoTone} from '@ant-design/icons';
 import {deleteEvent} from "../utils/eventsRequests";
 
@@ -41,7 +41,10 @@ const EventsList = ({ setEvents, isModalVisible, setIsModalVisible, dataList, da
         theme={{
           token: {
             colorBgElevated: isDarkMode ? '#444' : '#fff',
+            colorTextHeading: isDarkMode ? '#cccccc' : 'black',
+            colorTextDescription: isDarkMode ? '#cccccc' : 'black',
           },
+          algorithm: isDarkMode ? theme.darkAlgorithm : theme.defaultAlgorithm,
         }}
       >
         <Modal
