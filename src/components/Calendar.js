@@ -1,10 +1,9 @@
 import React, {useEffect, useState} from 'react';
-import { Badge, Calendar, ConfigProvider, Modal, Input, Button, Select, DatePicker, Radio, Col, Row, theme, TimePicker } from 'antd';
+import { Badge, Calendar, ConfigProvider, Button, Select, Radio, Col, Row } from 'antd';
 import '../styles/CustomCalendar.css';
 import EventsList from './Eventslist';
 import AddEvent from './AddEvent';
 import { v4 as uuidv4 } from 'uuid';
-import {fetchTasks} from "../utils/tasksRequests";
 import {fetchEvents} from "../utils/eventsRequests";
 
 
@@ -30,7 +29,7 @@ const CustomCalendar = ({ isDarkMode }) => {
 
   const handleCreateEvent = () => {
     const eventId = uuidv4();
-    const eventWithId = { ...newEvent, id: eventId };
+    const eventWithId = { ...newEvent, id: eventId, time: newEvent.time.format("HH:mm:ss") };
     setEvents((prevEvents) => [...prevEvents, eventWithId]);
     setIsModalVisible(false);
     setNewEvent(null);

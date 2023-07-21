@@ -1,6 +1,6 @@
-import React, { useContext, useState, useEffect } from 'react';
+import React  from 'react';
 import '../styles/Login.css';
-import {Button, Input, Checkbox, Form} from 'antd';
+import {Button, Input, Form} from 'antd';
 import {passwordValidator, emailValidator} from "../utils/validation";
 
 const Login = () => {

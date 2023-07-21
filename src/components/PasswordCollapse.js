@@ -1,9 +1,7 @@
 import React, {useEffect, useState} from "react";
 import "../styles/Settings.css";
-import {Button, Form, Input, Collapse, theme, ConfigProvider} from "antd";
-import {
-    passwordValidator,
-} from "../utils/validation";
+import {Button, Form, Input, Collapse, ConfigProvider} from "antd";
+import { passwordValidator} from "../utils/validation";
 
 const PasswordCollapse = ({isDarkMode}) => {
     const [passwordForm] = Form.useForm();

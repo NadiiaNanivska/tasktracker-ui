@@ -1,4 +1,4 @@
-import React, { useContext, useState, useEffect } from 'react';
+import React from 'react';
 import '../styles/Register.css';
 import {Button, Input, Form} from 'antd';
 import {firstNameValidator, lastNameValidator, passwordValidator, emailValidator, phoneValidator} from '../utils/validation';

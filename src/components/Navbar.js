@@ -1,4 +1,4 @@
-import React, {useRef, useState, useContext} from "react";
+import React, {useState, useContext} from "react";
 import '../styles/Navbar.css';
 import Search from "./Search";
 import DogItem from '../images/dog.png';
