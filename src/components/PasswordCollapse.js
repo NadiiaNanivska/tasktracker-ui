@@ -63,10 +63,10 @@ const PasswordCollapse = ({isDarkMode}) => {
                                     className={`settings-input-panel ${isDarkMode ? 'dark' : ''}`} placeholder="Repeat password" />
                         </Form.Item>
                         <div className="settings-button-wrapper-panel">
-                            <Button type="primary" htmlType="submit" className={`card-add-btn settings-btn-panel ${isDarkMode ? 'dark' : ''}`}>
+                            <Button type="primary" htmlType="submit" className={`settings-btn-panel ${isDarkMode ? 'dark' : ''}`}>
                                 Change Password
                             </Button>
-                            <Button type="primary" htmlType="reset" className={`card-add-btn settings-btn-panel ${isDarkMode ? 'dark' : ''}`}>
+                            <Button type="primary" htmlType="reset" className={`settings-btn-panel ${isDarkMode ? 'dark' : ''}`}>
                                 Cancel
                             </Button>
                         </div>
