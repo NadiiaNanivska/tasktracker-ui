@@ -2,12 +2,18 @@ import axios from 'axios';
 
 export const addEvent = async (type, time, date, content) => {
     try {
+        const token = localStorage.getItem('token');
+
+        const headers = {
+            'Authorization': `Bearer ${token}`
+        };
+
         await axios.post('http://localhost:8080/events', {
             type: type,
             date: date,
             time: time,
             content: content
-        });
+        }, {headers});
     } catch (error) {
         console.log('error', error);
     }
@@ -15,8 +21,14 @@ export const addEvent = async (type, time, date, content) => {
 
 export const fetchEvents = async (setEvents) => {
     try {
+        const token = localStorage.getItem('token');
+
+        const headers = {
+            'Authorization': `Bearer ${token}`
+        };
+
         const url = `http://localhost:8080/events`;
-        const response = await axios.get(url);
+        const response = await axios.get(url, {headers});
         setEvents(response.data);
     } catch (error) {
         console.error('Error fetching events:', error);
@@ -25,7 +37,13 @@ export const fetchEvents = async (setEvents) => {
 
 export const deleteEvent = async (eventId) => {
     try {
-        await axios.delete(`http://localhost:8080/events/${eventId}`);
+        const token = localStorage.getItem('token');
+
+        const headers = {
+            'Authorization': `Bearer ${token}`
+        };
+
+        await axios.delete(`http://localhost:8080/events/${eventId}`, {headers});
     } catch (error) {
         console.log('error', error);
     }
