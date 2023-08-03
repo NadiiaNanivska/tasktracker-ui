@@ -23,7 +23,14 @@ export const deleteTask = async (taskId) => {
 export const fetchTasks = async (name, setTasks) => {
     try {
         const url = `http://localhost:8080/tasks?status=${name}`;
-        const response = await axios.get(url);
+
+        const token = localStorage.getItem('token');
+
+        const headers = {
+            'Authorization': `Bearer ${token}`
+        };
+
+        const response = await axios.get(url, { headers });
         setTasks(response.data);
     } catch (error) {
         console.error('Error fetching tasks:', error);

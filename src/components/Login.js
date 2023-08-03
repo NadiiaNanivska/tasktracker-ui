@@ -1,11 +1,46 @@
 import React  from 'react';
+import { useState } from 'react';
+import { useNavigate  } from 'react-router-dom';
 import '../styles/Login.css';
-import {Button, Input, Form} from 'antd';
+import {Button, Input, Form, message} from 'antd';
 import {passwordValidator, emailValidator} from "../utils/validation";
 
 const Login = () => {
+
+    const history = useNavigate();
+    const [token, setToken] = useState('');
+
     const onFinish = (values) => {
-        console.log('Form values:', values);
+        const { email, password } = values;
+        const requestBody = {
+            email: email,
+            password: password
+        };
+
+        fetch("http://localhost:8080/api/v1/auth/authenticate", {
+            headers: {
+                "Content-Type": "application/json"
+            },
+            method: "post",
+            body: JSON.stringify(requestBody)
+        })
+            .then(response => {
+                if (!response.ok) {
+                    message.error("You passed incorrect credentials!")
+                }
+                return response.json();
+            })
+            .then(data => {
+                console.log('Response:', data);
+                const token = data.token;
+                localStorage.setItem('token', token);
+                setToken(token);
+
+                history("/tasks");
+            })
+            .catch(error => {
+                console.error('Error:', error);
+            });
     };
 
     return (
