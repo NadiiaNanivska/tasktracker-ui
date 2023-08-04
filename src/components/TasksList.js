@@ -8,6 +8,8 @@ import AddTask from './AddTask';
 import axios from "axios";
 import { deleteTask, fetchTasks, fetchTasksWithoutName, updateTask } from "../utils/tasksRequests";
 import { SearchContext } from "../contexts/SearchContext";
+import {checkTokenValidity} from "../utils/validation";
+import {useNavigate} from "react-router-dom";
 
 const TasksList = ({ name, afterdragtasks, updateTasks, isDarkMode }) => {
     const [isModalVisible, setIsModalVisible] = useState(false);
@@ -16,7 +18,7 @@ const TasksList = ({ name, afterdragtasks, updateTasks, isDarkMode }) => {
     const [isDeleteModalVisible, setIsDeleteModalVisible] = useState(false);
     const [taskIdToDelete, setTaskIdToDelete] = useState(null);
     const { searchText } = useContext(SearchContext);
-
+    const history = useNavigate();
 
     useEffect(() => {
         setTasks(afterdragtasks);
@@ -77,6 +79,10 @@ const TasksList = ({ name, afterdragtasks, updateTasks, isDarkMode }) => {
         }
     };
 
+    useEffect(() => {
+        const storedToken = localStorage.getItem('token');
+        checkTokenValidity(storedToken, history);
+    }, []);
 
     return (
         <div className={`list-card ${isDarkMode ? 'dark' : ''}`} onDrop={handleOnDrop} onDragOver={handleDragOver}>

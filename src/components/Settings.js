@@ -2,17 +2,13 @@ import React, {useContext, useEffect, useState} from "react";
 import Sidebar from "./Sidebar";
 import "../styles/Settings.css";
 import {Button, Form, Input} from "antd";
-import {
-    countryValidator,
-    emailValidator,
-    firstNameValidator,
-    lastNameValidator,
-} from "../utils/validation";
 import DarkModeItem from "../images/dark-mode.svg";
 import SidebarContext from "../contexts/SidebarContext";
 import PasswordCollapse from "./PasswordCollapse";
 import ChangePhotoPopover from "./ChangePhotoPopover";
 import fieldConfig from '../data/fieldConfig.json';
+import {useNavigate} from "react-router-dom";
+import {checkTokenValidity} from "../utils/validation";
 
 
 const Settings = () => {
@@ -21,6 +17,7 @@ const Settings = () => {
     const contentWidth = `calc(100% - ${sidebarWidth}em)`;
     const [isDarkMode, setIsDarkMode] = useState(localStorage.getItem('isDarkMode') === 'true');
     const [selectedPhoto, setSelectedPhoto] = useState(null);
+    const history = useNavigate();
 
     useEffect(() => {
         localStorage.setItem('isDarkMode', String(isDarkMode));
@@ -59,6 +56,12 @@ const Settings = () => {
             </Form.Item>
         </div>
     ));
+
+    useEffect(() => {
+        const storedToken = localStorage.getItem('token');
+        checkTokenValidity(storedToken, history);
+    }, []);
+
 
     return (
         <div className={`settings ${isDarkMode ? 'dark' : ''}`}>

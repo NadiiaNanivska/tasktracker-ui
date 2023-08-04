@@ -1,9 +1,13 @@
-import React from "react";
+import React, {useEffect} from "react";
 import { Modal, List, ConfigProvider, Skeleton, theme } from 'antd';
 import { DeleteTwoTone} from '@ant-design/icons';
 import {deleteEvent} from "../utils/eventsRequests";
+import {checkTokenValidity} from "../utils/validation";
+import {useNavigate} from "react-router-dom";
 
 const EventsList = ({ setEvents, isModalVisible, setIsModalVisible, dataList, date, isDarkMode }) => {
+    const history = useNavigate();
+
     const handleDelete = (event) => {
         const updatedDataList = dataList.filter((item) => item.id !== event.id);
         deleteEvent(event.id);
@@ -35,6 +39,12 @@ const EventsList = ({ setEvents, isModalVisible, setIsModalVisible, dataList, da
                 return 'black';
         }
     };
+
+    useEffect(() => {
+        const storedToken = localStorage.getItem('token');
+        checkTokenValidity(storedToken, history);
+    }, []);
+
 
     return (
         <ConfigProvider

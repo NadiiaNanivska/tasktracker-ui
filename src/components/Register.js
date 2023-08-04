@@ -1,12 +1,49 @@
-import React from 'react';
+import React, {useState} from 'react';
 import '../styles/Register.css';
-import {Button, Input, Form} from 'antd';
+import {Button, Input, Form, message} from 'antd';
 import {firstNameValidator, lastNameValidator, passwordValidator, emailValidator, phoneValidator} from '../utils/validation';
+import {useNavigate} from "react-router-dom";
 
 const Register = () => {
 
+    const history = useNavigate();
+    const [token, setToken] = useState('');
+
     const onFinish = (values) => {
-        console.log('Form values:', values);
+        const { firstname, lastname, email, password, repeatPassword, phone } = values;
+        const requestBody = {
+            firstname: firstname,
+            lastname: lastname,
+            email: email,
+            password: password,
+            repeatPassword: repeatPassword,
+            phone: phone,
+            role: "USER"
+        };
+
+        fetch("http://localhost:8080/api/v1/auth/register", {
+            headers: {
+                "Content-Type": "application/json"
+            },
+            method: "post",
+            body: JSON.stringify(requestBody)
+        })
+            .then(response => {
+                if (!response.ok) {
+                    message.error("You passed incorrect credentials!")
+                }
+                return response.json();
+            })
+            .then(data => {
+                const token = data.token;
+                localStorage.setItem('token', token);
+                setToken(token);
+
+                history("/tasks");
+            })
+            .catch(error => {
+                console.error('Error:', error);
+            });
     };
 
     return (
@@ -19,7 +56,7 @@ const Register = () => {
                         <div className="register-head-text">Register</div>
                     </div>
                     <Form.Item
-                        name="first-name"
+                        name="firstname"
                         rules={[
                             { required: true, message: 'Please enter your first name' },
                             { ...firstNameValidator },
@@ -29,7 +66,7 @@ const Register = () => {
                         <Input size="large" placeholder="First Name*" />
                     </Form.Item>
                     <Form.Item
-                        name="last-name"
+                        name="lastname"
                         rules={[
                             { required: true, message: 'Please enter your last name' },
                             { ...lastNameValidator },

@@ -6,7 +6,7 @@ import CalendarIcon from '../images/calendar.svg';
 import SettingsIcon from '../images/settings.svg';
 import LogoutIcon from '../images/log-out.svg';
 import MenuItem from '../images/burger-menu.svg';
-import {useLocation} from "react-router-dom";
+import {useLocation, useNavigate} from "react-router-dom";
 
 const Sidebar = ({updateSidebarWidth, isDarkMode}) => {
     const sidebarHeadingRef = useRef(null);
@@ -14,6 +14,7 @@ const Sidebar = ({updateSidebarWidth, isDarkMode}) => {
     const [isSidebarOpen, setIsSidebarOpen] = useState(false);
     const [activeTab, setActiveTab] = useState('');
     const location = useLocation();
+    const history = useNavigate();
 
     useEffect(() => {
         const path = location.pathname;
@@ -50,6 +51,11 @@ const Sidebar = ({updateSidebarWidth, isDarkMode}) => {
           hideElements(false);
         }
       };
+
+    const handleLogout = () => {
+        localStorage.removeItem('token');
+        history("/login");
+    };
     
       useEffect(() => {
         hideElements(true);
@@ -102,7 +108,7 @@ const Sidebar = ({updateSidebarWidth, isDarkMode}) => {
                         </a>
                     </li>
                     <li className="sidebar-item">
-                        <a href="/login" className={`sidebar-link ${isDarkMode ? 'dark' : ''}`}>
+                        <a onClick={handleLogout} className={`sidebar-link ${isDarkMode ? 'dark' : ''}`}>
                             <div className="icon-wrapper">
                                 <img src={LogoutIcon} alt="Home" className="sidebar-icon" />
                             </div>

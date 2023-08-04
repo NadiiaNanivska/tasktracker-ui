@@ -8,6 +8,8 @@ import instagramIcon from "../images/instagram.svg";
 import telegramIcon from "../images/telegram.svg";
 import DarkModeItem from "../images/dark-mode.svg";
 import SidebarContext from "../contexts/SidebarContext";
+import {useNavigate} from "react-router-dom";
+import {checkTokenValidity} from "../utils/validation";
 
 
 const HomePage = () => {
@@ -15,6 +17,7 @@ const HomePage = () => {
     const [sidebarWidth, setSidebarWidth] = useState(contextData);
     const contentWidth = `calc(100% - ${sidebarWidth}em)`;
     const [isDarkMode, setIsDarkMode] = useState(localStorage.getItem('isDarkMode') === 'true');
+    const history = useNavigate();
 
     useEffect(() => {
         localStorage.setItem('isDarkMode', String(isDarkMode));
@@ -23,6 +26,12 @@ const HomePage = () => {
     const updateSidebarWidth = (newWidth) => {
         setSidebarWidth(newWidth);
     };
+
+    useEffect(() => {
+        const storedToken = localStorage.getItem('token');
+        checkTokenValidity(storedToken, history);
+    }, []);
+
 
     return (
         <div className={`home-page ${isDarkMode ? 'dark' : ''}`}>

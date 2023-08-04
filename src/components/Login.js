@@ -1,9 +1,10 @@
-import React  from 'react';
+import React, {useEffect} from 'react';
 import { useState } from 'react';
 import { useNavigate  } from 'react-router-dom';
 import '../styles/Login.css';
 import {Button, Input, Form, message} from 'antd';
 import {passwordValidator, emailValidator} from "../utils/validation";
+import jwtDecode from 'jwt-decode';
 
 const Login = () => {
 
@@ -31,7 +32,6 @@ const Login = () => {
                 return response.json();
             })
             .then(data => {
-                console.log('Response:', data);
                 const token = data.token;
                 localStorage.setItem('token', token);
                 setToken(token);

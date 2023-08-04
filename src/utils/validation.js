@@ -1,3 +1,6 @@
+import jwtDecode from "jwt-decode";
+import {useNavigate} from "react-router-dom";
+
 export function createValidator(pattern, message) {
     return {
         pattern,
@@ -62,3 +65,21 @@ export const companyValidator = createValidator(companyPattern, companyMessage);
 const addressPattern = /^[A-Z][a-zA-Z]*$/;
 const addressMessage = 'Please enter a valid address';
 export const addressValidator = createValidator(addressPattern, addressMessage);
+
+const isTokenValid = (token) => {
+    if (!token) return false;
+    try {
+        const decodedToken = jwtDecode(token);
+        const currentTime = Math.floor(Date.now() / 1000);
+        return decodedToken.exp > currentTime;
+    } catch (error) {
+        return false;
+    }
+};
+
+export const checkTokenValidity = (storedToken, history) => {
+    if (!isTokenValid(storedToken)) {
+        localStorage.removeItem('token');
+        history("/login");
+    }
+};

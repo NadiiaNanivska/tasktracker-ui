@@ -31,15 +31,17 @@ const Home = () => {
   useEffect(() => {
     const fetchAllTasks = async () => {
       const allTasks = await fetchTasksWithoutName();
-      const updatedTasks = {
-        'To do': [],
-        'In progress': [],
-        'Done': []
-      };
-      allTasks.forEach((task) => {
-        updatedTasks[task.status].push(task);
-      });
-      setTasks(updatedTasks);
+      if (allTasks) {
+        const updatedTasks = {
+          'To do': [],
+          'In progress': [],
+          'Done': []
+        };
+        allTasks.forEach((task) => {
+          updatedTasks[task.status].push(task);
+        });
+        setTasks(updatedTasks);
+      }
     };
 
     fetchAllTasks();
