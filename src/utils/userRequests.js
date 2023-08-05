@@ -12,7 +12,9 @@ export const loginRequest = async (requestBody, history) => {
                 message.error('You passed incorrect credentials!');
             } else {
                 const token = response.data.token;
+                const userId = response.data.userId;
                 localStorage.setItem('token', token);
+                localStorage.setItem('userId', userId);
 
                 history('/tasks');
             }
@@ -47,7 +49,6 @@ export const registrationRequest = async (requestBody, history) => {
 
 export const getUserRequest = async () => {
     const userId = localStorage.getItem('userId');
-    console.log(userId);
     try {
         const response = await axios.get(`http://localhost:8080/users/${userId}`, {
             headers: {
@@ -60,3 +61,16 @@ export const getUserRequest = async () => {
         return null;
     }
 }
+
+export const updateUserData = async (id, data) => {
+    try {
+        const response = await axios.put(`http://localhost:8080/users/${id}`, data, {
+            headers: {
+                'Authorization': `Bearer ${localStorage.getItem('token')}`
+            }
+        });
+        return response.data;
+    } catch (error) {
+        throw new Error('Failed to update user data');
+    }
+};

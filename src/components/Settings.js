@@ -1,7 +1,7 @@
 import React, {useContext, useEffect, useState} from "react";
 import Sidebar from "./Sidebar";
 import "../styles/Settings.css";
-import {Button, Form, Input} from "antd";
+import {Button, Form, Input, message} from "antd";
 import DarkModeItem from "../images/dark-mode.svg";
 import SidebarContext from "../contexts/SidebarContext";
 import PasswordCollapse from "./PasswordCollapse";
@@ -9,7 +9,7 @@ import ChangePhotoPopover from "./ChangePhotoPopover";
 import fieldConfig from '../data/fieldConfig.json';
 import {useNavigate} from "react-router-dom";
 import {checkTokenValidity} from "../utils/validation";
-import {getUserRequest} from "../utils/userRequests";
+import {getUserRequest, updateUserData} from "../utils/userRequests";
 
 
 const Settings = () => {
@@ -90,6 +90,15 @@ const Settings = () => {
         checkTokenValidity(storedToken, history);
     }, []);
 
+    const handleSubmit = async () => {
+        try {
+            const userId = localStorage.getItem('userId');
+            await updateUserData(userId, formData);
+            message.success("You successfully updated yor profile!")
+        } catch (error) {
+            console.error('Error updating user data:', error);
+        }
+    };
 
     return (
         <div className={`settings ${isDarkMode ? 'dark' : ''}`}>
@@ -111,7 +120,7 @@ const Settings = () => {
                 {selectedPhoto && <ChangePhotoPopover handleDeletePhoto={handleDeletePhoto} isDarkMode={isDarkMode}/>}
                 </div>
                 <div className="settings-fields">
-                    <Form className="settings-form" form={form}>
+                    <Form className="settings-form" form={form} onFinish={handleSubmit}>
                         <div className="settings-form-parts">
                             {formFields}
                         </div>
