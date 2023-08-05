@@ -33,7 +33,9 @@ export const registrationRequest = async (requestBody, history) => {
                 message.error('You passed incorrect credentials!');
             } else {
                 const token = response.data.token;
+                const userId = response.data.userId;
                 localStorage.setItem('token', token);
+                localStorage.setItem('userId', userId);
 
                 history('/tasks');
             }
@@ -41,4 +43,20 @@ export const registrationRequest = async (requestBody, history) => {
         .catch(error => {
             console.error('Error:', error);
         });
+}
+
+export const getUserRequest = async () => {
+    const userId = localStorage.getItem('userId');
+    console.log(userId);
+    try {
+        const response = await axios.get(`http://localhost:8080/users/${userId}`, {
+            headers: {
+                'Authorization': `Bearer ${localStorage.getItem('token')}`
+            }
+        });
+        return response.data;
+    } catch (error) {
+        console.error('Error:', error);
+        return null;
+    }
 }

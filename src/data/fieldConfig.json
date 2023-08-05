@@ -1,13 +1,13 @@
 [
   {
-    "name": "first-name",
+    "name": "firstname",
     "label": "First Name",
     "rules": [
       { "required": true, "message": "Please enter your first name" }
     ]
   },
   {
-    "name": "last-name",
+    "name": "lastname",
     "label": "Last Name",
     "rules": [
       { "required": true, "message": "Please enter your last name" }
@@ -24,7 +24,7 @@
     "name": "country",
     "label": "Country",
     "rules": [
-      { "required": true, "message": "Please enter your country" }
+      { "required": false, "message": "Please enter your country" }
     ]
   }
 ]

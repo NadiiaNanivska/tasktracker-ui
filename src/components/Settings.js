@@ -9,6 +9,7 @@ import ChangePhotoPopover from "./ChangePhotoPopover";
 import fieldConfig from '../data/fieldConfig.json';
 import {useNavigate} from "react-router-dom";
 import {checkTokenValidity} from "../utils/validation";
+import {getUserRequest} from "../utils/userRequests";
 
 
 const Settings = () => {
@@ -18,6 +19,8 @@ const Settings = () => {
     const [isDarkMode, setIsDarkMode] = useState(localStorage.getItem('isDarkMode') === 'true');
     const [selectedPhoto, setSelectedPhoto] = useState(null);
     const history = useNavigate();
+    const [formData, setFormData] = useState({});
+    const [form] = Form.useForm();
 
     useEffect(() => {
         localStorage.setItem('isDarkMode', String(isDarkMode));
@@ -45,17 +48,42 @@ const Settings = () => {
         setSelectedPhoto(null);
     }
 
+    useEffect( () => {
+        const fetchUserData = async () => {
+            const userData = await getUserRequest();
+            if (userData) {
+                setFormData(userData);
+            }
+        };
+
+        fetchUserData();
+    }, []);
+
     const formFields = fieldConfig.map(field => (
-        <div>
+        <div key={field.name}>
             <span className={`settings-input-text ${isDarkMode ? 'dark' : ''}`}>{field.label}</span>
             <Form.Item
                 name={field.name}
                 rules={field.rules}
             >
-                <Input size="large" className={`settings-input ${isDarkMode ? 'dark' : ''}`} placeholder={field.label} />
+                <Input
+                    size="large"
+                    className={`settings-input ${isDarkMode ? 'dark' : ''}`}
+                    placeholder={field.label}
+                />
             </Form.Item>
         </div>
     ));
+
+    useEffect(() => {
+        form.resetFields();
+        form.setFieldsValue({
+            firstname: formData.firstname,
+            lastname: formData.lastname,
+            email: formData.email,
+        });
+    }, [formData]);
+
 
     useEffect(() => {
         const storedToken = localStorage.getItem('token');
@@ -83,7 +111,7 @@ const Settings = () => {
                 {selectedPhoto && <ChangePhotoPopover handleDeletePhoto={handleDeletePhoto} isDarkMode={isDarkMode}/>}
                 </div>
                 <div className="settings-fields">
-                    <Form className="settings-form">
+                    <Form className="settings-form" form={form}>
                         <div className="settings-form-parts">
                             {formFields}
                         </div>
