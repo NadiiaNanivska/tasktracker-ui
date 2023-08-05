@@ -100,6 +100,15 @@ const Settings = () => {
         }
     };
 
+    function handleReset() {
+        form.resetFields();
+        form.setFieldsValue({
+            firstname: formData.firstname,
+            lastname: formData.lastname,
+            email: formData.email,
+        });
+    }
+
     return (
         <div className={`settings ${isDarkMode ? 'dark' : ''}`}>
             <Sidebar isDarkMode={isDarkMode} updateSidebarWidth={updateSidebarWidth}/>
@@ -120,7 +129,7 @@ const Settings = () => {
                 {selectedPhoto && <ChangePhotoPopover handleDeletePhoto={handleDeletePhoto} isDarkMode={isDarkMode}/>}
                 </div>
                 <div className="settings-fields">
-                    <Form className="settings-form" form={form} onFinish={handleSubmit}>
+                    <Form className="settings-form" form={form} onFinish={handleSubmit} onReset={handleReset}>
                         <div className="settings-form-parts">
                             {formFields}
                         </div>
