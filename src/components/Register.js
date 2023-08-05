@@ -3,14 +3,13 @@ import '../styles/Register.css';
 import {Button, Input, Form, message} from 'antd';
 import {firstNameValidator, lastNameValidator, passwordValidator, emailValidator, phoneValidator} from '../utils/validation';
 import {useNavigate} from "react-router-dom";
+import {registrationRequest} from "../utils/userRequests";
 
 const Register = () => {
-
     const history = useNavigate();
-    const [token, setToken] = useState('');
 
-    const onFinish = (values) => {
-        const { firstname, lastname, email, password, repeatPassword, phone } = values;
+    const onFinish = async (values) => {
+        const {firstname, lastname, email, password, repeatPassword, phone} = values;
         const requestBody = {
             firstname: firstname,
             lastname: lastname,
@@ -21,29 +20,7 @@ const Register = () => {
             role: "USER"
         };
 
-        fetch("http://localhost:8080/api/v1/auth/register", {
-            headers: {
-                "Content-Type": "application/json"
-            },
-            method: "post",
-            body: JSON.stringify(requestBody)
-        })
-            .then(response => {
-                if (!response.ok) {
-                    message.error("You passed incorrect credentials!")
-                }
-                return response.json();
-            })
-            .then(data => {
-                const token = data.token;
-                localStorage.setItem('token', token);
-                setToken(token);
-
-                history("/tasks");
-            })
-            .catch(error => {
-                console.error('Error:', error);
-            });
+        await registrationRequest(requestBody, history);
     };
 
     return (

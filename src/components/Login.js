@@ -5,42 +5,19 @@ import '../styles/Login.css';
 import {Button, Input, Form, message} from 'antd';
 import {passwordValidator, emailValidator} from "../utils/validation";
 import jwtDecode from 'jwt-decode';
+import {loginRequest} from "../utils/userRequests";
 
 const Login = () => {
-
     const history = useNavigate();
-    const [token, setToken] = useState('');
 
-    const onFinish = (values) => {
+    const onFinish = async (values) => {
         const { email, password } = values;
         const requestBody = {
             email: email,
             password: password
         };
 
-        fetch("http://localhost:8080/api/v1/auth/authenticate", {
-            headers: {
-                "Content-Type": "application/json"
-            },
-            method: "post",
-            body: JSON.stringify(requestBody)
-        })
-            .then(response => {
-                if (!response.ok) {
-                    message.error("You passed incorrect credentials!")
-                }
-                return response.json();
-            })
-            .then(data => {
-                const token = data.token;
-                localStorage.setItem('token', token);
-                setToken(token);
-
-                history("/tasks");
-            })
-            .catch(error => {
-                console.error('Error:', error);
-            });
+        await loginRequest(requestBody, history);
     };
 
     return (
