@@ -22,6 +22,16 @@ const Settings = () => {
     const [formData, setFormData] = useState({});
     const [form] = Form.useForm();
 
+    const dataToUpdateUser = {
+        firstname: formData.firstname,
+        lastname: formData.lastname,
+        email: formData.email,
+        password: formData.password,
+        repeatPassword: formData.repeatPassword,
+        phone: formData.phone,
+        role: formData.role
+    }
+
     useEffect(() => {
         localStorage.setItem('isDarkMode', String(isDarkMode));
     }, [isDarkMode]);
@@ -70,6 +80,7 @@ const Settings = () => {
                     size="large"
                     className={`settings-input ${isDarkMode ? 'dark' : ''}`}
                     placeholder={field.label}
+                    onBlur={(e) => setFormData(prevData => ({ ...prevData, [field.name]: e.target.value }))}
                 />
             </Form.Item>
         </div>
@@ -92,11 +103,12 @@ const Settings = () => {
 
     const handleSubmit = async () => {
         try {
+            console.log(dataToUpdateUser)
             const userId = localStorage.getItem('userId');
-            await updateUserData(userId, formData);
+            await updateUserData(userId, dataToUpdateUser);
             message.success("You successfully updated yor profile!")
         } catch (error) {
-            console.error('Error updating user data:', error);
+            message.error("Please enter correct data!")
         }
     };
 
