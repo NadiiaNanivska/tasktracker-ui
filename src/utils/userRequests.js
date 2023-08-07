@@ -74,3 +74,22 @@ export const updateUserData = async (id, data) => {
         throw new Error('Failed to update user data');
     }
 };
+
+export const changePasswordRequest = async (data) => {
+    const userId = localStorage.getItem('userId');
+    try {
+        const response = await axios.patch(
+            `http://localhost:8080/api/v1/auth/change-password/${userId}`,
+            data,
+            {
+                headers: {
+                    Authorization: `Bearer ${localStorage.getItem('token')}`,
+                },
+            }
+        );
+        return response.data;
+    } catch (error) {
+        console.error('Error:', error);
+        throw new Error('Failed to change password');
+    }
+};

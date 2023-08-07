@@ -9,7 +9,7 @@ import ChangePhotoPopover from "./ChangePhotoPopover";
 import fieldConfig from '../data/fieldConfig.json';
 import {useNavigate} from "react-router-dom";
 import {checkTokenValidity} from "../utils/validation";
-import {getUserRequest, updateUserData} from "../utils/userRequests";
+import {changePasswordRequest, getUserRequest, updateUserData} from "../utils/userRequests";
 
 
 const Settings = () => {
@@ -103,10 +103,9 @@ const Settings = () => {
 
     const handleSubmit = async () => {
         try {
-            console.log(dataToUpdateUser)
             const userId = localStorage.getItem('userId');
             await updateUserData(userId, dataToUpdateUser);
-            message.success("You successfully updated yor profile!")
+            message.success("You successfully updated your profile!")
         } catch (error) {
             message.error("Please enter correct data!")
         }
@@ -154,7 +153,7 @@ const Settings = () => {
                             </Button>
                         </div>
                     </Form>
-                    <PasswordCollapse isDarkMode={isDarkMode}/>
+                    <PasswordCollapse handleChangePassword={handleSubmit} isDarkMode={isDarkMode}/>
                 </div>
             </div>
             <div className="settings-right-side">

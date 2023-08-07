@@ -1,7 +1,8 @@
 import React, {useEffect, useState} from "react";
 import "../styles/Settings.css";
-import {Button, Form, Input, Collapse, ConfigProvider} from "antd";
+import {Button, Form, Input, Collapse, ConfigProvider, message} from "antd";
 import { passwordValidator} from "../utils/validation";
+import {changePasswordRequest} from "../utils/userRequests";
 
 const PasswordCollapse = ({isDarkMode}) => {
     const [passwordForm] = Form.useForm();
@@ -29,6 +30,20 @@ const PasswordCollapse = ({isDarkMode}) => {
         }
     }
 
+    const handleChangePassword = async (values) => {
+        try {
+            const { password, 'new-password': newPassword } = values;
+            await changePasswordRequest({
+                password,
+                newPassword,
+            });
+
+            message.success("You successfully updated your password!");
+        } catch (error) {
+            message.error("Please enter correct data!");
+        }
+    };
+
     return (
         <ConfigProvider
             theme={{
@@ -39,7 +54,7 @@ const PasswordCollapse = ({isDarkMode}) => {
             }}>
             <Collapse className="settings-collapse" activeKey={isPanelOpen ? '1' : null} onChange={isPanelOpen ? handlePanelClose : handlePanelOpen}>
                 <Panel className="settings-password-panel" header="Change Password" key="1">
-                    <Form form={passwordForm}>
+                    <Form form={passwordForm} onFinish={handleChangePassword}>
                         <span className={`settings-input-text ${isDarkMode ? 'dark' : ''}`}>Password</span>
                         <Form.Item
                             name="password"
@@ -61,6 +76,17 @@ const PasswordCollapse = ({isDarkMode}) => {
                         >
                             <Input  size="large"
                                     className={`settings-input-panel ${isDarkMode ? 'dark' : ''}`} placeholder="Repeat password" />
+                        </Form.Item>
+                        <span className={`settings-input-text ${isDarkMode ? 'dark' : ''}`}>New Password</span>
+                        <Form.Item
+                            name="new-password"
+                            rules={[
+                                { required: true, message: 'Please enter new password' },
+                                { validator: passwordValidator },
+                            ]}
+                        >
+                            <Input  size="large"
+                                    className={`settings-input-panel ${isDarkMode ? 'dark' : ''}`} placeholder="New password" />
                         </Form.Item>
                         <div className="settings-button-wrapper-panel">
                             <Button type="primary" htmlType="submit" className={`settings-btn-panel ${isDarkMode ? 'dark' : ''}`}>
