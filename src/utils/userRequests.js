@@ -93,3 +93,22 @@ export const changePasswordRequest = async (data) => {
         throw new Error('Failed to change password');
     }
 };
+
+export const uploadPhotoRequest = async (photoData) => {
+    const userId = localStorage.getItem('userId');
+    try {
+        const response = await axios.patch(
+            `http://localhost:8080/users/photo/${userId}`,
+            { photo: photoData },
+            {
+                headers: {
+                    Authorization: `Bearer ${localStorage.getItem('token')}`,
+                },
+            }
+        );
+        return response.data;
+    } catch (error) {
+        console.error('Error:', error);
+        throw new Error('Failed to upload photo');
+    }
+};

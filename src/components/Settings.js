@@ -9,7 +9,8 @@ import ChangePhotoPopover from "./ChangePhotoPopover";
 import fieldConfig from '../data/fieldConfig.json';
 import {useNavigate} from "react-router-dom";
 import {checkTokenValidity} from "../utils/validation";
-import {changePasswordRequest, getUserRequest, updateUserData} from "../utils/userRequests";
+import {getUserRequest, updateUserData, uploadPhotoRequest} from "../utils/userRequests";
+import * as uuid from "uuid";
 
 
 const Settings = () => {
@@ -40,16 +41,18 @@ const Settings = () => {
         setSidebarWidth(newWidth);
     };
 
-    function handlePhotoChange(e) {
+    async function handlePhotoChange(e) {
         const file = e.target.files[0];
         if (file && file.type.startsWith('image/')) {
-            const reader = new FileReader();
-            reader.onload = function(e) {
-                const photoURL = e.target.result;
-                setSelectedPhoto(photoURL);
-            };
-            reader.readAsDataURL(file);
-        } else if(file && !file.type.startsWith('image/')){
+            setSelectedPhoto(file);
+            try {
+                await uploadPhotoRequest(file);
+                alert('Photo uploaded successfully');
+            } catch (error) {
+                console.error('Error:', error);
+                alert('Failed to upload photo');
+            }
+        } else if (file && !file.type.startsWith('image/')) {
             alert('Please choose an image');
         }
     }
@@ -63,6 +66,9 @@ const Settings = () => {
             const userData = await getUserRequest();
             if (userData) {
                 setFormData(userData);
+                if (userData.photo) {
+                    setSelectedPhoto(selectedPhoto);
+                }
             }
         };
 
@@ -132,7 +138,7 @@ const Settings = () => {
                 <div className="file-input-wrapper">
                     <input type="file" accept="image/*" onChange={handlePhotoChange} />
                     {selectedPhoto ? (
-                        <img src={selectedPhoto} alt="selected" className="settings-selected-photo" />
+                        <img src={URL.createObjectURL(selectedPhoto)} alt="selected" className="settings-selected-photo" />
                     ) : (
                         <span className={`settings-photo-placeholder-text ${isDarkMode ? 'dark' : ''}`}>Choose photo</span>
                     )}
