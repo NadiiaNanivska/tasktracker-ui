@@ -37,7 +37,15 @@ const Navbar = ({toggleDark, isDarkMode}) => {
                 <img className="navbar-notification-img" src={NotificationsItem} />
                 <h4 className={`navbar-name ${isDarkMode ? 'dark' : ''}`}>{userData.firstname} {userData.lastname}</h4>
                 <div className="navbar-person-div" onClick={handleMouseClick}>
-                <img className="navbar-person-img" src={DogItem} alt="person-img"/>
+                    <div className={`circle-container ${isDarkMode ? 'dark' : ''}`}>
+                        {userData.photo ? (
+                            <img className="navbar-person-img" src={userData.photo} alt="person-img" />
+                        ) : (
+                            <div className={`settings-photo-placeholder ${isDarkMode ? 'dark' : ''}`}>
+                                <span className="settings-photo-placeholder-text">No photo</span>
+                            </div>
+                        )}
+                    </div>
                 {showMenu && <UserMenu />}
                 </div>
             </div>

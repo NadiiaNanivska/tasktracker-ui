@@ -9,8 +9,7 @@ import ChangePhotoPopover from "./ChangePhotoPopover";
 import fieldConfig from '../data/fieldConfig.json';
 import {useNavigate} from "react-router-dom";
 import {checkTokenValidity} from "../utils/validation";
-import {getUserRequest, updateUserData, uploadPhotoRequest} from "../utils/userRequests";
-import * as uuid from "uuid";
+import {deletePhotoRequest, getUserRequest, updateUserData, uploadPhotoRequest} from "../utils/userRequests";
 
 
 const Settings = () => {
@@ -41,23 +40,30 @@ const Settings = () => {
         setSidebarWidth(newWidth);
     };
 
-    async function handlePhotoChange(e) {
+    function handlePhotoChange(e) {
         const file = e.target.files[0];
         if (file && file.type.startsWith('image/')) {
-            setSelectedPhoto(file);
-            try {
-                await uploadPhotoRequest(file);
-                alert('Photo uploaded successfully');
-            } catch (error) {
-                console.error('Error:', error);
-                alert('Failed to upload photo');
-            }
+            const reader = new FileReader();
+            reader.onload = async function (e) {
+                const photoURL = e.target.result;
+                setSelectedPhoto(photoURL);
+
+                try {
+                    await uploadPhotoRequest(photoURL);
+                    message.success('Photo uploaded successfully');
+                } catch (error) {
+                    message.error('Failed to upload photo');
+                }
+            };
+
+            reader.readAsDataURL(file);
         } else if (file && !file.type.startsWith('image/')) {
             alert('Please choose an image');
         }
     }
 
-    function handleDeletePhoto() {
+    async function handleDeletePhoto() {
+        await deletePhotoRequest();
         setSelectedPhoto(null);
     }
 
@@ -67,7 +73,7 @@ const Settings = () => {
             if (userData) {
                 setFormData(userData);
                 if (userData.photo) {
-                    setSelectedPhoto(selectedPhoto);
+                    setSelectedPhoto(userData.photo);
                 }
             }
         };
@@ -138,7 +144,7 @@ const Settings = () => {
                 <div className="file-input-wrapper">
                     <input type="file" accept="image/*" onChange={handlePhotoChange} />
                     {selectedPhoto ? (
-                        <img src={URL.createObjectURL(selectedPhoto)} alt="selected" className="settings-selected-photo" />
+                        <img src={selectedPhoto} alt="selected" className="settings-selected-photo" />
                     ) : (
                         <span className={`settings-photo-placeholder-text ${isDarkMode ? 'dark' : ''}`}>Choose photo</span>
                     )}

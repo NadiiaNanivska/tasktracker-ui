@@ -112,3 +112,21 @@ export const uploadPhotoRequest = async (photoData) => {
         throw new Error('Failed to upload photo');
     }
 };
+
+export const deletePhotoRequest = async () => {
+    const userId = localStorage.getItem('userId');
+    try {
+        const response = await axios.delete(
+            `http://localhost:8080/users/photo/${userId}`,
+            {
+                headers: {
+                    Authorization: `Bearer ${localStorage.getItem('token')}`,
+                },
+            }
+        );
+        return response.data;
+    } catch (error) {
+        console.error('Error:', error);
+        throw new Error('Failed to upload photo');
+    }
+};
