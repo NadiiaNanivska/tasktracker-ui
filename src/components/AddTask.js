@@ -12,7 +12,7 @@ const AddTask = ({ isModalVisible, setIsModalVisible, name, setIsNewTaskAdded, i
     const handleOk = () => {
         form.validateFields().then((data) => {
             form.resetFields();
-            addTask(title, description, name);
+            addTask(title, description, name, localStorage.getItem('userId'));
             setIsNewTaskAdded(true);
             setIsModalVisible(false);
         })

@@ -24,7 +24,7 @@ const CustomCalendar = ({ isDarkMode }) => {
   };
 
   useEffect(() => {
-    fetchEvents(setEvents);
+    fetchEvents(setEvents, localStorage.getItem('userId'));
   }, []);
 
   const handleCreateEvent = () => {

@@ -1,6 +1,6 @@
 import axios from 'axios';
 
-export const addTask = async (title, description, name) => {
+export const addTask = async (title, description, name, user) => {
     try {
         const token = localStorage.getItem('token');
 
@@ -12,6 +12,7 @@ export const addTask = async (title, description, name) => {
             title: title,
             description: description,
             status: name,
+            userId: user
         }, { headers });
     } catch (error) {
         console.log('error', error);
@@ -32,9 +33,9 @@ export const deleteTask = async (taskId) => {
     }
 };
 
-export const fetchTasks = async (name, setTasks) => {
+export const fetchTasks = async (name, setTasks, userId) => {
     try {
-        const url = `http://localhost:8080/tasks?status=${name}`;
+        const url = `http://localhost:8080/${userId}/tasks?status=${name}`;
         const token = localStorage.getItem('token');
 
         const headers = {

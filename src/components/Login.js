@@ -4,7 +4,6 @@ import { useNavigate  } from 'react-router-dom';
 import '../styles/Login.css';
 import {Button, Input, Form, message} from 'antd';
 import {passwordValidator, emailValidator} from "../utils/validation";
-import jwtDecode from 'jwt-decode';
 import {loginRequest} from "../utils/userRequests";
 
 const Login = () => {

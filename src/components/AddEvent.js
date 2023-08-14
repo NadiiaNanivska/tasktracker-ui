@@ -13,7 +13,7 @@ const AddEvent = ({ newEvent, setNewEvent, isModalVisible, setIsModalVisible, ha
             const formattedTime = time.format("HH:mm:ss");
             const formattedDate = date.format("YYYY-MM-DD");
 
-            addEvent(type, formattedTime, formattedDate, content);
+            addEvent(type, formattedTime, formattedDate, content, localStorage.getItem('userId'));
             handleCreateEvent();
             form.resetFields();
         }).catch(error => {

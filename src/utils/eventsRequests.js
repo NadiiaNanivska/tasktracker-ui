@@ -1,6 +1,6 @@
 import axios from 'axios';
 
-export const addEvent = async (type, time, date, content) => {
+export const addEvent = async (type, time, date, content, user) => {
     try {
         const token = localStorage.getItem('token');
 
@@ -12,14 +12,15 @@ export const addEvent = async (type, time, date, content) => {
             type: type,
             date: date,
             time: time,
-            content: content
+            content: content,
+            userId: user
         }, {headers});
     } catch (error) {
         console.log('error', error);
     }
 };
 
-export const fetchEvents = async (setEvents) => {
+export const fetchEvents = async (setEvents, userId) => {
     try {
         const token = localStorage.getItem('token');
 
@@ -27,7 +28,7 @@ export const fetchEvents = async (setEvents) => {
             'Authorization': `Bearer ${token}`
         };
 
-        const url = `http://localhost:8080/events`;
+        const url = `http://localhost:8080/${userId}/events`;
         const response = await axios.get(url, {headers});
         setEvents(response.data);
     } catch (error) {

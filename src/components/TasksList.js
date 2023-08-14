@@ -33,8 +33,7 @@ const TasksList = ({ name, afterdragtasks, updateTasks, isDarkMode }) => {
     };
 
     useEffect(() => {
-
-        fetchTasks(name, setTasks);
+        fetchTasks(name, setTasks, localStorage.getItem('userId'));
     }, [isNewTaskAdded]);
 
     const onDeleteTask = (id) => {
