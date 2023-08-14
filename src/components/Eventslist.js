@@ -67,7 +67,7 @@ const EventsList = ({ setEvents, isModalVisible, setIsModalVisible, dataList, da
                 itemLayout="horizontal"
                 dataSource={filteredEvents}
                 renderItem={(item) => (
-                    <List.Item>
+                    <List.Item key={item.id}>
                         <Skeleton loading={false} title={false}>
                         <List.Item.Meta
                             title={<a className={`${getTitleColor(item.type)}`}>{item.content}</a>}

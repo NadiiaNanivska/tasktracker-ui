@@ -27,8 +27,7 @@ const CustomCalendar = ({ isDarkMode }) => {
     fetchEvents(setEvents, localStorage.getItem('userId'));
   }, []);
 
-  const handleCreateEvent = () => {
-    const eventId = uuidv4();
+  const handleCreateEvent = (eventId) => {
     const eventWithId = { ...newEvent, id: eventId, time: newEvent.time.format("HH:mm:ss") };
     setEvents((prevEvents) => [...prevEvents, eventWithId]);
     setIsModalVisible(false);

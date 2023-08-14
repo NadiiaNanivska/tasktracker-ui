@@ -8,13 +8,15 @@ export const addEvent = async (type, time, date, content, user) => {
             'Authorization': `Bearer ${token}`
         };
 
-        await axios.post('http://localhost:8080/events', {
+        const response = await axios.post('http://localhost:8080/events', {
             type: type,
             date: date,
             time: time,
             content: content,
             userId: user
-        }, {headers});
+        }, { headers });
+
+        return response.data;
     } catch (error) {
         console.log('error', error);
     }
